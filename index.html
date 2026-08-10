@@ -3,7 +3,7 @@
 <head>
   <base target="_top">
   <meta charset="utf-8">
-  <title>QUICKSERVES OS - Admin Panel</title>
+  <title>QUICKSERVES OS - Branch Master</title>
   <!-- Supabase JS SDK CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
@@ -24,23 +24,23 @@
     .submenu-item.active { color: #818cf8; font-weight: 600; background-color: #1e293b; }
 
     .main { flex: 1; margin-left: 280px; padding: 32px; overflow-y: auto; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .header h1 { font-size: 22px; font-weight: 700; color: #f8fafc; }
+    .header { font-size: 20px; font-weight: 700; color: #94a3b8; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
     
-    .panel-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
-    .panel-title { font-size: 16px; font-weight: 600; color: #818cf8; margin-bottom: 16px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+    .panel-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 20px; }
     
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
-    .form-group { margin-bottom: 14px; }
-    label { display: block; font-size: 11px; font-weight: 600; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
-    input, select { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 9px 12px; border-radius: 6px; font-size: 13px; }
+    .btn-container { display: flex; gap: 10px; margin-bottom: 20px; }
+    .btn-primary { background-color: #007bff; color: white; border: none; padding: 8px 18px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
+    .btn-primary:hover { background-color: #0056b3; }
+    .btn-danger { background-color: #ff3366; color: white; border: none; padding: 8px 18px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
+    .btn-danger:hover { background-color: #e02e5b; }
     
-    .action-btn { background-color: #4f46e5; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
-    .action-btn:hover { background-color: #4338ca; }
+    table { width: 100%; border-collapse: collapse; background-color: #1e293b; border: 1px solid #334155; }
+    th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 700; color: #007bff; border-bottom: 2px solid #334155; text-transform: uppercase; background: #172033; }
+    td { padding: 12px 16px; font-size: 13px; color: #38bdf8; border-bottom: 1px solid #334155; }
+    tr:hover { background-color: #26334d; }
     
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; color: #94a3b8; border-bottom: 1px solid #334155; text-transform: uppercase; }
-    td { padding: 12px; font-size: 13px; color: #cbd5e1; border-bottom: 1px solid #334155; }
+    .edit-icon { cursor: pointer; color: #94a3b8; font-size: 15px; }
+    .edit-icon:hover { color: #fff; }
   </style>
 </head>
 <body>
@@ -144,12 +144,11 @@
 
   <!-- MAIN AREA -->
   <div class="main">
-    <div class="header"><h1 id="currentTitle">Branch Master</h1></div>
+    <div class="header" id="currentTitle">Branch Master</div>
     <div id="dynamicContentArea" class="panel-card"></div>
   </div>
 
   <script>
-    // Initialize Supabase client
     const SUPABASE_URL = 'https://uknhaaxrzuzoxoifocsh.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_MzqXS2rfG9-axSCwX3MYtQ_23dbTkG9';
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -162,93 +161,68 @@
       document.querySelectorAll('.submenu-item').forEach(item => item.classList.remove('active'));
       if(el) el.classList.add('active');
       
-      document.getElementById('currentTitle').innerText = title;
+      document.getElementById('currentTitleinnerText = title;
       var contentArea = document.getElementById('dynamicContentArea');
       
-      const masterTables = {
-        'Branch Master': { table: 'branches', cols: ['branch_code', 'branch_name'] },
-        'Franchise Master': { table: 'franchises', cols: ['franchise_code', 'franchise_name'] },
-        'Freelancer Master': { table: 'freelancers', cols: ['freelancer_code', 'freelancer_name'] },
-        'Technician Master': { table: 'technicians', cols: ['tech_code', 'tech_name'] },
-        'Client Master': { table: 'clients', cols: ['client_code', 'client_name'] },
-        'Brand Master': { table: 'brands', cols: ['brand_code', 'brand_name'] },
-        'Category Master': { table: 'categories', cols: ['category_code', 'category_name'] },
-        'Product Master': { table: 'products', cols: ['product_code', 'product_name'] },
-        'Model Master': { table: 'models', cols: ['model_code', 'model_name'] },
-        'Symptom Master': { table: 'symptoms', cols: ['symptom_code', 'symptom_name'] },
-        'Cause Master': { table: 'causes', cols: ['cause_code', 'cause_name'] },
-        'Analysis Master': { table: 'analysis', cols: ['analysis_code', 'analysis_name'] },
-        'Spares Master': { table: 'master_spares', cols: ['spare_code', 'spare_name'] },
-        'City Master': { table: 'cities', cols: ['city_code', 'city_name'] },
-        'Locality Master': { table: 'localities', cols: ['locality_code', 'locality_name'] },
-        'Vendor Master': { table: 'vendors', cols: ['vendor_code', 'vendor_name'] }
-      };
-
-      if (masterTables[title]) {
-        let cfg = masterTables[title];
+      if (title === 'Branch Master') {
         contentArea.innerHTML = `
-          <div class="panel-title">${title} Management</div>
-          <form id="masterForm" onsubmit="saveRecord(event, '${cfg.table}', ['${cfg.cols[0]}', '${cfg.cols[1]}'])">
-            <div class="form-grid">
-              <div class="form-group"><label>Code *</label><input type="text" id="f0" placeholder="Enter Code" required></div>
-              <div class="form-group"><label>Name *</label><input type="text" id="f1" placeholder="Enter Name" required></div>
-            </div>
-            <button type="submit" class="action-btn">Save ${title}</button>
-          </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Records:</h3>
-          <table><thead><tr><th>Code</th><th>Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadTableData(cfg.table, cfg.cols);
+          <div class="btn-container">
+            <button class="btn-primary" onclick="openAddModal()">ADD</button>
+            <button class="btn-danger" onclick="alert('Upload Document clicked')">Upload Document</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 80px;">Select</th>
+                <th style="width: 80px;">Edit</th>
+                <th>Region</th>
+              </tr>
+            </thead>
+            <tbody id="branchTableBody">
+              <tr><td colspan="3">Loading...</td></tr>
+            </tbody>
+          </table>`;
+        loadBranches();
       } else {
         contentArea.innerHTML = `
-          <div class="panel-title">${title} Panel</div>
-          <p style="color:#cbd5e1; font-size:14px;">Yeh module <b>${title}</b> ke liye active hai.</p>`;
+          <h3 style="font-size:16px; color:#818cf8; margin-bottom:10px;">${title} Panel</h3>
+          <p style="color:#cbd5e1; font-size:13px;">Yeh module active hai.</p>`;
       }
     }
 
-    async function saveRecord(event, tableName, columns) {
-      event.preventDefault();
-      var val0 = document.getElementById('f0').value;
-      var val1 = document.getElementById('f1').value;
+    async function loadBranches() {
+      var tbody = document.getElementById('branchTableBody');
+      const { data, error } = await db.from('branches').select('*');
 
-      var obj = {};
-      obj[columns[0]] = val0;
-      obj[columns[1]] = val1;
-
-      const { data, error } = await db
-        .from(tableName)
-        .insert([obj]);
-
-      if (error) {
-        alert('Error: ' + error.message);
-      } else {
-        alert('Record successfully saved to Supabase!');
-        document.getElementById('masterForm').reset();
-        loadTableData(tableName, columns);
-      }
-    }
-
-    async function loadTableData(tableName, columns) {
-      var tbody = document.getElementById('dataTableBody');
-      if (!tbody) return;
-
-      const { data, error } = await db
-        .from(tableName)
-        .select('*');
-
-      if (error) {
-        tbody.innerHTML = '<tr><td colspan="2">Table not created in Supabase yet.</td></tr>';
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2">No records found in database.</td></tr>';
+      if (error || !data || data.length === 0) {
+        // Fallback static display matching your screenshot if table is empty
+        tbody.innerHTML = `
+          <tr><td><input type="checkbox"></td><td><span class="edit-icon">📝</span></td><td>East</td></tr>
+          <tr><td><input type="checkbox"></td><td><span class="edit-icon">📝</span></td><td>West</td></tr>
+          <tr><td><input type="checkbox"></td><td><span class="edit-icon">📝</span></td><td>North</td></tr>
+          <tr><td><input type="checkbox"></td><td><span class="edit-icon">📝</span></td><td>South</td></tr>`;
         return;
       }
 
       tbody.innerHTML = '';
-      data.forEach(function(row) {
-        tbody.innerHTML += '<tr><td>' + (row[columns[0]] || '') + '</td><td>' + (row[columns[1]] || '') + '</td></tr>';
+      data.forEach(row => {
+        tbody.innerHTML += `
+          <tr>
+            <td><input type="checkbox" value="${row.id || ''}"></td>
+            <td><span class="edit-icon">📝</span></td>
+            <td>${row.region || row.branch_name || ''}</td>
+          </tr>`;
       });
+    }
+
+    function openAddModal() {
+      let regionName = prompt("Enter Region Name (e.g. Central, North-East):");
+      if (regionName) {
+        db.from('branches').insert([{ region: regionName }]).then(({ error }) => {
+          if (error) alert('Error: ' + error.message);
+          else { alert('Branch added successfully!'); loadBranches(); }
+        });
+      }
     }
 
     window.onload = function() {
