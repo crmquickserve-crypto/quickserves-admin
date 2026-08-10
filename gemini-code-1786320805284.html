@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <title>QUICKSERVES OS - Admin Panel</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; }
+    
+    .sidebar { width: 280px; background-color: #1e293b; border-right: 1px solid #334155; overflow-y: auto; height: 100vh; position: fixed; }
+    .sidebar-brand { font-size: 15px; font-weight: bold; color: #f8fafc; padding: 20px 16px; background: #172033; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #334155; }
+    
+    .menu-dropdown { border-bottom: 1px solid #334155; }
+    .menu-header { padding: 14px 16px; color: #cbd5e1; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; }
+    .menu-header:hover { background-color: #334155; color: #fff; }
+    
+    .submenu { display: none; background-color: #172033; padding: 4px 0; }
+    .submenu.open { display: block; }
+    .submenu-item { padding: 10px 16px 10px 42px; color: #94a3b8; font-size: 12px; cursor: pointer; transition: 0.2s; }
+    .submenu-item:hover { color: #f8fafc; background-color: #1e293b; }
+    .submenu-item.active { color: #818cf8; font-weight: 600; background-color: #1e293b; }
+
+    .main { flex: 1; margin-left: 280px; padding: 32px; overflow-y: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .header h1 { font-size: 22px; font-weight: 700; color: #f8fafc; }
+    
+    .panel-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .panel-title { font-size: 16px; font-weight: 600; color: #818cf8; margin-bottom: 16px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+    
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 11px; font-weight: 600; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
+    input, select { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 9px 12px; border-radius: 6px; font-size: 13px; }
+    
+    .action-btn { background-color: #4f46e5; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    .action-btn:hover { background-color: #4338ca; }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; color: #94a3b8; border-bottom: 1px solid #334155; text-transform: uppercase; }
+    td { padding: 12px; font-size: 13px; color: #cbd5e1; border-bottom: 1px solid #334155; }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN SIDEBAR WITH ALL MENUS -->
+  <div class="sidebar">
+    <div class="sidebar-brand">🏠 Admin Dashboard</div>
+
+    <!-- MASTER MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('masterSub')"><span>📄 Master</span> <span>▼</span></div>
+      <div class="submenu open" id="masterSub">
+        <div class="submenu-item active" onclick="switchView('Brand Master', this)">Brand Master</div>
+        <div class="submenu-item" onclick="switchView('Branch Master', this)">Branch Master</div>
+        <div class="submenu-item" onclick="switchView('Product Master', this)">Product Master</div>
+        <div class="submenu-item" onclick="switchView('Model Master', this)">Model Master</div>
+        <div class="submenu-item" onclick="switchView('Spares Master', this)">Spares Master</div>
+      </div>
+    </div>
+
+    <!-- CALL MANAGEMENT MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('callSub')"><span>💻 Call Management</span> <span>▼</span></div>
+      <div class="submenu" id="callSub">
+        <div class="submenu-item" onclick="switchView('Call Registration', this)">Call Registration</div>
+        <div class="submenu-item" onclick="switchView('Call View', this)">Call View</div>
+        <div class="submenu-item" onclick="switchView('Call Allotment', this)">Call Allotment</div>
+      </div>
+    </div>
+
+    <!-- MASTER DATA MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('masterDataSub')"><span>📊 Master Data</span> <span>▼</span></div>
+      <div class="submenu" id="masterDataSub">
+        <div class="submenu-item" onclick="switchView('Master Data Download', this)">Master Data Download</div>
+      </div>
+    </div>
+
+    <!-- USERS MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('usersSub')"><span>👤 Users</span> <span>▼</span></div>
+      <div class="submenu" id="usersSub">
+        <div class="submenu-item" onclick="switchView('Create User', this)">Create User</div>
+        <div class="submenu-item" onclick="switchView('Update User', this)">Update User</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div class="main">
+    <div class="header"><h1 id="currentTitle">Brand Master</h1></div>
+    <div id="dynamicContentArea" class="panel-card"></div>
+  </div>
+
+  <script>
+    function toggleSubmenu(id) {
+      document.getElementById(id).classList.toggle('open');
+    }
+
+    function switchView(title, el) {
+      document.querySelectorAll('.submenu-item').forEach(item => item.classList.remove('active'));
+      if(el) el.classList.add('active');
+      
+      document.getElementById('currentTitle').innerText = title;
+      var contentArea = document.getElementById('dynamicContentArea');
+      
+      if(title === 'Brand Master') {
+        contentArea.innerHTML = `
+          <div class="panel-title">Brand Master Management</div>
+          <form id="brandForm" onsubmit="saveBrand(event)">
+            <div class="form-grid">
+              <div class="form-group"><label>Brand Code *</label><input type="text" id="brandCode" placeholder="BR001" required></div>
+              <div class="form-group"><label>Brand Name *</label><input type="text" id="brandName" placeholder="Samsung" required></div>
+            </div>
+            <button type="submit" class="action-btn">Save Brand to Supabase</button>
+          </form>
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Brands from Database:</h3>
+          <table><thead><tr><th>Code</th><th>Brand Name</th></tr></thead><tbody id="brandTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
+        loadBrands();
+      } else if(title === 'Create User' || title === 'Update User') {
+        contentArea.innerHTML = `
+          <div class="panel-title">${title} Panel</div>
+          <form onsubmit="alert('User operation ready!'); return false;">
+            <div class="form-grid">
+              <div class="form-group"><label>User Code *</label><input type="text" placeholder="USR001" required></div>
+              <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Full Name" required></div>
+              <div class="form-group"><label>Email *</label><input type="email" placeholder="Email" required></div>
+              <div class="form-group"><label>Role *</label><select><option>Admin</option><option>Engineer</option><option>Operator</option></select></div>
+            </div>
+            <button type="submit" class="action-btn">${title}</button>
+          </form>`;
+      } else if(title === 'Call Registration') {
+        contentArea.innerHTML = `
+          <div class="panel-title">Service Call Registration</div>
+          <form onsubmit="alert('Call registered successfully!'); return false;">
+            <div class="form-grid">
+              <div class="form-group"><label>Customer Name *</label><input type="text" placeholder="Customer Name" required></div>
+              <div class="form-group"><label>Mobile Number *</label><input type="text" placeholder="Mobile Number" required></div>
+              <div class="form-group"><label>Brand *</label><input type="text" placeholder="Brand Name" required></div>
+              <div class="form-group"><label>City *</label><input type="text" placeholder="City" required></div>
+            </div>
+            <button type="submit" class="action-btn">Register Call</button>
+          </form>`;
+      } else {
+        contentArea.innerHTML = `
+          <div class="panel-title">${title} Panel</div>
+          <p style="color:#cbd5e1; font-size:14px;">Yeh window <b>${title}</b> ke liye active hai.</p>`;
+      }
+    }
+
+    function saveBrand(event) {
+      event.preventDefault();
+      var code = document.getElementById('brandCode').value;
+      var name = document.getElementById('brandName').value;
+
+      google.script.run
+        .withSuccessHandler(function(res) {
+          if (res.success) {
+            alert('Brand successfully saved to Supabase!');
+            document.getElementById('brandForm').reset();
+            loadBrands();
+          } else {
+            alert('Error: ' + res.message);
+          }
+        })
+        .withFailureHandler(function(err) { alert('Failed: ' + err.message); })
+        .saveBrandServer(code, name);
+    }
+
+    function loadBrands() {
+      google.script.run
+        .withSuccessHandler(function(data) {
+          var tbody = document.getElementById('brandTableBody');
+          if (!tbody) return;
+          if (!data || data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="2">No brands found in database.</td></tr>';
+            return;
+          }
+          tbody.innerHTML = '';
+          data.forEach(function(row) {
+            tbody.innerHTML += '<tr><td>' + row.brand_code + '</td><td>' + row.brand_name + '</td></tr>';
+          });
+        })
+        .getBrandsServer();
+    }
+
+    // Load initial view
+    window.onload = function() {
+      switchView('Brand Master', document.querySelector('.submenu-item'));
+    };
+  </script>
+</body>
+</html>
