@@ -1,432 +1,255 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Add Franchise - QUICKSERVES OS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Franchise - Quickserves Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
-        .container { background: #1e293b; padding: 20px; border-radius: 8px; max-width: 1100px; margin: auto; border: 1px solid #334155; }
-        h2 { border-bottom: 2px solid #334155; padding-bottom: 10px; }
-        h3 { background: #0f172a; padding: 10px; color: #38bdf8; border-left: 4px solid #38bdf8; margin-top: 20px; border-radius: 4px; }
-        .row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .col { flex: 1; min-width: 300px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 13px; color: #cbd5e1; }
-        .req { color: #f43f5e; }
-        input, select, textarea { width: 100%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #f8fafc; border-radius: 4px; box-sizing: border-box; }
-        textarea { resize: vertical; height: 60px; }
-        .btn-container { margin-top: 30px; text-align: center; }
-        .btn-save { background: #22c55e; color: white; padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        .btn-save:hover { background: #16a34a; }
-        .btn-abort { background: #eab308; color: black; padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-left: 10px; }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <h2>ADD FRANCHISE</h2>
+<body class="bg-slate-900 text-slate-100 font-sans">
 
-        <!-- General Details -->
-        <h3>General Details</h3>
-        <div class="row">
-            <div class="col">
-                <label>Region <span class="req">*</span></label>
-                <select id="region">
-                    <option value="">----Select----</option>
-                    <option value="North">North</option>
-                    <option value="South">South</option>
-                    <option value="East">East</option>
-                    <option value="West">West</option>
-                </select>
-            </div>
-            <div class="col">
-                <label>Firm Type <span class="req">*</span></label>
-                <select id="firmType">
-                    <option value="">----Select----</option>
-                    <option value="Proprietorship">Proprietorship</option>
-                    <option value="Partnership">Partnership</option>
-                    <option value="Pvt Ltd">Pvt Ltd</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Firm Name <span class="req">*</span></label>
-                <input type="text" id="firmName">
-            </div>
-            <div class="col">
-                <label>Number Of Partner <span class="req">*</span></label>
-                <input type="number" id="numOfPartner">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Firm Address <span class="req">*</span></label>
-                <textarea id="firmAddress"></textarea>
-            </div>
-            <div class="col">
-                <label>Landmark <span class="req">*</span></label>
-                <input type="text" id="landmark">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Pin Code <span class="req">*</span></label>
-                <input type="text" id="pinCode">
-            </div>
-            <div class="col">
-                <label>State <span class="req">*</span></label>
-                <select id="state">
-                    <option value="">----Select----</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>District <span class="req">*</span></label>
-                <input type="text" id="district">
-            </div>
-            <div class="col">
-                <label>City <span class="req">*</span></label>
-                <input type="text" id="city">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Locality <span class="req">*</span></label>
-                <input type="text" id="locality">
-            </div>
-            <div class="col">
-                <label>Contact Number <span class="req">*</span></label>
-                <input type="text" id="contactNumber">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Email ID <span class="req">*</span></label>
-                <input type="email" id="emailID">
-            </div>
+    <div class="max-w-6xl mx-auto p-6 bg-slate-800 rounded-xl shadow-2xl my-10 border border-slate-700">
+        <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+            <h1 class="text-2xl font-bold text-emerald-400">Add New Franchise</h1>
+            <a href="index.html" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition">Back to Dashboard</a>
         </div>
 
-        <!-- Government Details -->
-        <h3>Government Details</h3>
-        <div class="row">
-            <div class="col">
-                <label>GST Number</label>
-                <input type="text" id="gstNumber">
+        <form id="franchiseForm" class="space-y-8">
+            
+            <!-- SECTION 1: Firm & Location Details -->
+            <div>
+                <h3 class="text-lg font-semibold text-emerald-300 mb-4 border-b border-slate-700 pb-2">1. Firm & Location Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Region *</label>
+                        <select name="region" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                            <option value="">----Select----</option>
+                            <option value="North">North</option>
+                            <option value="South">South</option>
+                            <option value="East">East</option>
+                            <option value="West">West</option>
+                            <option value="Central">Central</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Firm Type</label>
+                        <select name="firm_type" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                            <option value="">----Select----</option>
+                            <option value="Proprietorship">Proprietorship</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Pvt Ltd">Pvt Ltd</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Firm Name *</label>
+                        <input type="text" name="firm_name" required placeholder="Enter Firm Name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Number of Partners</label>
+                        <input type="number" name="number_of_partner" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Firm Address</label>
+                        <textarea name="firm_address" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Landmark</label>
+                        <input type="text" name="landmark" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Pin Code</label>
+                        <input type="text" name="pin_code" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">State</label>
+                        <input type="text" name="state" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">District</label>
+                        <input type="text" name="district" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">City</label>
+                        <input type="text" name="city" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Locality</label>
+                        <input type="text" name="locality" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label>PAN Card No. <span class="req">*</span></label>
-                <input type="text" id="panCardNo">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Shop & Establishment Registration</label>
-                <input type="text" id="shopReg">
-            </div>
-            <div class="col">
-                <label>Establishment Month & Year <span class="req">*</span></label>
-                <input type="text" id="estMonthYear" placeholder="MM/YYYY">
-            </div>
-        </div>
 
-        <!-- Proprietor Details -->
-        <h3>Proprietor Details</h3>
-        <div class="row">
-            <div class="col">
-                <label>Proprietor/ Partner Name <span class="req">*</span></label>
-                <input type="text" id="propName">
+            <!-- SECTION 2: Contact & Statutory Details -->
+            <div>
+                <h3 class="text-lg font-semibold text-emerald-300 mb-4 border-b border-slate-700 pb-2">2. Contact & Statutory Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Contact Number</label>
+                        <input type="text" name="contact_number" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Email ID</label>
+                        <input type="email" name="email_id" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">GST Number</label>
+                        <input type="text" name="gst_number" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">PAN Card No</label>
+                        <input type="text" name="pan_card_no" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Shop Establishment Reg</label>
+                        <input type="text" name="shop_establishment_reg" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Establishment Month & Year</label>
+                        <input type="text" name="establishment_month_year" placeholder="MM/YYYY" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label>Contact Number <span class="req">*</span></label>
-                <input type="text" id="propContact">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Proprietor Residential Address <span class="req">*</span></label>
-                <textarea id="propAddress"></textarea>
-            </div>
-            <div class="col">
-                <label>Email ID <span class="req">*</span></label>
-                <input type="email" id="propEmail">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>PAN Card No. <span class="req">*</span></label>
-                <input type="text" id="propPAN">
-            </div>
-            <div class="col">
-                <label>Aadhar Card No.</label>
-                <input type="text" id="propAadhar">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Smartphone Availability <span class="req">*</span></label>
-                <select id="smartphone">
-                    <option value="">----Select----</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-        </div>
 
-        <!-- Bank Details -->
-        <h3>Bank Details</h3>
-        <div class="row">
-            <div class="col">
-                <label>Bank Name <span class="req">*</span></label>
-                <input type="text" id="bankName">
+            <!-- SECTION 3: Proprietor / Director Details -->
+            <div>
+                <h3 class="text-lg font-semibold text-emerald-300 mb-4 border-b border-slate-700 pb-2">3. Proprietor / Director Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Proprietor Name</label>
+                        <input type="text" name="proprietor_name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Prop Contact Number</label>
+                        <input type="text" name="prop_contact_number" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Prop Email ID</label>
+                        <input type="email" name="prop_email_id" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Prop Residential Address</label>
+                        <textarea name="prop_residential_address" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Prop PAN Card No</label>
+                        <input type="text" name="prop_pan_card_no" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Prop Aadhar Card No</label>
+                        <input type="text" name="prop_aadhar_card_no" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Smartphone Availability</label>
+                        <select name="smartphone_availability" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label>Bank Branch <span class="req">*</span></label>
-                <input type="text" id="bankBranch">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Account Holder Name <span class="req">*</span></label>
-                <input type="text" id="accHolderName">
-            </div>
-            <div class="col">
-                <label>Account Number <span class="req">*</span></label>
-                <input type="text" id="accountNumber">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>IFSC Code <span class="req">*</span></label>
-                <input type="text" id="ifscCode">
-            </div>
-            <div class="col">
-                <label>Security Amount <span class="req">*</span></label>
-                <input type="number" id="securityAmount">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Turn Over <span class="req">*</span></label>
-                <input type="number" id="turnOver">
-            </div>
-        </div>
 
-        <!-- Infrastructure Information -->
-        <h3>Infrastructure Information</h3>
-        <div class="row">
-            <div class="col">
-                <label>Space Ownership <span class="req">*</span></label>
-                <select id="spaceOwnership">
-                    <option value="">----Select----</option>
-                    <option value="Owned">Owned</option>
-                    <option value="Rented">Rented</option>
-                </select>
+            <!-- SECTION 4: Bank Details -->
+            <div>
+                <h3 class="text-lg font-semibold text-emerald-300 mb-4 border-b border-slate-700 pb-2">4. Bank Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Bank Name</label>
+                        <input type="text" name="bank_name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Bank Branch</label>
+                        <input type="text" name="bank_branch" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Account Holder Name</label>
+                        <input type="text" name="account_holder_name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Account Number</label>
+                        <input type="text" name="account_number" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">IFSC Code</label>
+                        <input type="text" name="ifsc_code" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label>Service Centre Space <span class="req">*</span></label>
-                <input type="text" id="serviceCentreSpace" placeholder="e.g. 500 Sq.Ft">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Agreement Date <span class="req">*</span></label>
-                <input type="date" id="agreementDate">
-            </div>
-            <div class="col">
-                <label>Validity <span class="req">*</span></label>
-                <input type="date" id="validity">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>System Availability <span class="req">*</span></label>
-                <select id="systemAvailability">
-                    <option value="">----Select----</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-            <div class="col">
-                <label>Printer Availability <span class="req">*</span></label>
-                <select id="printerAvailability">
-                    <option value="">----Select----</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-        </div>
 
-        <!-- Back End Stuff -->
-        <h3>Back End Stuff & Reporting</h3>
-        <div class="row">
-            <div class="col">
-                <label>Firm Manager / CCO Name <span class="req">*</span></label>
-                <input type="text" id="firmManagerName">
+            <!-- SECTION 5: Commercials & Infrastructure -->
+            <div>
+                <h3 class="text-lg font-semibold text-emerald-300 mb-4 border-b border-slate-700 pb-2">5. Commercials & Infrastructure</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Security Amount</label>
+                        <input type="number" step="0.01" name="security_amount" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Turn Over</label>
+                        <input type="number" step="0.01" name="turn_over" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Space Ownership</label>
+                        <input type="text" name="space_ownership" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Service Centre Space</label>
+                        <input type="text" name="service_centre_space" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Agreement Date</label>
+                        <input type="date" name="agreement_date" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Validity Date</label>
+                        <input type="date" name="validity" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">System Availability</label>
+                        <select name="system_availability" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Printer Availability</label>
+                        <select name="printer_availability" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label>Contact Number <span class="req">*</span></label>
-                <input type="text" id="backendContact">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Email ID <span class="req">*</span></label>
-                <input type="email" id="backendEmail">
-            </div>
-            <div class="col">
-                <label>Reporting Branch <span class="req">*</span></label>
-                <input type="text" id="reportingBranch">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Area Manager Name <span class="req">*</span></label>
-                <input type="text" id="areaManagerName">
-            </div>
-            <div class="col">
-                <label>Manager Email Id <span class="req">*</span></label>
-                <input type="email" id="managerEmailId">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>CCO Name <span class="req">*</span></label>
-                <input type="text" id="ccoName">
-            </div>
-            <div class="col">
-                <label>Manager Contact Number <span class="req">*</span></label>
-                <input type="text" id="managerContactNumber">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>CCO Contact Number <span class="req">*</span></label>
-                <input type="text" id="ccoContactNumber">
-            </div>
-            <div class="col">
-                <label>CCO Email ID <span class="req">*</span></label>
-                <input type="email" id="ccoEmailID">
-            </div>
-        </div>
 
-        <!-- SLA / TAT Performance -->
-        <div class="row">
-            <div class="col">
-                <label>Installation Response Time (Hours)</label>
-                <input type="number" id="instRespTime">
+            <!-- Submit Button -->
+            <div class="pt-4 border-t border-slate-700 flex justify-end">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition">Save Franchise</button>
             </div>
-            <div class="col">
-                <label>Installation Resolution Time (Hours)</label>
-                <input type="number" id="instResTime">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Service Response Time (Hours)</label>
-                <input type="number" id="servRespTime">
-            </div>
-            <div class="col">
-                <label>Service Resolution Time (Hours)</label>
-                <input type="number" id="servResTime">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Status <span class="req">*</span></label>
-                <select id="status">
-                    <option value="">----Select----</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                </select>
-            </div>
-            <div class="col">
-                <label>ASF Code <span class="req">*</span></label>
-                <input type="text" id="asfCode">
-            </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="btn-container">
-            <button type="button" class="btn-save" onclick="saveFranchise()">Save</button>
-            <button type="button" class="btn-abort" onclick="window.location.href='index.html'">Abort</button>
-        </div>
+        </form>
     </div>
 
+    <!-- Script to connect with Supabase -->
     <script>
-        // Apni Supabase Credentials yahan update karein ya index.html se match karein
-        const SUPABASE_URL = 'https://uknhaaxrzuzoxoifocsh.supabase.co';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Apni public anon key yahan dalein
+        // Replace with your actual Supabase URL and Anon Key if not already globally configured
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function saveFranchise() {
-            const data = {
-                region: document.getElementById('region').value,
-                firm_type: document.getElementById('firmType').value,
-                firm_name: document.getElementById('firmName').value,
-                number_of_partner: parseInt(document.getElementById('numOfPartner').value) || 0,
-                firm_address: document.getElementById('firmAddress').value,
-                landmark: document.getElementById('landmark').value,
-                pin_code: document.getElementById('pinCode').value,
-                state: document.getElementById('state').value,
-                district: document.getElementById('district').value,
-                city: document.getElementById('city').value,
-                locality: document.getElementById('locality').value,
-                contact_number: document.getElementById('contactNumber').value,
-                email_id: document.getElementById('emailID').value,
-                gst_number: document.getElementById('gstNumber').value,
-                pan_card_no: document.getElementById('panCardNo').value,
-                shop_establishment_reg: document.getElementById('shopReg').value,
-                establishment_month_year: document.getElementById('estMonthYear').value,
-                proprietor_name: document.getElementById('propName').value,
-                prop_contact_number: document.getElementById('propContact').value,
-                prop_residential_address: document.getElementById('propAddress').value,
-                prop_email_id: document.getElementById('propEmail').value,
-                prop_pan_card_no: document.getElementById('propPAN').value,
-                prop_aadhar_card_no: document.getElementById('propAadhar').value,
-                smartphone_availability: document.getElementById('smartphone').value,
-                bank_name: document.getElementById('bankName').value,
-                bank_branch: document.getElementById('bankBranch').value,
-                account_holder_name: document.getElementById('accHolderName').value,
-                account_number: document.getElementById('accountNumber').value,
-                ifsc_code: document.getElementById('ifscCode').value,
-                security_amount: parseFloat(document.getElementById('securityAmount').value) || 0,
-                turn_over: parseFloat(document.getElementById('turnOver').value) || 0,
-                space_ownership: document.getElementById('spaceOwnership').value,
-                service_centre_space: document.getElementById('serviceCentreSpace').value,
-                agreement_date: document.getElementById('agreementDate').value || null,
-                validity: document.getElementById('validity').value || null,
-                system_availability: document.getElementById('systemAvailability').value,
-                printer_availability: document.getElementById('printerAvailability').value,
-                manager_cco_name: document.getElementById('firmManagerName').value,
-                backend_contact_number: document.getElementById('backendContact').value,
-                backend_email_id: document.getElementById('backendEmail').value,
-                reporting_branch: document.getElementById('reportingBranch').value,
-                area_manager_name: document.getElementById('areaManagerName').value,
-                cco_name: document.getElementById('ccoName').value,
-                manager_email_id: document.getElementById('managerEmailId').value,
-                cco_contact_number: document.getElementById('ccoContactNumber').value,
-                manager_contact_number: document.getElementById('managerContactNumber').value,
-                cco_email_id: document.getElementById('ccoEmailID').value,
-                installation_response_time: parseInt(document.getElementById('instRespTime').value) || 0,
-                installation_resolution_time: parseInt(document.getElementById('instResTime').value) || 0,
-                service_response_time: parseInt(document.getElementById('servRespTime').value) || 0,
-                service_resolution_time: parseInt(document.getElementById('servResTime').value) || 0,
-                status: document.getElementById('status').value,
-                asf_code: document.getElementById('asfCode').value
-            };
+        document.getElementById('franchiseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
 
             const { error } = await supabaseClient.from('franchises').insert([data]);
 
             if (error) {
-                alert('Error saving data: ' + error.message);
+                alert('Error saving franchise: ' + error.message);
             } else {
-                alert('Franchise details saved successfully!');
-                window.location.href = 'index.html';
+                alert('Franchise saved successfully!');
+                e.target.reset();
             }
-        }
+        });
     </script>
 </body>
 </html>
