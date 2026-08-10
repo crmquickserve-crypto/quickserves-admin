@@ -34,6 +34,7 @@
     .required { color: #ef4444; margin-left: 2px; }
     input, select, textarea { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 9px 12px; border-radius: 4px; font-size: 13px; }
     input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+    input[type="file"] { padding: 6px; background: #0f172a; cursor: pointer; }
     textarea { resize: vertical; height: 75px; }
     
     .btn-container { display: flex; gap: 10px; margin: 20px 0; }
@@ -174,7 +175,7 @@
         contentArea.innerHTML = `
           <div class="btn-container">
             <button class="btn-primary" onclick="loadAddBranchForm()">ADD</button>
-            <button class="btn-danger" onclick="alert('Upload Document clicked')">Upload Document</button>
+            <button class="btn-danger" onclick="loadUploadBranchDocumentForm()">Upload Document</button>
           </div>
           <table>
             <thead>
@@ -185,6 +186,8 @@
               </tr>
             </thead>
             <tbody>
+              <tr><td><input type="checkbox"></td><td>📝</td><td>East</td></tr>
+              <tr><td><input type="checkbox"></td><td>📝</td><td>West</td></tr>
               <tr><td><input type="checkbox"></td><td>📝</td><td>North</td></tr>
               <tr><td><input type="checkbox"></td><td>📝</td><td>South</td></tr>
             </tbody>
@@ -215,6 +218,45 @@
           <h3 style="font-size:16px; color:#38bdf8; margin-bottom:10px;">${title} Panel</h3>
           <p style="color:#cbd5e1; font-size:13px;">Yeh module active hai.</p>`;
       }
+    }
+
+    function loadUploadBranchDocumentForm() {
+      document.getElementById('currentTitle').innerText = 'Upload Branch Document';
+      document.getElementById('dynamicContentArea').innerHTML = `
+        <form id="uploadBranchDocForm" onsubmit="saveBranchDocument(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Branch<span class="required">*</span></label>
+              <select id="doc_branch" required>
+                <option value="">----Select----</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Delhi">Delhi</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Document Type<span class="required">*</span></label>
+              <select id="doc_type" required>
+                <option value="">---Select---</option>
+                <option value="Address Proof Document">Address Proof Document</option>
+                <option value="Shop & Establishment Registration File Upload">Shop & Establishment Registration File Upload</option>
+                <option value="GST Number Proof Document">GST Number Proof Document</option>
+                <option value="Rent Agreement Document">Rent Agreement Document</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label>Document Upload<span class="required">*</span></label>
+            <input type="file" id="branch_doc_file" required>
+          </div>
+
+          <div class="btn-container">
+            <button type="submit" class="btn-success">Save</button>
+            <button type="button" class="btn-danger" onclick="switchView('Branch Master', document.querySelector('.submenu-item'))">Back</button>
+          </div>
+        </form>`;
     }
 
     function loadAddBranchForm() {
@@ -471,7 +513,6 @@
         </form>`;
     }
 
-    // Auto Fetch Pincode Details Function with Supabase & Fallback
     async function fetchLocationByPincode(pincode) {
       if (pincode.length !== 6) return;
       
@@ -504,14 +545,12 @@
         console.log("Supabase fetch fallback triggered.");
       }
 
-      // Fallback auto-detection if Supabase table is empty or unpopulated for this pincode
       if (pincode === "110092") {
         stateSelect.innerHTML = `<option value="Delhi">Delhi</option>`;
         distSelect.innerHTML = `<option value="New Delhi">New Delhi</option>`;
         citySelect.innerHTML = `<option value="New Delhi">New Delhi</option>`;
         localitySelect.innerHTML = `<option value="Mahipalpur">Mahipalpur</option><option value="Nangal Raya">Nangal Raya</option>`;
       } else {
-        // Generic fallback for any other 6 digit pincode so fields don't stay empty
         stateSelect.innerHTML = `<option value="Delhi">Delhi</option>`;
         distSelect.innerHTML = `<option value="Delhi">Delhi</option>`;
         citySelect.innerHTML = `<option value="Delhi">Delhi</option>`;
@@ -547,6 +586,12 @@
     async function saveBranch(event) {
       event.preventDefault();
       alert('Branch details saved successfully!');
+      switchView('Branch Master', document.querySelector('.submenu-item'));
+    }
+
+    async function saveBranchDocument(event) {
+      event.preventDefault();
+      alert('Branch Document uploaded successfully!');
       switchView('Branch Master', document.querySelector('.submenu-item'));
     }
 
