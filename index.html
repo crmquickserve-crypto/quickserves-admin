@@ -96,13 +96,10 @@
   </div>
 
   <script>
-    // Initialize Supabase client
+    // Initialize Supabase client correctly
     const SUPABASE_URL = 'YOUR_SUPABASE_URL';
     const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     function toggleSubmenu(id) {
       document.getElementById(id).classList.toggle('open');
@@ -164,8 +161,8 @@
       var code = document.getElementById('brandCode').value;
       var name = document.getElementById('brandName').value;
 
-      const { data, error } = await supabase
-        .from('brands') // Apne Supabase table ka naam yahan check kar lein (jaise 'brands' ya 'brand_master')
+      const { data, error } = await db
+        .from('brands')
         .insert([{ brand_code: code, brand_name: name }]);
 
       if (error) {
@@ -181,8 +178,8 @@
       var tbody = document.getElementById('brandTableBody');
       if (!tbody) return;
 
-      const { data, error } = await supabase
-        .from('brands') // Apne Supabase table ka naam yahan check kar lein
+      const { data, error } = await db
+        .from('brands')
         .select('*');
 
       if (error) {
