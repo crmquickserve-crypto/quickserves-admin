@@ -53,11 +53,28 @@
     <div class="menu-dropdown">
       <div class="menu-header" onclick="toggleSubmenu('masterSub')"><span>📄 Master</span> <span>▼</span></div>
       <div class="submenu open" id="masterSub">
-        <div class="submenu-item active" onclick="switchView('Brand Master', this)">Brand Master</div>
-        <div class="submenu-item" onclick="switchView('Branch Master', this)">Branch Master</div>
+        <div class="submenu-item active" onclick="switchView('Branch Master', this)">Branch Master</div>
+        <div class="submenu-item" onclick="switchView('Franchise Master', this)">Franchise Master</div>
+        <div class="submenu-item" onclick="switchView('Freelancer Master', this)">Freelancer Master</div>
+        <div class="submenu-item" onclick="switchView('Technician Master', this)">Technician Master</div>
+        <div class="submenu-item" onclick="switchView('Brand Mapping', this)">Brand Mapping</div>
+        <div class="submenu-item" onclick="switchView('Category Mapping', this)">Category Mapping</div>
+        <div class="submenu-item" onclick="switchView('Pincode Mapping', this)">Pincode Mapping</div>
+        <div class="submenu-item" onclick="switchView('Client Master', this)">Client Master</div>
+        <div class="submenu-item" onclick="switchView('Brand Master', this)">Brand Master</div>
+        <div class="submenu-item" onclick="switchView('Category Master', this)">Category Master</div>
         <div class="submenu-item" onclick="switchView('Product Master', this)">Product Master</div>
         <div class="submenu-item" onclick="switchView('Model Master', this)">Model Master</div>
+        <div class="submenu-item" onclick="switchView('Symptom Master', this)">Symptom Master</div>
+        <div class="submenu-item" onclick="switchView('Cause Master', this)">Cause Master</div>
+        <div class="submenu-item" onclick="switchView('Analysis Master', this)">Analysis Master</div>
         <div class="submenu-item" onclick="switchView('Spares Master', this)">Spares Master</div>
+        <div class="submenu-item" onclick="switchView('City Master', this)">City Master</div>
+        <div class="submenu-item" onclick="switchView('Locality Master', this)">Locality Master</div>
+        <div class="submenu-item" onclick="switchView('Vendor Master', this)">Vendor Master</div>
+        <div class="submenu-item" onclick="switchView('Bulk Excel Upload', this)">Bulk Excel Upload</div>
+        <div class="submenu-item" onclick="switchView('Admin Utility', this)">Admin Utility</div>
+        <div class="submenu-item" onclick="switchView('Warehouse Mapping', this)">Warehouse Mapping</div>
       </div>
     </div>
 
@@ -67,7 +84,43 @@
       <div class="submenu" id="callSub">
         <div class="submenu-item" onclick="switchView('Call Registration', this)">Call Registration</div>
         <div class="submenu-item" onclick="switchView('Call View', this)">Call View</div>
+        <div class="submenu-item" onclick="switchView('Call Edit', this)">Call Edit</div>
+        <div class="submenu-item" onclick="switchView('Call Reminder', this)">Call Reminder</div>
+        <div class="submenu-item" onclick="switchView('Call Appointment', this)">Call Appointment</div>
+        <div class="submenu-item" onclick="switchView('Call Reschedule', this)">Call Reschedule</div>
+        <div class="submenu-item" onclick="switchView('Call Transfer', this)">Call Transfer</div>
+        <div class="submenu-item" onclick="switchView('Call Reopen', this)">Call Reopen</div>
+        <div class="submenu-item" onclick="switchView('Call Cancel', this)">Call Cancel</div>
+        <div class="submenu-item" onclick="switchView('Call FeedBack', this)">Call FeedBack</div>
+        <div class="submenu-item" onclick="switchView('Call Update', this)">Call Update</div>
         <div class="submenu-item" onclick="switchView('Call Allotment', this)">Call Allotment</div>
+        <div class="submenu-item" onclick="switchView('Jobsheet Print', this)">Jobsheet Print</div>
+        <div class="submenu-item" onclick="switchView('Direct Cancel', this)">Direct Cancel</div>
+        <div class="submenu-item" onclick="switchView('Direct Cancel PO', this)">Direct Cancel PO</div>
+      </div>
+    </div>
+
+    <!-- MASTER DATA MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('masterDataSub')"><span>📊 Master Data</span> <span>▼</span></div>
+      <div class="submenu" id="masterDataSub">
+        <div class="submenu-item" onclick="switchView('Master Data Download', this)">Master Data Download</div>
+      </div>
+    </div>
+
+    <!-- UPLOADER MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('uploaderSub')"><span>📁 Uploader</span> <span>▼</span></div>
+      <div class="submenu" id="uploaderSub">
+        <div class="submenu-item" onclick="switchView('Live Call Upload', this)">Live Call Upload</div>
+      </div>
+    </div>
+
+    <!-- REPORTS MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('reportsSub')"><span>📈 Reports</span> <span>▼</span></div>
+      <div class="submenu" id="reportsSub">
+        <div class="submenu-item" onclick="switchView('Report Main', this)">Report Main</div>
       </div>
     </div>
 
@@ -79,11 +132,19 @@
         <div class="submenu-item" onclick="switchView('Update User', this)">Update User</div>
       </div>
     </div>
+
+    <!-- PASSWORD MENU -->
+    <div class="menu-dropdown">
+      <div class="menu-header" onclick="toggleSubmenu('passwordSub')"><span>🔑 Password</span> <span>▼</span></div>
+      <div class="submenu" id="passwordSub">
+        <div class="submenu-item" onclick="switchView('Change Password', this)">Change Password</div>
+      </div>
+    </div>
   </div>
 
   <!-- MAIN AREA -->
   <div class="main">
-    <div class="header"><h1 id="currentTitle">Brand Master</h1></div>
+    <div class="header"><h1 id="currentTitle">Branch Master</h1></div>
     <div id="dynamicContentArea" class="panel-card"></div>
   </div>
 
@@ -104,80 +165,43 @@
       document.getElementById('currentTitle').innerText = title;
       var contentArea = document.getElementById('dynamicContentArea');
       
-      if(title === 'Brand Master') {
+      const masterTables = {
+        'Branch Master': { table: 'branches', cols: ['branch_code', 'branch_name'] },
+        'Franchise Master': { table: 'franchises', cols: ['franchise_code', 'franchise_name'] },
+        'Freelancer Master': { table: 'freelancers', cols: ['freelancer_code', 'freelancer_name'] },
+        'Technician Master': { table: 'technicians', cols: ['tech_code', 'tech_name'] },
+        'Client Master': { table: 'clients', cols: ['client_code', 'client_name'] },
+        'Brand Master': { table: 'brands', cols: ['brand_code', 'brand_name'] },
+        'Category Master': { table: 'categories', cols: ['category_code', 'category_name'] },
+        'Product Master': { table: 'products', cols: ['product_code', 'product_name'] },
+        'Model Master': { table: 'models', cols: ['model_code', 'model_name'] },
+        'Symptom Master': { table: 'symptoms', cols: ['symptom_code', 'symptom_name'] },
+        'Cause Master': { table: 'causes', cols: ['cause_code', 'cause_name'] },
+        'Analysis Master': { table: 'analysis', cols: ['analysis_code', 'analysis_name'] },
+        'Spares Master': { table: 'master_spares', cols: ['spare_code', 'spare_name'] },
+        'City Master': { table: 'cities', cols: ['city_code', 'city_name'] },
+        'Locality Master': { table: 'localities', cols: ['locality_code', 'locality_name'] },
+        'Vendor Master': { table: 'vendors', cols: ['vendor_code', 'vendor_name'] }
+      };
+
+      if (masterTables[title]) {
+        let cfg = masterTables[title];
         contentArea.innerHTML = `
-          <div class="panel-title">Brand Master Management</div>
-          <form id="masterForm" onsubmit="saveRecord(event, 'brands', ['brand_code', 'brand_name'])">
+          <div class="panel-title">${title} Management</div>
+          <form id="masterForm" onsubmit="saveRecord(event, '${cfg.table}', ['${cfg.cols[0]}', '${cfg.cols[1]}'])">
             <div class="form-grid">
-              <div class="form-group"><label>Brand Code *</label><input type="text" id="f0" placeholder="BR001" required></div>
-              <div class="form-group"><label>Brand Name *</label><input type="text" id="f1" placeholder="Samsung" required></div>
+              <div class="form-group"><label>Code *</label><input type="text" id="f0" placeholder="Enter Code" required></div>
+              <div class="form-group"><label>Name *</label><input type="text" id="f1" placeholder="Enter Name" required></div>
             </div>
-            <button type="submit" class="action-btn">Save Brand</button>
+            <button type="submit" class="action-btn">Save ${title}</button>
           </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Brands:</h3>
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Records:</h3>
           <table><thead><tr><th>Code</th><th>Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadTableData('brands', ['brand_code', 'brand_name']);
-      } 
-      else if(title === 'Branch Master') {
-        contentArea.innerHTML = `
-          <div class="panel-title">Branch Master Management</div>
-          <form id="masterForm" onsubmit="saveRecord(event, 'branches', ['branch_code', 'branch_name'])">
-            <div class="form-grid">
-              <div class="form-group"><label>Branch Code *</label><input type="text" id="f0" placeholder="DEL01" required></div>
-              <div class="form-group"><label>Branch Name *</label><input type="text" id="f1" placeholder="Delhi Branch" required></div>
-            </div>
-            <button type="submit" class="action-btn">Save Branch</button>
-          </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Branches:</h3>
-          <table><thead><tr><th>Branch Code</th><th>Branch Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadTableData('branches', ['branch_code', 'branch_name']);
-      }
-      else if(title === 'Product Master') {
-        contentArea.innerHTML = `
-          <div class="panel-title">Product Master Management</div>
-          <form id="masterForm" onsubmit="saveRecord(event, 'products', ['product_code', 'product_name'])">
-            <div class="form-grid">
-              <div class="form-group"><label>Product Code *</label><input type="text" id="f0" placeholder="PRD01" required></div>
-              <div class="form-group"><label>Product Name *</label><input type="text" id="f1" placeholder="Water Purifier" required></div>
-            </div>
-            <button type="submit" class="action-btn">Save Product</button>
-          </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Products:</h3>
-          <table><thead><tr><th>Product Code</th><th>Product Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadTableData('products', ['product_code', 'product_name']);
-      }
-      else if(title === 'Model Master') {
-        contentArea.innerHTML = `
-          <div class="panel-title">Model Master Management</div>
-          <form id="masterForm" onsubmit="saveRecord(event, 'models', ['model_code', 'model_name'])">
-            <div class="form-grid">
-              <div class="form-group"><label>Model Code *</label><input type="text" id="f0" placeholder="MOD01" required></div>
-              <div class="form-group"><label>Model Name *</label><input type="text" id="f1" placeholder="Model X" required></div>
-            </div>
-            <button type="submit" class="action-btn">Save Model</button>
-          </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Models:</h3>
-          <table><thead><tr><th>Model Code</th><th>Model Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadTableData('models', ['model_code', 'model_name']);
-      }
-      else if(title === 'Spares Master') {
-        contentArea.innerHTML = `
-          <div class="panel-title">Spares Master Management</div>
-          <form id="masterForm" onsubmit="saveRecord(event, 'master_spares', ['spare_code', 'spare_name'])">
-            <div class="form-grid">
-              <div class="form-group"><label>Spare Code *</label><input type="text" id="f0" placeholder="SP01" required></div>
-              <div class="form-group"><label>Spare Name *</label><input type="text" id="f1" placeholder="Filter Candle" required></div>
-            </div>
-            <button type="submit" class="action-btn">Save Spare</button>
-          </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Spares:</h3>
-          <table><thead><tr><th>Spare Code</th><th>Spare Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadTableData('master_spares', ['spare_code', 'spare_name']);
-      }
-      else {
+        loadTableData(cfg.table, cfg.cols);
+      } else {
         contentArea.innerHTML = `
           <div class="panel-title">${title} Panel</div>
-          <p style="color:#cbd5e1; font-size:14px;">Yeh window <b>${title}</b> ke liye active hai.</p>`;
+          <p style="color:#cbd5e1; font-size:14px;">Yeh module <b>${title}</b> ke liye active hai.</p>`;
       }
     }
 
@@ -212,7 +236,7 @@
         .select('*');
 
       if (error) {
-        tbody.innerHTML = '<tr><td colspan="2">Error loading data: ' + error.message + '</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2">Table not created in Supabase yet.</td></tr>';
         return;
       }
 
@@ -228,7 +252,7 @@
     }
 
     window.onload = function() {
-      switchView('Brand Master', document.querySelector('.submenu-item'));
+      switchView('Branch Master', document.querySelector('.submenu-item'));
     };
   </script>
 </body>
