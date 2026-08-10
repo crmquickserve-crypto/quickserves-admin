@@ -3,7 +3,7 @@
 <head>
   <base target="_top">
   <meta charset="utf-8">
-  <title>QUICKSERVES OS - Add Branch</title>
+  <title>QUICKSERVES OS - Add Franchise</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -26,19 +26,20 @@
     .header { font-size: 18px; font-weight: 700; color: #94a3b8; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
     
     .panel-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 24px; }
-    .section-title { font-size: 14px; font-weight: 600; color: #38bdf8; margin: 20px 0 12px 0; border-bottom: 1px solid #334155; padding-bottom: 6px; text-transform: uppercase; }
+    .section-title { font-size: 13px; font-weight: 600; color: #38bdf8; margin: 24px 0 14px 0; border-bottom: 1px solid #334155; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 15px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 12px; }
     .form-group { margin-bottom: 12px; }
     label { display: block; font-size: 11px; font-weight: 600; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
+    .required { color: #ef4444; margin-left: 2px; }
     input, select, textarea { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 9px 12px; border-radius: 4px; font-size: 13px; }
     textarea { resize: vertical; height: 75px; }
     
-    .btn-container { display: flex; gap: 10px; margin-top: 20px; }
-    .btn-primary { background-color: #007bff; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
-    .btn-primary:hover { background-color: #0056b3; }
-    .btn-secondary { background-color: #007bff; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
-    .btn-secondary:hover { background-color: #0056b3; }
+    .btn-container { display: flex; gap: 10px; margin-top: 24px; border-top: 1px solid #334155; padding-top: 20px; }
+    .btn-primary { background-color: #22c55e; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
+    .btn-primary:hover { background-color: #16a34a; }
+    .btn-warning { background-color: #eab308; color: #0f172a; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
+    .btn-warning:hover { background-color: #ca8a04; }
   </style>
 </head>
 <body>
@@ -50,32 +51,28 @@
     <div class="menu-dropdown">
       <div class="menu-header" onclick="toggleSubmenu('masterSub')"><span>📄 Master</span> <span>▼</span></div>
       <div class="submenu open" id="masterSub">
-        <div class="submenu-item active" onclick="switchView('Branch Master')">Branch Master</div>
-        <div class="submenu-item" onclick="switchView('Franchise Master')">Franchise Master</div>
+        <div class="submenu-item" onclick="switchView('Branch Master')">Branch Master</div>
+        <div class="submenu-item active" onclick="switchView('Franchise Master')">Franchise Master</div>
         <div class="submenu-item" onclick="switchView('Freelancer Master')">Freelancer Master</div>
         <div class="submenu-item" onclick="switchView('Technician Master')">Technician Master</div>
         <div class="submenu-item" onclick="switchView('Brand Mapping')">Brand Mapping</div>
         <div class="submenu-item" onclick="switchView('Category Mapping')">Category Mapping</div>
         <div class="submenu-item" onclick="switchView('Pincode Mapping')">Pincode Mapping</div>
         <div class="submenu-item" onclick="switchView('Client Master')">Client Master</div>
-        <div class="submenu-item" onclick="switchView('Brand Master')">Brand Master</div>
-        <div class="submenu-item" onclick="switchView('Category Master')">Category Master</div>
-        <div class="submenu-item" onclick="switchView('Product Master')">Product Master</div>
-        <div class="submenu-item" onclick="switchView('Model Master')">Model Master</div>
-        <div class="submenu-item" onclick="switchView('Symptom Master')">Symptom Master</div>
-        <div class="submenu-item" onclick="switchView('Cause Master')">Cause Master</div>
       </div>
     </div>
   </div>
 
   <!-- MAIN AREA -->
   <div class="main">
-    <div class="header">Add Branch</div>
+    <div class="header">Add Franchise</div>
     <div class="panel-card">
-      <form id="addBranchForm" onsubmit="saveBranch(event)">
+      <form id="addFranchiseForm" onsubmit="saveFranchise(event)">
+        
+        <!-- Basic Info -->
         <div class="form-grid">
           <div class="form-group">
-            <label>Region</label>
+            <label>Region<span class="required">*</span></label>
             <select id="region" required>
               <option value="">----Select----</option>
               <option value="North">North</option>
@@ -85,29 +82,45 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Branch</label>
-            <input type="text" id="branch_name" placeholder="Enter Branch Name" required>
+            <label>Firm Type<span class="required">*</span></label>
+            <select id="firm_type" required>
+              <option value="">---select---</option>
+              <option value="Proprietorship">Proprietorship</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Private Limited">Private Limited</option>
+            </select>
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
-            <label>Address</label>
-            <textarea id="address" placeholder="Enter Full Address"></textarea>
+            <label>Firm Name<span class="required">*</span></label>
+            <input type="text" id="firm_name" placeholder="Enter Firm Name" required>
           </div>
           <div class="form-group">
-            <label>Landmark</label>
+            <label>Number Of Partner<span class="required">*</span></label>
+            <input type="number" id="num_partners" placeholder="Enter Number of Partners">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Firm Address<span class="required">*</span></label>
+            <textarea id="firm_address" placeholder="Enter Full Address"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Landmark<span class="required">*</span></label>
             <input type="text" id="landmark" placeholder="Enter Landmark">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
-            <label>Pincode</label>
+            <label>Pin Code<span class="required">*</span></label>
             <input type="text" id="pincode" placeholder="Enter Pincode">
           </div>
           <div class="form-group">
-            <label>State</label>
+            <label>State<span class="required">*</span></label>
             <select id="state">
               <option value="">----Select----</option>
               <option value="Delhi">Delhi</option>
@@ -119,47 +132,322 @@
 
         <div class="form-grid">
           <div class="form-group">
-            <label>District</label>
+            <label>District<span class="required">*</span></label>
             <select id="district">
               <option value="">----Select----</option>
-              <option value="New Delhi">New Delhi</option>
-              <option value="Ghaziabad">Ghaziabad</option>
-              <option value="Noida">Noida</option>
             </select>
           </div>
           <div class="form-group">
-            <label>City</label>
+            <label>City<span class="required">*</span></label>
             <select id="city">
               <option value="">----Select----</option>
-              <option value="Delhi">Delhi</option>
-              <option value="Ghaziabad">Ghaziabad</option>
-              <option value="Noida">Noida</option>
             </select>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Locality<span class="required">*</span></label>
+            <select id="locality">
+              <option value="">----Select----</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Contact Number<span class="required">*</span></label>
+            <input type="text" id="contact_no" placeholder="Enter Contact Number">
           </div>
         </div>
 
         <div class="form-group" style="width: 50%; padding-right: 10px;">
-          <label>Locality</label>
-          <select id="locality">
-            <option value="">----Select----</option>
-          </select>
+          <label>Email ID<span class="required">*</span></label>
+          <input type="email" id="email_id" placeholder="Enter Email ID">
         </div>
 
-        <div class="section-title">Gst Details</div>
+        <!-- Government Details -->
+        <div class="section-title">Government Details</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>GST Number</label>
+            <input type="text" id="gst_number" placeholder="Enter GST Number">
+          </div>
+          <div class="form-group">
+            <label>PAN Card No.<span class="required">*</span></label>
+            <input type="text" id="pan_card" placeholder="Enter PAN Card No.">
+          </div>
+        </div>
         <div class="form-grid">
           <div class="form-group">
             <label>Shop & Establishment Registration</label>
             <input type="text" id="shop_reg" placeholder="Enter Registration No">
           </div>
           <div class="form-group">
-            <label>GST Number</label>
-            <input type="text" id="gst_no" placeholder="Enter GST Number">
+            <label>Establishment Month & Year<span class="required">*</span></label>
+            <input type="text" id="est_date" placeholder="MM/YYYY">
+          </div>
+        </div>
+
+        <!-- Proprietor Details -->
+        <div class="section-title">Proprietor Details</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Proprietor/ Partner Name<span class="required">*</span></label>
+            <input type="text" id="prop_name" placeholder="Enter Proprietor Name">
+          </div>
+          <div class="form-group">
+            <label>Contact Number<span class="required">*</span></label>
+            <input type="text" id="prop_contact" placeholder="Enter Proprietor Contact">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Proprietor Residential Address<span class="required">*</span></label>
+            <textarea id="prop_address" placeholder="Enter Residential Address"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Email ID<span class="required">*</span></label>
+            <input type="email" id="prop_email" placeholder="Enter Email ID">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>PAN Card No.<span class="required">*</span></label>
+            <input type="text" id="prop_pan" placeholder="Enter PAN Card No.">
+          </div>
+          <div class="form-group">
+            <label>Aadhar Card No</label>
+            <input type="text" id="prop_aadhaar" placeholder="Enter Aadhar Card No">
+          </div>
+        </div>
+
+        <!-- Additional Settings -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Language</label>
+            <select id="language" multiple style="height: 90px;">
+              <option value="Hindi">Hindi</option>
+              <option value="English">English</option>
+              <option value="Punjabi">Punjabi</option>
+              <option value="Bengali">Bengali</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Smartphone Availability<span class="required">*</span></label>
+            <select id="smartphone">
+              <option value="">---Select---</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="section-title">Bank Details</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Bank Name<span class="required">*</span></label>
+            <input type="text" id="bank_name" placeholder="Enter Bank Name">
+          </div>
+          <div class="form-group">
+            <label>Bank Branch<span class="required">*</span></label>
+            <input type="text" id="bank_branch" placeholder="Enter Branch Name">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Account Holder Name<span class="required">*</span></label>
+            <input type="text" id="acc_holder" placeholder="Enter Account Holder Name">
+          </div>
+          <div class="form-group">
+            <label>Account Number<span class="required">*</span></label>
+            <input type="text" id="acc_number" placeholder="Enter Account Number">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>IFSC Code<span class="required">*</span></label>
+            <input type="text" id="ifsc_code" placeholder="Enter IFSC Code">
+          </div>
+          <div class="form-group">
+            <label>Security Amount<span class="required">*</span></label>
+            <input type="number" id="security_amount" placeholder="Enter Amount">
+          </div>
+        </div>
+        <div class="form-group" style="width: 50%; padding-right: 10px;">
+          <label>Turn Over<span class="required">*</span></label>
+          <input type="text" id="turn_over" placeholder="Enter Turn Over">
+        </div>
+
+        <!-- Infrastructure Information -->
+        <div class="section-title">Infrastructure Information</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Space Ownership<span class="required">*</span></label>
+            <select id="space_ownership">
+              <option value="">---Select---</option>
+              <option value="Owned">Owned</option>
+              <option value="Rented">Rented</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Service Centre Space<span class="required">*</span></label>
+            <input type="text" id="centre_space" placeholder="Enter Space in Sq. Ft.">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Agreement Date<span class="required">*</span></label>
+            <input type="date" id="agreement_date">
+          </div>
+          <div class="form-group">
+            <label>Validity<span class="required">*</span></label>
+            <input type="date" id="validity_date">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>System Availability<span class="required">*</span></label>
+            <select id="system_avail">
+              <option value="">---Select---</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Printer Availability<span class="required">*</span></label>
+            <select id="printer_avail">
+              <option value="">---Select---</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Internet Connectivity<span class="required">*</span></label>
+            <select id="internet_conn">
+              <option value="">---Select---</option>
+              <option value="Broadband">Broadband</option>
+              <option value="Mobile Data">Mobile Data</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Inverter Availability<span class="required">*</span></label>
+            <select id="inverter_avail">
+              <option value="">---Select---</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Covering Area<span class="required">*</span></label>
+            <input type="text" id="covering_area" placeholder="Enter Covering Area">
+          </div>
+          <div class="form-group">
+            <label>Number Of Technician<span class="required">*</span></label>
+            <input type="number" id="num_technicians" placeholder="Enter Number">
+          </div>
+        </div>
+        <div class="form-group" style="width: 50%; padding-right: 10px;">
+          <label>Brand Handling<span class="required">*</span></label>
+          <input type="text" id="brand_handling" placeholder="Enter Brands">
+        </div>
+
+        <!-- Back End Stuff -->
+        <div class="section-title">Back End Stuff</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Firm Manager / CCO Name<span class="required">*</span></label>
+            <input type="text" id="manager_name" placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+            <label>Contact Number<span class="required">*</span></label>
+            <input type="text" id="manager_contact" placeholder="Enter Contact Number">
+          </div>
+        </div>
+        <div class="form-group" style="width: 50%; padding-right: 10px;">
+          <label>Email ID<span class="required">*</span></label>
+          <input type="email" id="manager_email" placeholder="Enter Email ID">
+        </div>
+
+        <!-- Reporting -->
+        <div class="section-title">Reporting</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Reporting Branch<span class="required">*</span></label>
+            <input type="text" id="reporting_branch" placeholder="Enter Reporting Branch">
+          </div>
+          <div class="form-group">
+            <label>CCO Name<span class="required">*</span></label>
+            <input type="text" id="cco_name" placeholder="Enter CCO Name">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Area Manager Name<span class="required">*</span></label>
+            <input type="text" id="area_manager" placeholder="Enter Area Manager Name">
+          </div>
+          <div class="form-group">
+            <label>CCO Contact Number<span class="required">*</span></label>
+            <input type="text" id="cco_contact" placeholder="Enter CCO Contact Number">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Manager Email Id<span class="required">*</span></label>
+            <input type="email" id="manager_email_id" placeholder="Enter Email Id">
+          </div>
+          <div class="form-group">
+            <label>CCO Email ID<span class="required">*</span></label>
+            <input type="email" id="cco_email" placeholder="Enter CCO Email ID">
+          </div>
+        </div>
+        <div class="form-group" style="width: 50%; padding-right: 10px;">
+          <label>Manager Contact Number<span class="required">*</span></label>
+          <input type="text" id="manager_contact_no" placeholder="Enter Contact Number">
+        </div>
+
+        <!-- SLA / TAT Performance -->
+        <div class="section-title">SLA / TAT Performance</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Installation (Within City) - Response Time</label>
+            <input type="text" id="inst_resp" placeholder="In Hours">
+          </div>
+          <div class="form-group">
+            <label>Installation (Within City) - Resolution Time</label>
+            <input type="text" id="inst_res" placeholder="In Hours">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Service (Within City) - Response Time</label>
+            <input type="text" id="serv_resp" placeholder="In Hours">
+          </div>
+          <div class="form-group">
+            <label>Service (Within City) - Resolution Time</label>
+            <input type="text" id="serv_res" placeholder="In Hours">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Status<span class="required">*</span></label>
+            <select id="status" required>
+              <option value="">---Select---</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>ASF Code<span class="required">*</span></label>
+            <input type="text" id="asf_code" placeholder="Enter ASF Code" required>
           </div>
         </div>
 
         <div class="btn-container">
           <button type="submit" class="btn-primary">Save</button>
-          <button type="reset" class="btn-secondary">Reset</button>
+          <button type="button" class="btn-warning" onclick="document.getElementById('addFranchiseForm').reset()">Abort</button>
         </div>
       </form>
     </div>
@@ -178,30 +466,26 @@
       alert("Switched to " + title);
     }
 
-    async function saveBranch(event) {
+    async function saveFranchise(event) {
       event.preventDefault();
       
-      const branchData = {
+      const franchiseData = {
         region: document.getElementById('region').value,
-        branch_name: document.getElementById('branch_name').value,
-        address: document.getElementById('address').value,
-        landmark: document.getElementById('landmark').value,
-        pincode: document.getElementById('pincode').value,
-        state: document.getElementById('state').value,
-        district: document.getElementById('district').value,
-        city: document.getElementById('city').value,
-        locality: document.getElementById('locality').value,
-        shop_registration: document.getElementById('shop_reg').value,
-        gst_number: document.getElementById('gst_no').value
+        firm_name: document.getElementById('firm_name').value,
+        firm_type: document.getElementById('firm_type').value,
+        contact_number: document.getElementById('contact_no').value,
+        email_id: document.getElementById('email_id').value,
+        status: document.getElementById('status').value,
+        asf_code: document.getElementById('asf_code').value
       };
 
-      const { data, error } = await db.from('branches').insert([branchData]);
+      const { data, error } = await db.from('franchises').insert([franchiseData]);
 
       if (error) {
-        alert('Error saving branch: ' + error.message);
+        alert('Error saving franchise: ' + error.message);
       } else {
-        alert('Branch added successfully!');
-        document.getElementById('addBranchForm').reset();
+        alert('Franchise added successfully!');
+        document.getElementById('addFranchiseForm').reset();
       }
     }
   </script>
