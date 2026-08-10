@@ -45,7 +45,7 @@
 </head>
 <body>
 
-  <!-- ADMIN SIDEBAR WITH ALL MENUS -->
+  <!-- ADMIN SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-brand">🏠 Admin Dashboard</div>
 
@@ -68,14 +68,6 @@
         <div class="submenu-item" onclick="switchView('Call Registration', this)">Call Registration</div>
         <div class="submenu-item" onclick="switchView('Call View', this)">Call View</div>
         <div class="submenu-item" onclick="switchView('Call Allotment', this)">Call Allotment</div>
-      </div>
-    </div>
-
-    <!-- MASTER DATA MENU -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleSubmenu('masterDataSub')"><span>📊 Master Data</span> <span>▼</span></div>
-      <div class="submenu" id="masterDataSub">
-        <div class="submenu-item" onclick="switchView('Master Data Download', this)">Master Data Download</div>
       </div>
     </div>
 
@@ -115,90 +107,126 @@
       if(title === 'Brand Master') {
         contentArea.innerHTML = `
           <div class="panel-title">Brand Master Management</div>
-          <form id="brandForm" onsubmit="saveBrand(event)">
+          <form id="masterForm" onsubmit="saveRecord(event, 'brands', ['brand_code', 'brand_name'])">
             <div class="form-grid">
-              <div class="form-group"><label>Brand Code *</label><input type="text" id="brandCode" placeholder="BR001" required></div>
-              <div class="form-group"><label>Brand Name *</label><input type="text" id="brandName" placeholder="Samsung" required></div>
+              <div class="form-group"><label>Brand Code *</label><input type="text" id="f0" placeholder="BR001" required></div>
+              <div class="form-group"><label>Brand Name *</label><input type="text" id="f1" placeholder="Samsung" required></div>
             </div>
-            <button type="submit" class="action-btn">Save Brand to Supabase</button>
+            <button type="submit" class="action-btn">Save Brand</button>
           </form>
-          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Brands from Database:</h3>
-          <table><thead><tr><th>Code</th><th>Brand Name</th></tr></thead><tbody id="brandTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
-        loadBrands();
-      } else if(title === 'Create User' || title === 'Update User') {
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Brands:</h3>
+          <table><thead><tr><th>Code</th><th>Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
+        loadTableData('brands', ['brand_code', 'brand_name']);
+      } 
+      else if(title === 'Branch Master') {
         contentArea.innerHTML = `
-          <div class="panel-title">${title} Panel</div>
-          <form onsubmit="alert('User operation ready!'); return false;">
+          <div class="panel-title">Branch Master Management</div>
+          <form id="masterForm" onsubmit="saveRecord(event, 'branches', ['branch_code', 'branch_name'])">
             <div class="form-grid">
-              <div class="form-group"><label>User Code *</label><input type="text" placeholder="USR001" required></div>
-              <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Full Name" required></div>
-              <div class="form-group"><label>Email *</label><input type="email" placeholder="Email" required></div>
-              <div class="form-group"><label>Role *</label><select><option>Admin</option><option>Engineer</option><option>Operator</option></select></div>
+              <div class="form-group"><label>Branch Code *</label><input type="text" id="f0" placeholder="DEL01" required></div>
+              <div class="form-group"><label>Branch Name *</label><input type="text" id="f1" placeholder="Delhi Branch" required></div>
             </div>
-            <button type="submit" class="action-btn">${title}</button>
-          </form>`;
-      } else if(title === 'Call Registration') {
+            <button type="submit" class="action-btn">Save Branch</button>
+          </form>
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Branches:</h3>
+          <table><thead><tr><th>Branch Code</th><th>Branch Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
+        loadTableData('branches', ['branch_code', 'branch_name']);
+      }
+      else if(title === 'Product Master') {
         contentArea.innerHTML = `
-          <div class="panel-title">Service Call Registration</div>
-          <form onsubmit="alert('Call registered successfully!'); return false;">
+          <div class="panel-title">Product Master Management</div>
+          <form id="masterForm" onsubmit="saveRecord(event, 'products', ['product_code', 'product_name'])">
             <div class="form-grid">
-              <div class="form-group"><label>Customer Name *</label><input type="text" placeholder="Customer Name" required></div>
-              <div class="form-group"><label>Mobile Number *</label><input type="text" placeholder="Mobile Number" required></div>
-              <div class="form-group"><label>Brand *</label><input type="text" placeholder="Brand Name" required></div>
-              <div class="form-group"><label>City *</label><input type="text" placeholder="City" required></div>
+              <div class="form-group"><label>Product Code *</label><input type="text" id="f0" placeholder="PRD01" required></div>
+              <div class="form-group"><label>Product Name *</label><input type="text" id="f1" placeholder="Water Purifier" required></div>
             </div>
-            <button type="submit" class="action-btn">Register Call</button>
-          </form>`;
-      } else {
+            <button type="submit" class="action-btn">Save Product</button>
+          </form>
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Products:</h3>
+          <table><thead><tr><th>Product Code</th><th>Product Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
+        loadTableData('products', ['product_code', 'product_name']);
+      }
+      else if(title === 'Model Master') {
+        contentArea.innerHTML = `
+          <div class="panel-title">Model Master Management</div>
+          <form id="masterForm" onsubmit="saveRecord(event, 'models', ['model_code', 'model_name'])">
+            <div class="form-grid">
+              <div class="form-group"><label>Model Code *</label><input type="text" id="f0" placeholder="MOD01" required></div>
+              <div class="form-group"><label>Model Name *</label><input type="text" id="f1" placeholder="Model X" required></div>
+            </div>
+            <button type="submit" class="action-btn">Save Model</button>
+          </form>
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Models:</h3>
+          <table><thead><tr><th>Model Code</th><th>Model Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
+        loadTableData('models', ['model_code', 'model_name']);
+      }
+      else if(title === 'Spares Master') {
+        contentArea.innerHTML = `
+          <div class="panel-title">Spares Master Management</div>
+          <form id="masterForm" onsubmit="saveRecord(event, 'master_spares', ['spare_code', 'spare_name'])">
+            <div class="form-grid">
+              <div class="form-group"><label>Spare Code *</label><input type="text" id="f0" placeholder="SP01" required></div>
+              <div class="form-group"><label>Spare Name *</label><input type="text" id="f1" placeholder="Filter Candle" required></div>
+            </div>
+            <button type="submit" class="action-btn">Save Spare</button>
+          </form>
+          <h3 style="margin-top:20px; font-size:14px; color:#94a3b8;">Existing Spares:</h3>
+          <table><thead><tr><th>Spare Code</th><th>Spare Name</th></tr></thead><tbody id="dataTableBody"><tr><td colspan="2">Loading...</td></tr></tbody></table>`;
+        loadTableData('master_spares', ['spare_code', 'spare_name']);
+      }
+      else {
         contentArea.innerHTML = `
           <div class="panel-title">${title} Panel</div>
           <p style="color:#cbd5e1; font-size:14px;">Yeh window <b>${title}</b> ke liye active hai.</p>`;
       }
     }
 
-    async function saveBrand(event) {
+    async function saveRecord(event, tableName, columns) {
       event.preventDefault();
-      var code = document.getElementById('brandCode').value;
-      var name = document.getElementById('brandName').value;
+      var val0 = document.getElementById('f0').value;
+      var val1 = document.getElementById('f1').value;
+
+      var obj = {};
+      obj[columns[0]] = val0;
+      obj[columns[1]] = val1;
 
       const { data, error } = await db
-        .from('brands')
-        .insert([{ brand_code: code, brand_name: name }]);
+        .from(tableName)
+        .insert([obj]);
 
       if (error) {
         alert('Error: ' + error.message);
       } else {
-        alert('Brand successfully saved to Supabase!');
-        document.getElementById('brandForm').reset();
-        loadBrands();
+        alert('Record successfully saved to Supabase!');
+        document.getElementById('masterForm').reset();
+        loadTableData(tableName, columns);
       }
     }
 
-    async function loadBrands() {
-      var tbody = document.getElementById('brandTableBody');
+    async function loadTableData(tableName, columns) {
+      var tbody = document.getElementById('dataTableBody');
       if (!tbody) return;
 
       const { data, error } = await db
-        .from('brands')
+        .from(tableName)
         .select('*');
 
       if (error) {
-        tbody.innerHTML = '<tr><td colspan="2">Error loading brands.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2">Error loading data: ' + error.message + '</td></tr>';
         return;
       }
 
       if (!data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2">No brands found in database.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2">No records found in database.</td></tr>';
         return;
       }
 
       tbody.innerHTML = '';
       data.forEach(function(row) {
-        tbody.innerHTML += '<tr><td>' + row.brand_code + '</td><td>' + row.brand_name + '</td></tr>';
+        tbody.innerHTML += '<tr><td>' + (row[columns[0]] || '') + '</td><td>' + (row[columns[1]] || '') + '</td></tr>';
       });
     }
 
-    // Load initial view
     window.onload = function() {
       switchView('Brand Master', document.querySelector('.submenu-item'));
     };
