@@ -34,7 +34,7 @@
                     <a href="#" onclick="showBranchMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
                     <a href="#" onclick="showFranchiseMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
+                    <a href="#" onclick="showTechnicianMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
@@ -244,9 +244,8 @@
             </div>
         </div>
 
-        <!-- ================= SECTION 2: BRANCH MASTER (COMPLETE FIELDS INTEGRATED) ================= -->
+        <!-- ================= SECTION 2: BRANCH MASTER ================= -->
         <div id="branchMasterSection" class="hidden space-y-6">
-            <!-- Branch Listing View -->
             <div id="branchListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">Branch Master</h2>
@@ -279,21 +278,12 @@
                                 <td class="p-3 text-slate-300">GHAZIABAD</td>
                                 <td class="p-3 text-slate-300">UTTAR PRADESH</td>
                             </tr>
-                            <tr>
-                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
-                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
-                                <td class="p-3 text-emerald-400 font-mono">CDBR002</td>
-                                <td class="p-3 font-medium text-white">East</td>
-                                <td class="p-3 text-slate-300">Bihar Branch</td>
-                                <td class="p-3 text-slate-300">PATNA</td>
-                                <td class="p-3 text-slate-300">BIHAR</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Upload Branch Document View -->
+            <!-- Upload Document View -->
             <div id="uploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">Upload Branch Document</h2>
@@ -306,7 +296,6 @@
                             <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
                                 <option>----Select Branch----</option>
                                 <option>CDBR001 - Uttar Pradesh (North)</option>
-                                <option>CDBR002 - Bihar Branch (East)</option>
                             </select>
                         </div>
                         <div>
@@ -315,13 +304,11 @@
                                 <option>---Select---</option>
                                 <option>Address Proof Document</option>
                                 <option>GST Number Proof Document</option>
-                                <option>Rent Agreement Copy</option>
-                                <option>Electricity Bill</option>
                             </select>
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-xs font-medium text-slate-400 mb-1">Choose File</label>
-                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
+                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300">
                         </div>
                     </div>
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
@@ -331,42 +318,255 @@
                 </form>
             </div>
 
-            <!-- ADD BRANCH FORM (Complete Excel Fields Integrated) -->
+            <!-- ADD BRANCH FORM -->
             <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">ADD BRANCH (Master Data Form)</h2>
                     <button onclick="hideBranchAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
                 </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Saved Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <option>North</option><option>South</option><option>East</option><option>West</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch Name</label>
+                            <input type="text" placeholder="Enter Branch Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch CRMCode</label>
+                            <input type="text" placeholder="CDBR001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-600 text-white text-xs px-6 py-2.5 rounded">Save Branch</button>
+                        <button type="button" onclick="hideBranchAddForm()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Saved Successfully with all Master Fields!');">
+        <!-- ================= SECTION 3: FRANCHISE MASTER ================= -->
+        <div id="franchiseMasterSection" class="hidden space-y-6">
+            <div id="franchiseListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Franchise Master</h2>
+                    <div class="space-x-2">
+                        <button onclick="showFranchiseAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                        <button onclick="showFranchiseUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr>
+                                <th class="p-3">Select</th>
+                                <th class="p-3">Edit</th>
+                                <th class="p-3">CRM Code</th>
+                                <th class="p-3">Firm Name</th>
+                                <th class="p-3">City</th>
+                                <th class="p-3">Contact No.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#334155]">
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showFranchiseAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 text-emerald-400 font-mono">QSN001</td>
+                                <td class="p-3 font-medium text-white">UNIVERSAL SERVICES</td>
+                                <td class="p-3 text-slate-300">Alwar</td>
+                                <td class="p-3 text-slate-300">8005543000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Upload Franchise Document View -->
+            <div id="franchiseUploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Upload Franchise Document</h2>
+                    <button onclick="hideFranchiseUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Document Uploaded Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Franchise Name / CRM Code</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>QSN001 - UNIVERSAL SERVICES</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>Agreement Document</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Choose File</label>
+                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300">
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-500 text-white text-xs px-6 py-2.5 rounded">Save</button>
+                        <button type="button" onclick="hideFranchiseUploadDocumentView()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ADD FRANCHISE FORM -->
+            <div id="franchiseAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">ADD FRANCHISE (Master Data Form)</h2>
+                    <button onclick="hideFranchiseAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Saved Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">CRM Code</label>
+                            <input type="text" placeholder="QSN001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Firm Name</label>
+                            <input type="text" placeholder="Firm Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-600 text-white text-xs px-6 py-2.5 rounded">Save Franchise</button>
+                        <button type="button" onclick="hideFranchiseAddForm()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= SECTION 4: TECHNICIAN MASTER (EXCEL FIELDS FULLY INTEGRATED) ================= -->
+        <div id="technicianMasterSection" class="hidden space-y-6">
+            <!-- Technician Listing View -->
+            <div id="technicianListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Technician Master</h2>
+                    <div class="space-x-2">
+                        <button onclick="showTechnicianAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                        <button onclick="showTechnicianUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr>
+                                <th class="p-3">Select</th>
+                                <th class="p-3">Edit</th>
+                                <th class="p-3">CRM Code</th>
+                                <th class="p-3">Technician Name</th>
+                                <th class="p-3">Contact Number</th>
+                                <th class="p-3">City</th>
+                                <th class="p-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#334155]">
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showTechnicianAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 text-emerald-400 font-mono">CDSFT001</td>
+                                <td class="p-3 font-medium text-white">PRASHANT GUPTA</td>
+                                <td class="p-3 text-slate-300">9041941903</td>
+                                <td class="p-3 text-slate-300">GHAZIABAD</td>
+                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-xs">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showTechnicianAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 text-emerald-400 font-mono">QSSFT004</td>
+                                <td class="p-3 font-medium text-white">Ankur</td>
+                                <td class="p-3 text-slate-300">8791507279</td>
+                                <td class="p-3 text-slate-300">MEERUT</td>
+                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-xs">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Upload Technician Document View -->
+            <div id="technicianUploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Upload Technician Document</h2>
+                    <button onclick="hideTechnicianUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Technician Document Uploaded Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Technician Name / CRM Code</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>----Select Technician----</option>
+                                <option>CDSFT001 - PRASHANT GUPTA</option>
+                                <option>QSSFT004 - Ankur</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>---Select---</option>
+                                <option>Aadhar Card</option>
+                                <option>PAN Card</option>
+                                <option>Driving License</option>
+                                <option>Voter ID</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Choose File</label>
+                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-6 py-2.5 rounded font-medium">Save</button>
+                        <button type="button" onclick="hideTechnicianUploadDocumentView()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ADD TECHNICIAN FORM (Complete Excel Fields Integrated) -->
+            <div id="technicianAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">ADD TECHNICIAN (Master Data Form)</h2>
+                    <button onclick="hideTechnicianAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Technician Saved Successfully with all Master Fields!');">
                     
-                    <!-- 1. General & Location Details -->
+                    <!-- 1. General & Personal Information -->
                     <div>
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">1. General & Location Details</h3>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">1. General & Personal Information</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
                                 <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select Region--</option>
-                                    <option>North</option>
-                                    <option>South</option>
-                                    <option>East</option>
-                                    <option>West</option>
-                                    <option>Central</option>
-                                    <option>North-East</option>
+                                    <option>North</option><option>South</option><option>East</option><option>West</option><option>Central</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Name</label>
-                                <input type="text" placeholder="Enter Branch Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Technician Name</label>
+                                <input type="text" placeholder="Enter Full Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch CRMCode</label>
-                                <input type="text" placeholder="e.g. CDBR001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CRMCode</label>
+                                <input type="text" placeholder="e.g. CDSFT001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Contact Number</label>
+                                <input type="text" maxlength="10" placeholder="Mobile Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Email ID</label>
+                                <input type="email" placeholder="Email Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Address</label>
-                                <textarea rows="2" placeholder="Full Branch Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Residential Address</label>
+                                <textarea rows="2" placeholder="Full Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
@@ -392,316 +592,163 @@
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
                                 <input type="text" placeholder="Locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Identification, Documents & Assets -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Identification, Documents & Assets</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Shop Establishment Registration</label>
-                                <input type="text" placeholder="Registration No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Aadhar Card No</label>
+                                <input type="text" placeholder="12 Digit Aadhar No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">GST Number</label>
-                                <input type="text" placeholder="GSTIN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">PAN Card No.</label>
+                                <input type="text" placeholder="PAN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Vehicle Number</label>
+                                <input type="text" placeholder="Vehicle Registration No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Driving License</label>
+                                <input type="text" placeholder="DL Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Voter ID No.</label>
+                                <input type="text" placeholder="Voter ID No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Smartphone Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>Yes</option><option>No</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2. Infrastructure & Utility Details -->
+                    <!-- 3. Qualification, Skills & Employment Details -->
                     <div class="border-t border-[#334155] pt-4">
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Infrastructure & Utility Details</h3>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Qualification, Skills & Employment Details</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Premises Ownership</label>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Highest Qualification</label>
                                 <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Owned</option>
-                                    <option>Rented</option>
+                                    <option>--Select--</option><option>Graduate</option><option>Post Graduate</option><option>12th</option><option>10th</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Rent Agreement</label>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Technical Qualification</label>
                                 <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option>--Select--</option><option>ITI</option><option>Diploma</option><option>B. Tech</option><option>None</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Agreement Period</label>
-                                <input type="text" placeholder="e.g. 11 Months" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Language</label>
+                                <input type="text" placeholder="Known Languages" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Renewal Date</label>
-                                <input type="text" id="renewalDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Rent Date</label>
-                                <input type="text" id="rentDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Area in Sq. Ft</label>
-                                <input type="text" placeholder="Area size" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Warehouse</label>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Personal Insurance</label>
                                 <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option>Yes</option><option>No</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Broadband Connection</label>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Skill Set (Main Stream)</label>
+                                <input type="text" placeholder="e.g. All Product, HVAC, etc." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Product Handling</label>
+                                <input type="text" placeholder="Product types" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Date Of Joining</label>
+                                <input type="text" id="dateOfJoining" placeholder="dd/mm/yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Experience in Years</label>
+                                <input type="text" placeholder="e.g. 5 Years" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Status</label>
                                 <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Available</option>
-                                    <option>Not Available</option>
+                                    <option>Active (A)</option><option>Inactive (I)</option>
                                 </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Alternate Connection</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Available</option>
-                                    <option>Not Available</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">System Availability</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Printer Availability</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Landline Number</label>
-                                <input type="text" placeholder="Landline No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Billing Due Date</label>
-                                <input type="text" placeholder="Due Date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Electricity Connection</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Commercial</option>
-                                    <option>Domestic</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Wattage / Load</label>
-                                <input type="text" placeholder="Load capacity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Billing Due Date 1 (Electricity)</label>
-                                <input type="text" placeholder="Due Date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Availability</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Capacity</label>
-                                <input type="text" placeholder="Capacity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Fire Safety Norms</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>--Select--</option>
-                                    <option>Complied</option>
-                                    <option>Not Complied</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Refilling Date (Fire Extinguisher)</label>
-                                <input type="text" id="refillingDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3. Management & Contacts Details -->
+                    <!-- 4. Bank Account & Management Details -->
                     <div class="border-t border-[#334155] pt-4">
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Management & Contacts Details</h3>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">4. Bank Account & Management Details</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Bank Name</label>
+                                <input type="text" placeholder="Bank Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch (Bank)</label>
+                                <input type="text" placeholder="Bank Branch" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Account Number</label>
+                                <input type="text" placeholder="Account Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">IFSC Number</label>
+                                <input type="text" placeholder="IFSC Code" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Account Holder Name</label>
+                                <input type="text" placeholder="Account Holder Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Base Location</label>
+                                <input type="text" placeholder="Base Location" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Name</label>
                                 <input type="text" placeholder="Manager Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Cell Number</label>
-                                <input type="text" placeholder="Mobile Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Contact Number</label>
+                                <input type="text" placeholder="Manager Contact" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Email Id</label>
-                                <input type="email" placeholder="Email ID" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Email ID</label>
+                                <input type="email" placeholder="Manager Email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Name</label>
-                                <input type="text" placeholder="Store Manager" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CCO Name</label>
+                                <input type="text" placeholder="CCO Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Contact Number</label>
-                                <input type="text" placeholder="Contact Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CCO Contact Number</label>
+                                <input type="text" placeholder="CCO Contact" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Email ID</label>
-                                <input type="email" placeholder="Email ID" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CCO Email ID</label>
+                                <input type="email" placeholder="CCO Email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Name</label>
-                                <input type="text" placeholder="Coordinator Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Service Provider Name (SvcProviderName)</label>
+                                <input type="text" value="Quick Serves" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Contact Number</label>
-                                <input type="text" placeholder="Contact Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Email ID</label>
-                                <input type="email" placeholder="Email ID" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Provider Type</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>Franchise</option><option>Company</option><option>Freelancer</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
                     <!-- Form Actions -->
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Branch</button>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Technician</button>
                         <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
-                        <button type="button" onclick="hideBranchAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Abort</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- ================= SECTION 3: FRANCHISE MASTER ================= -->
-        <div id="franchiseMasterSection" class="hidden space-y-6">
-            <!-- Franchise Listing View -->
-            <div id="franchiseListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Franchise Master</h2>
-                    <div class="space-x-2">
-                        <button onclick="showFranchiseAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
-                        <button onclick="showFranchiseUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-300">
-                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
-                            <tr>
-                                <th class="p-3">Select</th>
-                                <th class="p-3">Edit</th>
-                                <th class="p-3">CRM Code</th>
-                                <th class="p-3">Firm Name</th>
-                                <th class="p-3">City</th>
-                                <th class="p-3">Contact No.</th>
-                                <th class="p-3">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-[#334155]">
-                            <tr>
-                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
-                                <td class="p-3"><a href="#" onclick="showFranchiseAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
-                                <td class="p-3 text-emerald-400 font-mono">QSN001</td>
-                                <td class="p-3 font-medium text-white">UNIVERSAL SERVICES</td>
-                                <td class="p-3 text-slate-300">Alwar</td>
-                                <td class="p-3 text-slate-300">8005543000</td>
-                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-xs">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
-                                <td class="p-3"><a href="#" onclick="showFranchiseAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
-                                <td class="p-3 text-emerald-400 font-mono">QSN002</td>
-                                <td class="p-3 font-medium text-white">RS ENTERPRISES</td>
-                                <td class="p-3 text-slate-300">Muzaffarnagar</td>
-                                <td class="p-3 text-slate-300">9808351000</td>
-                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-xs">Active</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Upload Franchise Document View -->
-            <div id="franchiseUploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Upload Franchise Document</h2>
-                    <button onclick="hideFranchiseUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
-                </div>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Document Uploaded Successfully!');">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Franchise Name / CRM Code</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
-                                <option>----Select Franchise----</option>
-                                <option>QSN001 - UNIVERSAL SERVICES</option>
-                                <option>QSN002 - RS ENTERPRISES</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
-                                <option>---Select---</option>
-                                <option>Agreement Document</option>
-                                <option>GST Certificate</option>
-                                <option>PAN Card File</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Choose File</label>
-                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
-                        </div>
-                    </div>
-                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-6 py-2.5 rounded font-medium">Save</button>
-                        <button type="button" onclick="hideFranchiseUploadDocumentView()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium">Cancel</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- ADD NEW FRANCHISE FORM -->
-            <div id="franchiseAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">ADD FRANCHISE (Master Data Form)</h2>
-                    <button onclick="hideFranchiseAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
-                </div>
-
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Saved Successfully!');">
-                    <div>
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Identification & Firm Details</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option>North</option>
-                                    <option>South</option>
-                                    <option>East</option>
-                                    <option>West</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">CRM Code</label>
-                                <input type="text" placeholder="e.g. QSN001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Firm Name</label>
-                                <input type="text" placeholder="Firm Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Franchise</button>
-                        <button type="button" onclick="hideFranchiseAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Abort</button>
+                        <button type="button" onclick="hideTechnicianAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Abort</button>
                     </div>
                 </form>
             </div>
@@ -721,6 +768,7 @@
             document.getElementById('dashboardSection').classList.add('hidden');
             document.getElementById('branchMasterSection').classList.add('hidden');
             document.getElementById('franchiseMasterSection').classList.add('hidden');
+            document.getElementById('technicianMasterSection').classList.add('hidden');
             document.getElementById(sectionId).classList.remove('hidden');
         }
 
@@ -731,24 +779,20 @@
             document.getElementById('branchAddFormView').classList.add('hidden');
             document.getElementById('uploadDocumentView').classList.add('hidden');
         }
-
         function showBranchAddForm() {
             document.getElementById('branchListView').classList.add('hidden');
             document.getElementById('uploadDocumentView').classList.add('hidden');
             document.getElementById('branchAddFormView').classList.remove('hidden');
         }
-
         function hideBranchAddForm() {
             document.getElementById('branchAddFormView').classList.add('hidden');
             document.getElementById('branchListView').classList.remove('hidden');
         }
-
         function showUploadDocumentView() {
             document.getElementById('branchListView').classList.add('hidden');
             document.getElementById('branchAddFormView').classList.add('hidden');
             document.getElementById('uploadDocumentView').classList.remove('hidden');
         }
-
         function hideUploadDocumentView() {
             document.getElementById('uploadDocumentView').classList.add('hidden');
             document.getElementById('branchListView').classList.remove('hidden');
@@ -761,36 +805,58 @@
             document.getElementById('franchiseAddFormView').classList.add('hidden');
             document.getElementById('franchiseUploadDocumentView').classList.add('hidden');
         }
-
         function showFranchiseAddForm() {
             document.getElementById('franchiseListView').classList.add('hidden');
             document.getElementById('franchiseUploadDocumentView').classList.add('hidden');
             document.getElementById('franchiseAddFormView').classList.remove('hidden');
         }
-
         function hideFranchiseAddForm() {
             document.getElementById('franchiseAddFormView').classList.add('hidden');
             document.getElementById('franchiseListView').classList.remove('hidden');
         }
-
         function showFranchiseUploadDocumentView() {
             document.getElementById('franchiseListView').classList.add('hidden');
             document.getElementById('franchiseAddFormView').classList.add('hidden');
             document.getElementById('franchiseUploadDocumentView').classList.remove('hidden');
         }
-
         function hideFranchiseUploadDocumentView() {
             document.getElementById('franchiseUploadDocumentView').classList.add('hidden');
             document.getElementById('franchiseListView').classList.remove('hidden');
         }
 
-        // Initialize Flatpickr Calendar for Branch Master Date fields
+        // Technician Master Navigation
+        function showTechnicianMasterMain() {
+            showSection('technicianMasterSection');
+            document.getElementById('technicianListView').classList.remove('hidden');
+            document.getElementById('technicianAddFormView').classList.add('hidden');
+            document.getElementById('technicianUploadDocumentView').classList.add('hidden');
+        }
+        function showTechnicianAddForm() {
+            document.getElementById('technicianListView').classList.add('hidden');
+            document.getElementById('technicianUploadDocumentView').classList.add('hidden');
+            document.getElementById('technicianAddFormView').classList.remove('hidden');
+        }
+        function hideTechnicianAddForm() {
+            document.getElementById('technicianAddFormView').classList.add('hidden');
+            document.getElementById('technicianListView').classList.remove('hidden');
+        }
+        function showTechnicianUploadDocumentView() {
+            document.getElementById('technicianListView').classList.add('hidden');
+            document.getElementById('technicianAddFormView').classList.add('hidden');
+            document.getElementById('technicianUploadDocumentView').classList.remove('hidden');
+        }
+        function hideTechnicianUploadDocumentView() {
+            document.getElementById('technicianUploadDocumentView').classList.add('hidden');
+            document.getElementById('technicianListView').classList.remove('hidden');
+        }
+
+        // Initialize Flatpickr Calendar for Date fields
         document.addEventListener("DOMContentLoaded", function() {
             flatpickr(".calendar-input", {
-                dateFormat: "d-m-Y",
+                dateFormat: "d/m/Y",
                 allowInput: true,
                 altInput: true,
-                altFormat: "d-m-Y"
+                altFormat: "d/m/Y"
             });
         });
     </script>
