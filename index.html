@@ -1,609 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <base target="_top">
-  <meta charset="utf-8">
-  <title>QUICKSERVES OS - Admin Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; }
-    
-    .sidebar { width: 280px; background-color: #1e293b; border-right: 1px solid #334155; overflow-y: auto; height: 100vh; position: fixed; left: 0; top: 0; z-index: 100; }
-    .sidebar-brand { font-size: 15px; font-weight: bold; color: #f8fafc; padding: 20px 16px; background: #172033; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #334155; }
-    
-    .menu-dropdown { border-bottom: 1px solid #334155; }
-    .menu-header { padding: 14px 16px; color: #cbd5e1; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; background-color: #172033; }
-    .menu-header:hover { background-color: #334155; color: #fff; }
-    
-    .submenu { background-color: #1e293b; padding: 4px 0; display: none; }
-    .submenu.open { display: block; }
-    .submenu-item { padding: 10px 16px 10px 32px; color: #94a3b8; font-size: 12px; cursor: pointer; transition: 0.2s; border-left: 3px solid transparent; }
-    .submenu-item:hover { color: #f8fafc; background-color: #26334d; }
-    .submenu-item.active { color: #38bdf8; font-weight: 600; background-color: #26334d; border-left-color: #38bdf8; }
-
-    .main { flex: 1; margin-left: 280px; padding: 32px; overflow-y: auto; height: 100vh; }
-    .header { font-size: 18px; font-weight: 700; color: #94a3b8; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-    
-    .panel-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 24px; margin-bottom: 40px; }
-    .section-heading { font-size: 12px; font-weight: 700; color: #38bdf8; margin: 24px 0 12px 0; border-bottom: 1px solid #334155; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; background: #172033; padding: 8px 12px; border-radius: 4px; }
-    
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 12px; }
-    .form-group { margin-bottom: 12px; }
-    label { display: block; font-size: 11px; font-weight: 600; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
-    .required { color: #ef4444; margin-left: 2px; }
-    input, select, textarea { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 9px 12px; border-radius: 4px; font-size: 13px; }
-    input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
-    input[type="file"] { padding: 6px; background: #0f172a; cursor: pointer; }
-    textarea { resize: vertical; height: 75px; }
-    
-    .btn-container { display: flex; gap: 10px; margin: 20px 0; }
-    .btn-primary { background-color: #007bff; color: white; border: none; padding: 8px 18px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
-    .btn-primary:hover { background-color: #0056b3; }
-    .btn-success { background-color: #22c55e; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
-    .btn-success:hover { background-color: #16a34a; }
-    .btn-danger { background-color: #ff3366; color: white; border: none; padding: 8px 18px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
-    .btn-danger:hover { background-color: #e02e5b; }
-    .btn-warning { background-color: #eab308; color: #0f172a; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
-    
-    table { width: 100%; border-collapse: collapse; background-color: #1e293b; border: 1px solid #334155; margin-top: 10px; }
-    th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 700; color: #007bff; border-bottom: 2px solid #334155; text-transform: uppercase; background: #172033; }
-    td { padding: 12px 16px; font-size: 13px; color: #38bdf8; border-bottom: 1px solid #334155; }
-    tr:hover { background-color: #26334d; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Branch - Quickserves Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-100 font-sans">
 
-  <!-- ADMIN SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-brand">🏠 Admin Dashboard</div>
+    <div class="max-w-6xl mx-auto p-6 bg-slate-800 rounded-xl shadow-2xl my-10 border border-slate-700">
+        <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+            <h1 class="text-2xl font-bold text-emerald-400">Add New Branch</h1>
+            <a href="index.html" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition">Back to Dashboard</a>
+        </div>
 
-    <!-- MASTER MENU -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>📄 Master</span><span>▼</span></div>
-      <div class="submenu open">
-        <div class="submenu-item active" onclick="switchView('Branch Master', this)">Branch Master</div>
-        <div class="submenu-item" onclick="switchView('Franchise Master', this)">Franchise Master</div>
-        <div class="submenu-item" onclick="switchView('Freelancer Master', this)">Freelancer Master</div>
-        <div class="submenu-item" onclick="switchView('Technician Master', this)">Technician Master</div>
-        <div class="submenu-item" onclick="switchView('Brand Mapping', this)">Brand Mapping</div>
-        <div class="submenu-item" onclick="switchView('Category Mapping', this)">Category Mapping</div>
-        <div class="submenu-item" onclick="switchView('Pincode Mapping', this)">Pincode Mapping</div>
-        <div class="submenu-item" onclick="switchView('Client Master', this)">Client Master</div>
-        <div class="submenu-item" onclick="switchView('Category Master', this)">Category Master</div>
-        <div class="submenu-item" onclick="switchView('Product Master', this)">Product Master</div>
-        <div class="submenu-item" onclick="switchView('Model Master', this)">Model Master</div>
-        <div class="submenu-item" onclick="switchView('Symptom Master', this)">Symptom Master</div>
-        <div class="submenu-item" onclick="switchView('Cause Master', this)">Cause Master</div>
-        <div class="submenu-item" onclick="switchView('Analysis Master', this)">Analysis Master</div>
-        <div class="submenu-item" onclick="switchView('Spares Master', this)">Spares Master</div>
-        <div class="submenu-item" onclick="switchView('City Master', this)">City Master</div>
-        <div class="submenu-item" onclick="switchView('Locality Master', this)">Locality Master</div>
-        <div class="submenu-item" onclick="switchView('Vendor Master', this)">Vendor Master</div>
-        <div class="submenu-item" onclick="switchView('Warehouse Mapping', this)">Warehouse Mapping</div>
-      </div>
+        <form id="branchForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Region -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Region *</label>
+                    <select name="region" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                        <option value="">----Select----</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="East">East</option>
+                        <option value="West">West</option>
+                        <option value="Central">Central</option>
+                    </select>
+                </div>
+
+                <!-- Branch Name -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Branch Name *</label>
+                    <input type="text" name="branch_name" required placeholder="Enter Branch Name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                </div>
+
+                <!-- Address -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Address *</label>
+                    <textarea name="address" rows="2" required placeholder="Enter Full Address" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <!-- Landmark -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Landmark</label>
+                    <input type="text" name="landmark" placeholder="Enter Landmark" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                </div>
+
+                <!-- Pincode -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Pincode *</label>
+                    <input type="text" id="pincodeInput" name="pincode" maxlength="6" required placeholder="Enter 6-digit Pincode" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                </div>
+
+                <!-- State -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">State *</label>
+                    <input type="text" id="stateInput" name="state" required placeholder="Auto-filled by Pincode" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                </div>
+
+                <!-- District -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">District *</label>
+                    <input type="text" id="districtInput" name="district" required placeholder="Auto-filled by Pincode" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                </div>
+
+                <!-- City -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">City *</label>
+                    <input type="text" id="cityInput" name="city" required placeholder="Auto-filled by Pincode" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                </div>
+
+                <!-- Locality -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Locality *</label>
+                    <select id="localitySelect" name="locality" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                        <option value="">----Select Pincode First----</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4 border-t border-slate-700 flex justify-end">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition">Save Branch</button>
+            </div>
+        </form>
     </div>
 
-    <!-- CALL MANAGEMENT -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>💻 Call Management</span><span>▼</span></div>
-      <div class="submenu">
-        <div class="submenu-item" onclick="switchView('Call Registration', this)">Call Registration</div>
-        <div class="submenu-item" onclick="switchView('Call View', this)">Call View</div>
-        <div class="submenu-item" onclick="switchView('Call Edit', this)">Call Edit</div>
-        <div class="submenu-item" onclick="switchView('Call Reminder', this)">Call Reminder</div>
-        <div class="submenu-item" onclick="switchView('Call Appointment', this)">Call Appointment</div>
-        <div class="submenu-item" onclick="switchView('Call Reschedule', this)">Call Reschedule</div>
-        <div class="submenu-item" onclick="switchView('Call Transfer', this)">Call Transfer</div>
-        <div class="submenu-item" onclick="switchView('Call Reopen', this)">Call Reopen</div>
-        <div class="submenu-item" onclick="switchView('Call Cancel', this)">Call Cancel</div>
-        <div class="submenu-item" onclick="switchView('Call FeedBack', this)">Call FeedBack</div>
-        <div class="submenu-item" onclick="switchView('Call Update', this)">Call Update</div>
-        <div class="submenu-item" onclick="switchView('Call Allotment', this)">Call Allotment</div>
-        <div class="submenu-item" onclick="switchView('Jobsheet Print', this)">Jobsheet Print</div>
-        <div class="submenu-item" onclick="switchView('Direct Cancel', this)">Direct Cancel</div>
-        <div class="submenu-item" onclick="switchView('Call Audit', this)">Call Audit</div>
-      </div>
-    </div>
+    <!-- Script for Pincode Auto-Fill & Supabase Insertion -->
+    <script>
+        // Pincode API Integration
+        document.getElementById('pincodeInput').addEventListener('blur', async function() {
+            let pincode = this.value.trim();
+            if (pincode.length === 6) {
+                try {
+                    let response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                    let data = await response.json();
+                    
+                    if (data[0].Status === "Success") {
+                        let details = data[0].PostOffice[0];
+                        
+                        // Auto-fill State, District, City
+                        document.getElementById('stateInput').value = details.State || '';
+                        document.getElementById('districtInput').value = details.District || '';
+                        document.getElementById('cityInput').value = details.Block || details.District || '';
 
-    <!-- MASTER DATA -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>📊 Master Data</span><span>▼</span></div>
-      <div class="submenu">
-        <div class="submenu-item" onclick="switchView('Master Data Download', this)">Master Data Download</div>
-      </div>
-    </div>
+                        // Populate Locality dropdown with all available post offices/areas
+                        let localitySelect = document.getElementById('localitySelect');
+                        localitySelect.innerHTML = '<option value="">----Select Locality----</option>';
+                        
+                        data[0].PostOffice.forEach(po => {
+                            let opt = document.createElement('option');
+                            opt.value = po.Name;
+                            opt.textContent = `${po.Name} (${po.BranchType})`;
+                            localitySelect.appendChild(opt);
+                        });
+                    } else {
+                        alert('Invalid Pincode! Please check.');
+                        document.getElementById('stateInput').value = '';
+                        document.getElementById('districtInput').value = '';
+                        document.getElementById('cityInput').value = '';
+                        document.getElementById('localitySelect').innerHTML = '<option value="">----Select Pincode First----</option>';
+                    }
+                } catch (error) {
+                    console.error('Error fetching pincode data:', error);
+                }
+            }
+        });
 
-    <!-- UPLOADER -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>📁 Uploader</span><span>▼</span></div>
-      <div class="submenu">
-        <div class="submenu-item" onclick="switchView('Live Call Upload', this)">Live Call Upload</div>
-      </div>
-    </div>
+        // Supabase Integration (Replace with your actual keys if needed)
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    <!-- REPORTS -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>📈 Reports</span><span>▼</span></div>
-      <div class="submenu">
-        <div class="submenu-item" onclick="switchView('Report Main', this)">Report Main</div>
-      </div>
-    </div>
+        document.getElementById('branchForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
 
-    <!-- USERS -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>👥 Users</span><span>▼</span></div>
-      <div class="submenu">
-        <div class="submenu-item" onclick="switchView('Create User', this)">Create User</div>
-        <div class="submenu-item" onclick="switchView('Update User', this)">Update User</div>
-      </div>
-    </div>
+            const { error } = await supabaseClient.from('branches').insert([data]);
 
-    <!-- PASSWORD -->
-    <div class="menu-dropdown">
-      <div class="menu-header" onclick="toggleMenu(this)"><span>🔒 Password</span><span>▼</span></div>
-      <div class="submenu">
-        <div class="submenu-item" onclick="switchView('Change Password', this)">Change Password</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN AREA -->
-  <div class="main">
-    <div class="header" id="currentTitle">Branch Master</div>
-    <div id="dynamicContentArea" class="panel-card"></div>
-  </div>
-
-  <script>
-    const SUPABASE_URL = 'https://uknhaaxrzuzoxoifocsh.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_MzqXS2rfG9-axSCwX3MYtQ_23dbTkG9';
-    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    function toggleMenu(headerEl) {
-      const submenu = headerEl.nextElementSibling;
-      submenu.classList.toggle('open');
-    }
-
-    function switchView(title, el) {
-      document.querySelectorAll('.submenu-item').forEach(item => item.classList.remove('active'));
-      if(el) el.classList.add('active');
-      
-      document.getElementById('currentTitle').innerText = title;
-      var contentArea = document.getElementById('dynamicContentArea');
-      
-      if (title === 'Branch Master') {
-        contentArea.innerHTML = `
-          <div class="btn-container">
-            <button class="btn-primary" onclick="loadAddBranchForm()">ADD</button>
-            <button class="btn-danger" onclick="loadUploadBranchDocumentForm()">Upload Document</button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 80px;">Select</th>
-                <th style="width: 80px;">Edit</th>
-                <th>Region</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><input type="checkbox"></td><td>📝</td><td>East</td></tr>
-              <tr><td><input type="checkbox"></td><td>📝</td><td>West</td></tr>
-              <tr><td><input type="checkbox"></td><td>📝</td><td>North</td></tr>
-              <tr><td><input type="checkbox"></td><td>📝</td><td>South</td></tr>
-            </tbody>
-          </table>`;
-      } 
-      else if (title === 'Franchise Master') {
-        contentArea.innerHTML = `
-          <div class="btn-container">
-            <button class="btn-primary" onclick="loadAddFranchiseForm()">ADD FRANCHISE</button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Select</th>
-                <th>Edit</th>
-                <th>Firm Name</th>
-                <th>Region</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td colspan="5">No franchises added yet. Click ADD FRANCHISE.</td></tr>
-            </tbody>
-          </table>`;
-      }
-      else {
-        contentArea.innerHTML = `
-          <h3 style="font-size:16px; color:#38bdf8; margin-bottom:10px;">${title} Panel</h3>
-          <p style="color:#cbd5e1; font-size:13px;">Yeh module active hai.</p>`;
-      }
-    }
-
-    function loadUploadBranchDocumentForm() {
-      document.getElementById('currentTitle').innerText = 'Upload Branch Document';
-      document.getElementById('dynamicContentArea').innerHTML = `
-        <form id="uploadBranchDocForm" onsubmit="saveBranchDocument(event)">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Branch<span class="required">*</span></label>
-              <select id="doc_branch" required>
-                <option value="">----Select----</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Delhi">Delhi</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Document Type<span class="required">*</span></label>
-              <select id="doc_type" required>
-                <option value="">---Select---</option>
-                <option value="Address Proof Document">Address Proof Document</option>
-                <option value="Shop & Establishment Registration File Upload">Shop & Establishment Registration File Upload</option>
-                <option value="GST Number Proof Document">GST Number Proof Document</option>
-                <option value="Rent Agreement Document">Rent Agreement Document</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label>Document Upload<span class="required">*</span></label>
-            <input type="file" id="branch_doc_file" required>
-          </div>
-
-          <div class="btn-container">
-            <button type="submit" class="btn-success">Save</button>
-            <button type="button" class="btn-danger" onclick="switchView('Branch Master', document.querySelector('.submenu-item'))">Back</button>
-          </div>
-        </form>`;
-    }
-
-    function loadAddBranchForm() {
-      document.getElementById('currentTitle').innerText = 'Add Branch';
-      document.getElementById('dynamicContentArea').innerHTML = `
-        <form id="addBranchForm" onsubmit="saveBranch(event)">
-          
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Region<span class="required">*</span></label>
-              <select id="branch_region" required>
-                <option value="">----Select----</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Branch<span class="required">*</span></label>
-              <input type="text" id="branch_name" placeholder="Enter Branch Name" required>
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Address<span class="required">*</span></label>
-              <textarea id="branch_address" placeholder="Enter Full Address" required></textarea>
-            </div>
-            <div class="form-group">
-              <label>Landmark</label>
-              <input type="text" id="branch_landmark" placeholder="Enter Landmark">
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Pincode</label>
-              <input type="text" id="branch_pincode" placeholder="Enter Pincode" maxlength="6" oninput="fetchLocationByPincode(this.value)">
-            </div>
-            <div class="form-group">
-              <label>State</label>
-              <select id="branch_state">
-                <option value="">----Select----</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>District</label>
-              <select id="branch_district">
-                <option value="">----Select----</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>City</label>
-              <select id="branch_city">
-                <option value="">----Select----</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label>Locality</label>
-            <select id="branch_locality">
-              <option value="">----Select----</option>
-            </select>
-          </div>
-
-          <!-- GST Details -->
-          <div class="section-heading">Gst Details</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Shop & Establishment Registration</label>
-              <input type="text" id="shop_reg" placeholder="Enter Registration No.">
-            </div>
-            <div class="form-group">
-              <label>GST Number</label>
-              <input type="text" id="gst_number" placeholder="Enter GST Number">
-            </div>
-          </div>
-
-          <!-- Premises Details -->
-          <div class="section-heading">Premises Details</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Premises Ownership</label>
-              <select id="premises_ownership">
-                <option value="">--Select--</option>
-                <option value="Owned">Owned</option>
-                <option value="Rented">Rented</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Rent Agreement</label>
-              <select id="rent_agreement">
-                <option value="">--Select--</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Agreement Period</label>
-              <input type="text" id="agreement_period" placeholder="Enter Agreement Period">
-            </div>
-            <div class="form-group">
-              <label>Renewal Date</label>
-              <input type="date" id="renewal_date">
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Rent Date</label>
-              <input type="date" id="rent_date">
-            </div>
-            <div class="form-group">
-              <label>Area in Sq. Ft</label>
-              <input type="text" id="area_sq_ft" placeholder="Enter Area">
-            </div>
-          </div>
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label>Warehouse</label>
-            <select id="warehouse_status">
-              <option value="">--Select--</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-
-          <!-- Connection -->
-          <div class="section-heading">Connection</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Broadband Connection</label>
-              <select id="broadband"><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>
-            </div>
-            <div class="form-group">
-              <label>Alternate Connection</label>
-              <select id="alt_connection"><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>System Availability</label>
-              <select id="system_avail"><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>
-            </div>
-            <div class="form-group">
-              <label>Printer Availability</label>
-              <select id="printer_avail"><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>
-            </div>
-          </div>
-          <div class="form-grid" style="margin-bottom: 20px;">
-            <div class="form-group">
-              <label>Landline Number</label>
-              <input type="text" id="landline" placeholder="Enter Landline">
-            </div>
-            <div class="form-group">
-              <label>Billing Due Date</label>
-              <input type="date" id="billing_due_date">
-            </div>
-          </div>
-
-          <!-- Power -->
-          <div class="section-heading">Power</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Electricity Connection</label>
-              <select id="electricity"><option value="">--Select--</option><option value="Commercial">Commercial</option><option value="Domestic">Domestic</option></select>
-            </div>
-            <div class="form-group">
-              <label>Wattage</label>
-              <input type="text" id="wattage" placeholder="Enter Wattage">
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Inverter Availability</label>
-              <select id="inverter_avail"><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>
-            </div>
-            <div class="form-group">
-              <label>Inverter Capacity</label>
-              <input type="text" id="inverter_capacity" placeholder="Enter Capacity">
-            </div>
-          </div>
-          <div class="form-grid" style="margin-bottom: 20px;">
-            <div class="form-group">
-              <label>Fire Safety Norms</label>
-              <select id="fire_safety"><option value="">--Select--</option><option value="Yes">Yes</option><option value="No">No</option></select>
-            </div>
-            <div class="form-group">
-              <label>Refilling Date</label>
-              <input type="date" id="refilling_date">
-            </div>
-          </div>
-
-          <!-- Branch Manager -->
-          <div class="section-heading">Branch Manager</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Branch Manager Name</label>
-              <input type="text" id="bm_name" placeholder="Enter Name">
-            </div>
-            <div class="form-group">
-              <label>Branch Manager Cell Number</label>
-              <input type="text" id="bm_phone" placeholder="Enter Mobile">
-            </div>
-          </div>
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label>Branch Manager Email Id</label>
-            <input type="email" id="bm_email" placeholder="Enter Email">
-          </div>
-
-          <!-- Store Manager -->
-          <div class="section-heading">Store Manager</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Store Manager Name</label>
-              <input type="text" id="sm_name" placeholder="Enter Name">
-            </div>
-            <div class="form-group">
-              <label>Store Manager Contact Number</label>
-              <input type="text" id="sm_phone" placeholder="Enter Mobile">
-            </div>
-          </div>
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label>Store Manager Email Id</label>
-            <input type="email" id="sm_email" placeholder="Enter Email">
-          </div>
-
-          <!-- Branch Coordinator -->
-          <div class="section-heading">Branch Coordinator</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Branch Coordinator Name</label>
-              <input type="text" id="bc_name" placeholder="Enter Name">
-            </div>
-            <div class="form-group">
-              <label>Branch Coordinator Contact Number</label>
-              <input type="text" id="bc_phone" placeholder="Enter Mobile">
-            </div>
-          </div>
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label>Branch Coordinator Email Id</label>
-            <input type="email" id="bc_email" placeholder="Enter Email">
-          </div>
-
-          <div class="btn-container">
-            <button type="submit" class="btn-success">Save Branch</button>
-            <button type="button" class="btn-danger" onclick="switchView('Branch Master', document.querySelector('.submenu-item'))">Abort / Back</button>
-          </div>
-        </form>`;
-    }
-
-    async function fetchLocationByPincode(pincode) {
-      if (pincode.length !== 6) return;
-      
-      let stateSelect = document.getElementById('branch_state');
-      let distSelect = document.getElementById('branch_district');
-      let citySelect = document.getElementById('branch_city');
-      let localitySelect = document.getElementById('branch_locality');
-
-      try {
-        let { data, error } = await db
-          .from('pincode_mapping')
-          .select('*')
-          .eq('pincode', pincode);
-
-        if (data && data.length > 0) {
-          stateSelect.innerHTML = `<option value="${data[0].state}">${data[0].state}</option>`;
-          distSelect.innerHTML = `<option value="${data[0].district}">${data[0].district}</option>`;
-          citySelect.innerHTML = `<option value="${data[0].city}">${data[0].city}</option>`;
-          
-          localitySelect.innerHTML = '';
-          data.forEach(loc => {
-            let opt = document.createElement('option');
-            opt.value = loc.locality;
-            opt.textContent = loc.locality;
-            localitySelect.appendChild(opt);
-          });
-          return;
-        }
-      } catch (err) {
-        console.log("Supabase fetch fallback triggered.");
-      }
-
-      if (pincode === "110092") {
-        stateSelect.innerHTML = `<option value="Delhi">Delhi</option>`;
-        distSelect.innerHTML = `<option value="New Delhi">New Delhi</option>`;
-        citySelect.innerHTML = `<option value="New Delhi">New Delhi</option>`;
-        localitySelect.innerHTML = `<option value="Mahipalpur">Mahipalpur</option><option value="Nangal Raya">Nangal Raya</option>`;
-      } else {
-        stateSelect.innerHTML = `<option value="Delhi">Delhi</option>`;
-        distSelect.innerHTML = `<option value="Delhi">Delhi</option>`;
-        citySelect.innerHTML = `<option value="Delhi">Delhi</option>`;
-        localitySelect.innerHTML = `<option value="Local Area">Local Area (${pincode})</option>`;
-      }
-    }
-
-    function loadAddFranchiseForm() {
-      document.getElementById('currentTitle').innerText = 'Add Franchise';
-      document.getElementById('dynamicContentArea').innerHTML = `
-        <form id="addFranchiseForm" onsubmit="saveFranchise(event)">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Region<span class="required">*</span></label>
-              <select id="region" required>
-                <option value="">----Select----</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Firm Name<span class="required">*</span></label>
-              <input type="text" id="firm_name" placeholder="Enter Firm Name" required>
-            </div>
-          </div>
-          <div class="btn-container">
-            <button type="submit" class="btn-success">Save Franchise</button>
-            <button type="button" class="btn-warning" onclick="switchView('Franchise Master', document.querySelectorAll('.submenu-item')[1])">Back</button>
-          </div>
-        </form>`;
-    }
-
-    async function saveBranch(event) {
-      event.preventDefault();
-      alert('Branch details saved successfully!');
-      switchView('Branch Master', document.querySelector('.submenu-item'));
-    }
-
-    async function saveBranchDocument(event) {
-      event.preventDefault();
-      alert('Branch Document uploaded successfully!');
-      switchView('Branch Master', document.querySelector('.submenu-item'));
-    }
-
-    async function saveFranchise(event) {
-      event.preventDefault();
-      alert('Franchise saved successfully!');
-      switchView('Franchise Master', document.querySelectorAll('.submenu-item')[1]);
-    }
-
-    window.onload = function() {
-      switchView('Branch Master', document.querySelector('.submenu-item'));
-    };
-  </script>
+            if (error) {
+                alert('Error saving branch: ' + error.message);
+            } else {
+                alert('Branch saved successfully!');
+                e.target.reset();
+                document.getElementById('localitySelect').innerHTML = '<option value="">----Select Pincode First----</option>';
+            }
+        });
+    </script>
 </body>
 </html>
