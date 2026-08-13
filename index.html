@@ -138,7 +138,7 @@
         </nav>
     </div>
 
-    <!-- Main Content Area with Full-Functional Dashboard -->
+    <!-- Main Content Area with Updated Dashboard -->
     <div class="ml-64 flex-1 p-8 space-y-6">
         
         <!-- Top Bar Header -->
@@ -156,7 +156,7 @@
             </div>
         </div>
 
-        <!-- Section 1: Core Service Call Metrics -->
+        <!-- Section 1: Core Service Call Metrics (Updated with Part Pending, Cancel & Completed) -->
         <div>
             <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -175,7 +175,26 @@
                     <h3 class="text-2xl font-bold text-white mt-1">171</h3>
                     <span class="text-xs text-emerald-400 mt-2 inline-block">In progress</span>
                 </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
+                    <p class="text-slate-400 text-xs font-medium">PART PENDING CALLS</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">14</h3>
+                    <span class="text-xs text-purple-400 mt-2 inline-block">Awaiting spare parts</span>
+                </div>
+            </div>
+
+            <!-- Second Row of Call Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-600">
+                    <p class="text-slate-400 text-xs font-medium">COMPLETED CALLS</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">1,280</h3>
+                    <span class="text-xs text-emerald-400 mt-2 inline-block">Successfully closed</span>
+                </div>
                 <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-500">
+                    <p class="text-slate-400 text-xs font-medium">CANCEL CALLS</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">22</h3>
+                    <span class="text-xs text-rose-400 mt-2 inline-block">Dropped / Cancelled</span>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-700">
                     <p class="text-slate-400 text-xs font-medium">PENDING &gt;= 15 DAYS</p>
                     <h3 class="text-2xl font-bold text-white mt-1">151</h3>
                     <span class="text-xs text-rose-400 mt-2 inline-block">Critical backlog</span>
