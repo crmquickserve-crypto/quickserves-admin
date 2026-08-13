@@ -11,7 +11,7 @@
 </head>
 <body class="bg-[#0f172a] font-sans text-[#f8fafc] min-h-screen flex">
 
-    <!-- Complete Quickserves CRM Sidebar with All Masters -->
+    <!-- Complete Quickserves CRM Sidebar with Reorganized & Grouped Masters -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto z-20">
         <!-- Logo Header -->
         <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
@@ -24,7 +24,7 @@
                 <span>Admin Dashboard</span>
             </a>
 
-            <!-- 2. Master Dropdown (All Masters Included) -->
+            <!-- 2. Master Dropdown (All Core Masters Grouped Together) -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Master</span>
@@ -35,9 +35,6 @@
                     <a href="#" onclick="showFranchiseMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" onclick="showTechnicianMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
@@ -50,13 +47,24 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">City Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Locality Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Vendor Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Admin Utility</a>
+                </div>
+            </div>
+
+            <!-- 3. Mapping Masters Dropdown (All Mapping Fields Grouped Together) -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('mappingMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Mapping</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="mappingMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
                 </div>
             </div>
 
-            <!-- 3. Call Management Dropdown -->
+            <!-- 4. Call Management Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Call Management</span>
@@ -83,7 +91,7 @@
                 </div>
             </div>
 
-            <!-- 4. Master Data Dropdown -->
+            <!-- 5. Master Data Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Master Data</span>
@@ -94,7 +102,7 @@
                 </div>
             </div>
 
-            <!-- 5. Uploader Dropdown -->
+            <!-- 6. Uploader Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Uploader</span>
@@ -102,10 +110,11 @@
                 </button>
                 <div id="uploaderMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Live Call Upload</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
                 </div>
             </div>
 
-            <!-- 6. Reports Dropdown -->
+            <!-- 7. Reports Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Reports</span>
@@ -116,7 +125,7 @@
                 </div>
             </div>
 
-            <!-- 7. Users Dropdown -->
+            <!-- 8. Users Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('usersMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Users</span>
@@ -128,13 +137,14 @@
                 </div>
             </div>
 
-            <!-- 8. Password Dropdown -->
+            <!-- 9. Utilities & Settings Dropdown -->
             <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('passwordMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Password</span>
+                <button onclick="toggleMenu('utilitiesMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Utilities & Settings</span>
                     <span class="text-xs">▼</span>
                 </button>
-                <div id="passwordMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                <div id="utilitiesMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Admin Utility</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Change Password</a>
                 </div>
             </div>
