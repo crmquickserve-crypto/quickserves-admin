@@ -11,7 +11,7 @@
 </head>
 <body class="bg-[#0f172a] font-sans text-[#f8fafc] min-h-screen flex">
 
-    <!-- Complete Quickserves CRM Sidebar with Reordered Masters -->
+    <!-- Complete Quickserves CRM Sidebar with All Masters -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto z-20">
         <!-- Logo Header -->
         <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
@@ -24,16 +24,20 @@
                 <span>Admin Dashboard</span>
             </a>
 
-            <!-- 2. Master Dropdown (Reordered with all Masters & Mappings on top) -->
+            <!-- 2. Master Dropdown (All Masters Included) -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Master</span>
                     <span class="text-xs">▼</span>
                 </button>
                 <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <!-- Masters Section -->
-                    <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold px-3 pt-2 pb-1">Masters</div>
+                    <a href="#" onclick="showBranchMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
+                    <a href="#" onclick="showFranchiseMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" onclick="showTechnicianMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
@@ -46,21 +50,9 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">City Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Locality Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Vendor Master</a>
-                    <a href="#" onclick="showBranchMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
-                    <a href="#" onclick="showFranchiseMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
-
-                    <!-- Mappings Section -->
-                    <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold px-3 pt-3 pb-1 border-t border-slate-700 mt-2">Mappings</div>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
-
-                    <!-- Utilities Section -->
-                    <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold px-3 pt-3 pb-1 border-t border-slate-700 mt-2">Utilities</div>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Admin Utility</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
                 </div>
             </div>
 
@@ -355,8 +347,92 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Address & Location Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Address</label>
+                                <textarea rows="2" placeholder="Full Branch Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
+                                <input type="text" placeholder="Nearby Landmark" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
+                                <input type="text" placeholder="State" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
+                                <input type="text" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <input type="text" placeholder="City" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
+                                <input type="text" placeholder="Locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Statutory & Financial Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">GST Number</label>
+                                <input type="text" placeholder="GSTIN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">PAN Number</label>
+                                <input type="text" placeholder="PAN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Bank Name</label>
+                                <input type="text" placeholder="Bank Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch (Bank)</label>
+                                <input type="text" placeholder="Bank Branch" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Account Number</label>
+                                <input type="text" placeholder="Account Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">IFSC Number</label>
+                                <input type="text" placeholder="IFSC Code" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">4. Management Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Name</label>
+                                <input type="text" placeholder="Manager Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Manager Contact Number</label>
+                                <input type="text" maxlength="10" placeholder="Manager Mobile" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Manager Email ID</label>
+                                <input type="email" placeholder="Manager Email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
                         <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Branch</button>
+                        <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
                         <button type="button" onclick="hideBranchAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
                     </div>
                 </form>
@@ -370,6 +446,7 @@
                     <h2 class="text-lg font-bold text-white">Franchise Master</h2>
                     <div class="space-x-2">
                         <button onclick="showFranchiseAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                        <button onclick="showFranchiseUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -398,25 +475,186 @@
                 </div>
             </div>
 
+            <!-- Upload Franchise Document View -->
+            <div id="franchiseUploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Upload Franchise Document</h2>
+                    <button onclick="hideFranchiseUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Document Uploaded Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Franchise Name / CRM Code</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>QSSF001 - UNIVERSAL SERVICES</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>Agreement Document</option>
+                                <option>GST Number Proof Document</option>
+                                <option>Address Proof Document</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Choose File</label>
+                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300">
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-500 text-white text-xs px-6 py-2.5 rounded">Save</button>
+                        <button type="button" onclick="hideFranchiseUploadDocumentView()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
             <!-- ADD FRANCHISE FORM -->
             <div id="franchiseAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">ADD FRANCHISE (Master Data Form)</h2>
                     <button onclick="hideFranchiseAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
                 </div>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Saved Successfully!');">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Firm Name</label>
-                            <input type="text" placeholder="Enter Firm Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">CRM Code</label>
-                            <input type="text" placeholder="e.g. QSSF001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Saved Successfully with all Master Fields!');">
+                    
+                    <!-- 1. General & Firm Information -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">1. General & Firm Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>North</option><option>South</option><option>East</option><option>West</option><option>Central</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Firm Name</label>
+                                <input type="text" placeholder="Enter Firm Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CRM Code</label>
+                                <input type="text" placeholder="e.g. QSSF001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Contact Number</label>
+                                <input type="text" maxlength="10" placeholder="Firm Mobile Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Email ID</label>
+                                <input type="email" placeholder="Firm Email Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Status</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>Active (A)</option><option>Inactive (I)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- 2. Address & Location Details -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Address & Location Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Firm Address</label>
+                                <textarea rows="2" placeholder="Full Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
+                                <input type="text" placeholder="Nearby Landmark" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
+                                <input type="text" placeholder="State" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
+                                <input type="text" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <input type="text" placeholder="City" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
+                                <input type="text" placeholder="Locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Statutory & Financial Details -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Statutory & Financial Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">GST Number</label>
+                                <input type="text" placeholder="GSTIN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">PAN Number</label>
+                                <input type="text" placeholder="PAN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Bank Name</label>
+                                <input type="text" placeholder="Bank Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Branch (Bank)</label>
+                                <input type="text" placeholder="Bank Branch" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Account Number</label>
+                                <input type="text" placeholder="Account Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">IFSC Number</label>
+                                <input type="text" placeholder="IFSC Code" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Management & CCO Details -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">4. Management Details & CCO Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Owner / Manager Name</label>
+                                <input type="text" placeholder="Owner Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Contact Number</label>
+                                <input type="text" maxlength="10" placeholder="Mobile" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Email ID</label>
+                                <input type="email" placeholder="Email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <!-- CCO Fields Included -->
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CCO Name</label>
+                                <input type="text" placeholder="Enter CCO Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CCO Contact Number</label>
+                                <input type="text" maxlength="10" placeholder="CCO Mobile" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CCO Email ID</label>
+                                <input type="email" placeholder="CCO Email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
                         <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Franchise</button>
+                        <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
                         <button type="button" onclick="hideFranchiseAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
                     </div>
                 </form>
@@ -430,8 +668,10 @@
                     <h2 class="text-lg font-bold text-white">Technician Master</h2>
                     <div class="space-x-2">
                         <button onclick="showTechnicianAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                        <button onclick="showTechnicianUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
                     </div>
                 </div>
+
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm text-slate-300">
                         <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
@@ -460,25 +700,164 @@
                 </div>
             </div>
 
+            <!-- Upload Technician Document View -->
+            <div id="technicianUploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Upload Technician Document</h2>
+                    <button onclick="hideTechnicianUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Technician Document Uploaded Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Technician Name / CRM Code</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>QSSFT0001 - PRASHANT GUPTA</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
+                                <option>Identity Proof Document</option>
+                                <option>PAN Card</option>
+                                <option>Driving License</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Choose File</label>
+                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300">
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-500 text-white text-xs px-6 py-2.5 rounded">Save</button>
+                        <button type="button" onclick="hideTechnicianUploadDocumentView()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
             <!-- ADD TECHNICIAN FORM -->
             <div id="technicianAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">ADD TECHNICIAN (Master Data Form)</h2>
                     <button onclick="hideTechnicianAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
                 </div>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Technician Saved Successfully!');">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Technician Name</label>
-                            <input type="text" placeholder="Enter Full Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">CRMCode</label>
-                            <input type="text" placeholder="e.g. QSSFT0001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Technician Saved Successfully with all Master Fields!');">
+                    <div>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">1. General & Personal Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>North</option><option>South</option><option>East</option><option>West</option><option>Central</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Technician Name</label>
+                                <input type="text" placeholder="Enter Full Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">CRMCode</label>
+                                <input type="text" placeholder="e.g. QSSFT0001" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Contact Number</label>
+                                <input type="text" maxlength="10" placeholder="Mobile Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Email ID</label>
+                                <input type="email" placeholder="Email Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Residential Address</label>
+                                <textarea rows="2" placeholder="Full Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
+                                <input type="text" placeholder="Nearby Landmark" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
+                                <input type="text" placeholder="State" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
+                                <input type="text" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <input type="text" placeholder="City" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
+                                <input type="text" placeholder="Locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
                         </div>
                     </div>
+
+                    <!-- 2. Educational & Technical Qualifications -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Educational & Technical Qualifications</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Academic / Educational Qualification</label>
+                                <input type="text" placeholder="e.g. 12th Pass, Graduate, Diploma" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Technical Qualification</label>
+                                <input type="text" placeholder="e.g. ITI, HVAC Certified, Electrical Training" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Identification & Statutory Details -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Identification & Statutory Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Identity Proof Number</label>
+                                <input type="text" placeholder="ID Proof Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">PAN Card Number</label>
+                                <input type="text" maxlength="10" placeholder="PAN Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Driving Licence Number</label>
+                                <input type="text" placeholder="Driving Licence Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white uppercase">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Bank Details -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">4. Bank Account Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Bank Name</label>
+                                <input type="text" placeholder="Bank Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Bank Branch</label>
+                                <input type="text" placeholder="Bank Branch" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Account Number</label>
+                                <input type="text" placeholder="Account Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">IFSC Code</label>
+                                <input type="text" placeholder="IFSC Code" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono uppercase">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
                         <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Technician</button>
+                        <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
                         <button type="button" onclick="hideTechnicianAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
                     </div>
                 </form>
@@ -487,7 +866,7 @@
 
     </div>
 
-    <!-- JavaScript Handling -->
+    <!-- Flatpickr JS Library for Calendar Popups -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         function toggleMenu(menuId) {
@@ -503,6 +882,7 @@
             document.getElementById(sectionId).classList.remove('hidden');
         }
 
+        // Branch Master Navigation
         function showBranchMasterMain() {
             showSection('branchMasterSection');
             document.getElementById('branchListView').classList.remove('hidden');
@@ -511,6 +891,7 @@
         }
         function showBranchAddForm() {
             document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('uploadDocumentView').classList.add('hidden');
             document.getElementById('branchAddFormView').classList.remove('hidden');
         }
         function hideBranchAddForm() {
@@ -519,6 +900,7 @@
         }
         function showUploadDocumentView() {
             document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('branchAddFormView').classList.add('hidden');
             document.getElementById('uploadDocumentView').classList.remove('hidden');
         }
         function hideUploadDocumentView() {
@@ -526,33 +908,67 @@
             document.getElementById('branchListView').classList.remove('hidden');
         }
 
+        // Franchise Master Navigation
         function showFranchiseMasterMain() {
             showSection('franchiseMasterSection');
             document.getElementById('franchiseListView').classList.remove('hidden');
             document.getElementById('franchiseAddFormView').classList.add('hidden');
+            document.getElementById('franchiseUploadDocumentView').classList.add('hidden');
         }
         function showFranchiseAddForm() {
             document.getElementById('franchiseListView').classList.add('hidden');
+            document.getElementById('franchiseUploadDocumentView').classList.add('hidden');
             document.getElementById('franchiseAddFormView').classList.remove('hidden');
         }
         function hideFranchiseAddForm() {
             document.getElementById('franchiseAddFormView').classList.add('hidden');
             document.getElementById('franchiseListView').classList.remove('hidden');
         }
+        function showFranchiseUploadDocumentView() {
+            document.getElementById('franchiseListView').classList.add('hidden');
+            document.getElementById('franchiseAddFormView').classList.add('hidden');
+            document.getElementById('franchiseUploadDocumentView').classList.remove('hidden');
+        }
+        function hideFranchiseUploadDocumentView() {
+            document.getElementById('franchiseUploadDocumentView').classList.add('hidden');
+            document.getElementById('franchiseListView').classList.remove('hidden');
+        }
 
+        // Technician Master Navigation
         function showTechnicianMasterMain() {
             showSection('technicianMasterSection');
             document.getElementById('technicianListView').classList.remove('hidden');
             document.getElementById('technicianAddFormView').classList.add('hidden');
+            document.getElementById('technicianUploadDocumentView').classList.add('hidden');
         }
         function showTechnicianAddForm() {
             document.getElementById('technicianListView').classList.add('hidden');
+            document.getElementById('technicianUploadDocumentView').classList.add('hidden');
             document.getElementById('technicianAddFormView').classList.remove('hidden');
         }
         function hideTechnicianAddForm() {
             document.getElementById('technicianAddFormView').classList.add('hidden');
             document.getElementById('technicianListView').classList.remove('hidden');
         }
+        function showTechnicianUploadDocumentView() {
+            document.getElementById('technicianListView').classList.add('hidden');
+            document.getElementById('technicianAddFormView').classList.add('hidden');
+            document.getElementById('technicianUploadDocumentView').classList.remove('hidden');
+        }
+        function hideTechnicianUploadDocumentView() {
+            document.getElementById('technicianUploadDocumentView').classList.add('hidden');
+            document.getElementById('technicianListView').classList.remove('hidden');
+        }
+
+        // Initialize Flatpickr Calendar for Date fields
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr(".calendar-input", {
+                dateFormat: "d/m/Y",
+                allowInput: true,
+                altInput: true,
+                altFormat: "d/m/Y"
+            });
+        });
     </script>
 </body>
 </html>
