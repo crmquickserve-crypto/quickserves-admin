@@ -31,7 +31,7 @@
                     <span class="text-xs">▼</span>
                 </button>
                 <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" onclick="showSection('branchMasterSection')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
+                    <a href="#" onclick="showBranchMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
@@ -291,7 +291,7 @@
                 </div>
             </div>
 
-            <!-- Upload Branch Document View (Updated with State & Region only, no city names) -->
+            <!-- Upload Branch Document View -->
             <div id="uploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">Upload Branch Document</h2>
@@ -614,6 +614,14 @@
             document.getElementById('dashboardSection').classList.add('hidden');
             document.getElementById('branchMasterSection').classList.add('hidden');
             document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Dedicated function for Sidebar Branch Master Click
+        function showBranchMasterMain() {
+            showSection('branchMasterSection');
+            document.getElementById('branchListView').classList.remove('hidden');
+            document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('uploadDocumentView').classList.add('hidden');
         }
 
         function showBranchAddForm() {
