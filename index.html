@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin Full Dashboard & CRM - Quickserves</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flatpickr CSS for Advanced Interactive Calendar Pop-up -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
@@ -288,7 +291,7 @@
                 </div>
             </div>
 
-            <!-- Add New Branch Form with Auto-Pincode Integration & Fully Functional Options/Calendars -->
+            <!-- Add New Branch Form with Auto-Pincode & Interactive Calendar Datepickers -->
             <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">ADD BRANCH</h2>
@@ -386,11 +389,11 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Renewal Date</label>
-                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" id="renewalDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Rent Date</label>
-                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" id="rentDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Area in Sq. Ft</label>
@@ -450,7 +453,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Billing Due Date</label>
-                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" id="billingDueDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                         </div>
                     </div>
@@ -494,7 +497,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Refilling Date</label>
-                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" id="refillingDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                         </div>
                     </div>
@@ -535,7 +538,8 @@
 
     </div>
 
-    <!-- Scripts for Toggle, View Switching & India Post Pincode API Integration -->
+    <!-- Flatpickr JS Library for Calendar Popups -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
@@ -558,6 +562,16 @@
             document.getElementById('branchListView').classList.remove('hidden');
         }
 
+        // Initialize Flatpickr Interactive Calendar on all date inputs
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr(".calendar-input", {
+                dateFormat: "d-m-Y",
+                allowInput: true,
+                altInput: true,
+                altFormat: "d-m-Y"
+            });
+        });
+
         // India Post Pincode API Integration Script
         async function fetchPincodeDetails(pincode) {
             if (pincode.length !== 6 || isNaN(pincode)) return;
@@ -574,12 +588,10 @@
                 if (data[0].Status === "Success") {
                     let postOfficeDetails = data[0].PostOffice;
                     
-                    // Auto-fill State, District and City
                     document.getElementById('stateInput').value = postOfficeDetails[0].State || '';
                     document.getElementById('districtInput').value = postOfficeDetails[0].District || '';
                     document.getElementById('cityInput').value = postOfficeDetails[0].Division || postOfficeDetails[0].District || '';
 
-                    // Populate Localities / Post Offices Dropdown
                     let localitySelect = document.getElementById('localitySelect');
                     localitySelect.innerHTML = '<option>----Select Locality----</option>';
                     
