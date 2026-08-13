@@ -822,6 +822,18 @@
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Email ID</label>
                                 <input type="email" placeholder="Email Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Status</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>Active (A)</option><option>Inactive (I)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Address & Location Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Residential Address</label>
                                 <textarea rows="2" placeholder="Full Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
@@ -880,7 +892,7 @@
                     </div>
 
                     <div class="border-t border-[#334155] pt-4">
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Educational & Technical Qualifications</h3>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Educational & Technical Qualifications</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Academic / Educational Qualification</label>
@@ -894,7 +906,7 @@
                     </div>
 
                     <div class="border-t border-[#334155] pt-4">
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">3. Identification & Statutory Details</h3>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">4. Identification & Statutory Details</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Identity Proof Number</label>
@@ -912,7 +924,7 @@
                     </div>
 
                     <div class="border-t border-[#334155] pt-4">
-                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">4. Bank Account Details</h3>
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">5. Bank Account Details</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Bank Name</label>
@@ -1105,6 +1117,17 @@
                                     <option value="NOIDA">Noida</option>
                                 </select>
                             </div>
+                            <!-- Locality Dropdown -->
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
+                                <select id="client_locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select Locality</option>
+                                    <option value="CONNAUGHT PLACE">Connaught Place</option>
+                                    <option value="INDIRAPURAM">Indirapuram</option>
+                                    <option value="VAISHALI">Vaishali</option>
+                                    <option value="SECTOR 62">Sector 62</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -1242,7 +1265,6 @@
 
         // Dependent Dropdown Mock Functions (Connect to your Database/API later)
         function loadCities(stateElemId, cityElemId) {
-            // Sample city loading logic based on selected state
             const state = document.getElementById(stateElemId).value;
             const citySelect = document.getElementById(cityElemId);
             citySelect.innerHTML = '<option value="">Select City</option>';
