@@ -156,9 +156,8 @@
             </div>
         </div>
 
-        <!-- ================= SECTION 1: DASHBOARD (Default View) ================= -->
+        <!-- ================= SECTION 1: DASHBOARD ================= -->
         <div id="dashboardSection" class="space-y-6">
-            <!-- Service & Call Operations -->
             <div>
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -203,7 +202,6 @@
                 </div>
             </div>
 
-            <!-- Network & Resource Management -->
             <div>
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -230,7 +228,6 @@
                 </div>
             </div>
 
-            <!-- Quick Action Shortcuts -->
             <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Quick Administrative Actions</h2>
                 <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
@@ -291,7 +288,7 @@
                 </div>
             </div>
 
-            <!-- Add New Branch Comprehensive Form (Hidden by default, shown on ADD click) -->
+            <!-- Add New Branch Form with Auto-Pincode Integration -->
             <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">ADD BRANCH</h2>
@@ -324,38 +321,27 @@
                             <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
-                            <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Pincode (Auto-Fill)</label>
+                            <input type="text" id="pincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 201001)" onblur="fetchPincodeDetails(this.value)" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            <span id="pincodeLoader" class="text-xs text-blue-400 hidden mt-1">Fetching location details...</span>
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                                <option>----Select----</option>
-                                <option>Uttar Pradesh</option>
-                                <option>Delhi</option>
-                                <option>Maharashtra</option>
-                            </select>
+                            <input type="text" id="stateInput" placeholder="Auto-filled State" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                                <option>----Select----</option>
-                                <option>Ghaziabad</option>
-                                <option>Noida</option>
-                                <option>Meerut</option>
-                            </select>
+                            <input type="text" id="districtInput" placeholder="Auto-filled District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                                <option>----Select----</option>
-                                <option>Ghaziabad</option>
-                                <option>Noida</option>
-                            </select>
+                            <input type="text" id="cityInput" placeholder="Auto-filled City" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
-                            <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            <select id="localitySelect" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select Locality----</option>
+                            </select>
                         </div>
                     </div>
 
@@ -507,7 +493,7 @@
 
     </div>
 
-    <!-- Scripts for Toggle & Switching Views -->
+    <!-- Scripts for Toggle, View Switching & India Post Pincode API Integration -->
     <script>
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
@@ -517,7 +503,6 @@
         function showSection(sectionId) {
             document.getElementById('dashboardSection').classList.add('hidden');
             document.getElementById('branchMasterSection').classList.add('hidden');
-            
             document.getElementById(sectionId).classList.remove('hidden');
         }
 
@@ -529,6 +514,46 @@
         function hideBranchAddForm() {
             document.getElementById('branchAddFormView').classList.add('hidden');
             document.getElementById('branchListView').classList.remove('hidden');
+        }
+
+        // India Post Pincode API Integration Script
+        async function fetchPincodeDetails(pincode) {
+            if (pincode.length !== 6 || isNaN(pincode)) return;
+
+            const loader = document.getElementById('pincodeLoader');
+            loader.classList.remove('hidden');
+
+            try {
+                let response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                let data = await response.json();
+
+                loader.classList.add('hidden');
+
+                if (data[0].Status === "Success") {
+                    let postOfficeDetails = data[0].PostOffice;
+                    
+                    // Auto-fill State, District and City
+                    document.getElementById('stateInput').value = postOfficeDetails[0].State || '';
+                    document.getElementById('districtInput').value = postOfficeDetails[0].District || '';
+                    document.getElementById('cityInput').value = postOfficeDetails[0].Division || postOfficeDetails[0].District || '';
+
+                    // Populate Localities / Post Offices Dropdown
+                    let localitySelect = document.getElementById('localitySelect');
+                    localitySelect.innerHTML = '<option>----Select Locality----</option>';
+                    
+                    postOfficeDetails.forEach(po => {
+                        let opt = document.createElement('option');
+                        opt.value = po.Name;
+                        opt.textContent = po.Name + ' (' + po.BranchType + ')';
+                        localitySelect.appendChild(opt);
+                    });
+                } else {
+                    alert('Invalid Pincode or data not found!');
+                }
+            } catch (error) {
+                loader.classList.add('hidden');
+                console.error('Error fetching pincode data:', error);
+            }
         }
     </script>
 </body>
