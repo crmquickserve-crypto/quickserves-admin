@@ -291,7 +291,7 @@
                 </div>
             </div>
 
-            <!-- Upload Branch Document View (Mst_BranchDocument.aspx style) -->
+            <!-- Upload Branch Document View (Updated with State & Region info in Branches) -->
             <div id="uploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">Upload Branch Document</h2>
@@ -301,13 +301,16 @@
                 <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Document Uploaded Successfully!');">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch</label>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch (with State & Region)</label>
                             <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
                                 <option>----Select----</option>
-                                <option>Uttar Pradesh (East)</option>
-                                <option>Uttar Pradesh (West)</option>
-                                <option>Delhi NCR (North)</option>
-                                <option>South Region</option>
+                                <option>Lucknow (Uttar Pradesh) - East Region</option>
+                                <option>Meerut (Uttar Pradesh) - West Region</option>
+                                <option>Faridabad (Haryana) - North Region</option>
+                                <option>South Delhi (Delhi NCR) - North Region</option>
+                                <option>Noida (Uttar Pradesh) - North Region</option>
+                                <option>Ghaziabad (Uttar Pradesh) - North Region</option>
+                                <option>South Branch (Karnataka) - South Region</option>
                             </select>
                         </div>
                         <div>
