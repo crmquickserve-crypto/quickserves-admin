@@ -288,7 +288,7 @@
                 </div>
             </div>
 
-            <!-- Add New Branch Form with Auto-Pincode Integration -->
+            <!-- Add New Branch Form with Auto-Pincode Integration & Fully Functional Options/Calendars -->
             <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">ADD BRANCH</h2>
@@ -366,15 +366,23 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Premises Ownership</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Rented</option><option>Owned</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Rented</option>
+                                    <option>Owned</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Rent Agreement</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Yes</option><option>No</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Agreement Period</label>
-                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" placeholder="e.g. 11 Months" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Renewal Date</label>
@@ -386,11 +394,15 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Area in Sq. Ft</label>
-                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" placeholder="Enter Area" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Warehouse</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Yes</option><option>No</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -401,23 +413,40 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Broadband Connection</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Available</option><option>Not Available</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Available</option>
+                                    <option>Not Available</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Alternate Connection</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Mobile Hotspot / Dongle</option>
+                                    <option>Secondary Broadband</option>
+                                    <option>None</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">System Availability</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Available</option>
+                                    <option>Not Available</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Printer Availability</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Available</option>
+                                    <option>Not Available</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Landline Number</label>
-                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" placeholder="Enter Landline No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Billing Due Date</label>
@@ -432,23 +461,36 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Electricity Connection</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Single Phase</option>
+                                    <option>Three Phase</option>
+                                    <option>Not Available</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Wattage</label>
-                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" placeholder="Enter Wattage" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Availability</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Capacity</label>
-                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                <input type="text" placeholder="Enter Capacity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Fire Safety Norms</label>
-                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Refilling Date</label>
