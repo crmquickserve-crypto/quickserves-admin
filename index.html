@@ -36,14 +36,14 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" onclick="showTechnicianMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
                     <a href="#" onclick="showClientMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
-                    <a href="#" onclick="showBrandMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Product Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Model Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Symptom Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Cause Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Analysis Master</a>
-                    <a href="#" onclick="showSparesMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Spares Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Spares Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">City Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Locality Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Vendor Master</a>
@@ -71,7 +71,7 @@
                     <span class="text-xs">▼</span>
                 </button>
                 <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" onclick="showCallRegistrationMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reminder</a>
@@ -864,7 +864,7 @@
             </div>
         </div>
 
-        <!-- ================= SECTION 5: CLIENT MASTER ================= -->
+        <!-- ================= SECTION 5: CLIENT MASTER (Fully Functional) ================= -->
         <div id="clientMasterSection" class="hidden space-y-6">
             <!-- Client List View -->
             <div id="clientListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
@@ -957,7 +957,7 @@
                     <button onclick="hideClientAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
                 </div>
 
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Client Master Saved Successfully!');">
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Client Master Saved Successfully with all Excel Fields!');">
                     <div>
                         <h3 class="text-sm font-semibold text-emerald-400 mb-3">1. General & Client Information</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -973,170 +973,58 @@
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Proprietor Name</label>
                                 <input type="text" placeholder="Proprietor / Director Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Status</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="A">Active (A)</option>
+                                    <option value="I">Inactive (I)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Service Area</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option>----Select----</option>
+                                    <option>North Region</option>
+                                    <option>Pan India</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">2. Registered Address & Location Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Registered Address</label>
+                                <textarea rows="2" placeholder="Full Registered Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
+                                <input type="text" placeholder="Landmark" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
+                                <input type="text" placeholder="State" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
+                                <input type="text" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <input type="text" placeholder="City" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
                         <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Client</button>
+                        <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
                         <button type="button" onclick="hideClientAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- ================= SECTION 6: BRAND MASTER ================= -->
-        <div id="brandMasterSection" class="hidden space-y-6">
-            <div id="brandListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Brand Master</h2>
-                    <button onclick="showBrandAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD BRAND</button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-300">
-                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
-                            <tr>
-                                <th class="p-3">Brand ID</th>
-                                <th class="p-3">Brand Name</th>
-                                <th class="p-3">Category Type</th>
-                                <th class="p-3">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-[#334155]">
-                            <tr>
-                                <td class="p-3 text-emerald-400 font-mono">QSBD001</td>
-                                <td class="p-3 font-medium text-white">SAAR Appliances</td>
-                                <td class="p-3 text-slate-300">Consumer Durables</td>
-                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-xs">Active</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Add Brand Form -->
-            <div id="brandAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Add Brand</h2>
-                    <button onclick="hideBrandAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
-                </div>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Brand Saved Successfully!');">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Brand Name</label>
-                            <input type="text" placeholder="Enter Brand Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Status</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                <option>Active</option>
-                                <option>Inactive</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded">Save Brand</button>
-                        <button type="button" onclick="hideBrandAddForm()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- ================= SECTION 7: SPARES MASTER ================= -->
-        <div id="sparesMasterSection" class="hidden space-y-6">
-            <div id="sparesListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Spares Master & Inventory</h2>
-                    <button onclick="showSparesAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD SPARE PART</button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-300">
-                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
-                            <tr>
-                                <th class="p-3">Part Code</th>
-                                <th class="p-3">Part Name</th>
-                                <th class="p-3">Appliance Category</th>
-                                <th class="p-3">Stock Qty</th>
-                                <th class="p-3">Unit Price (₹)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-[#334155]">
-                            <tr>
-                                <td class="p-3 text-emerald-400 font-mono">QSSP-CH-01</td>
-                                <td class="p-3 font-medium text-white">Chimney Baffle Filter</td>
-                                <td class="p-3 text-slate-300">Kitchen Chimney</td>
-                                <td class="p-3 text-slate-300">45</td>
-                                <td class="p-3 text-slate-300">₹ 850</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Add Spares Form -->
-            <div id="sparesAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Add Spare Part</h2>
-                    <button onclick="hideSparesAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
-                </div>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Spare Part Added Successfully!');">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Part Code</label>
-                            <input type="text" placeholder="e.g. QSSP-01" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white font-mono">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Part Name</label>
-                            <input type="text" placeholder="Part Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Unit Price (₹)</label>
-                            <input type="number" placeholder="Price" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                    </div>
-                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded">Save Part</button>
-                        <button type="button" onclick="hideSparesAddForm()" class="bg-slate-600 text-white text-xs px-6 py-2.5 rounded">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- ================= SECTION 8: CALL REGISTRATION ================= -->
-        <div id="callRegistrationSection" class="hidden space-y-6">
-            <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">New Service Call Registration (Consumer Durables & IT)</h2>
-                </div>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Service Call Registered Successfully & Ticket Generated!');">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Customer Name</label>
-                            <input type="text" placeholder="Customer Full Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Contact Number</label>
-                            <input type="text" maxlength="10" placeholder="Mobile Number" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Appliance Category</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                <option>Chimney</option>
-                                <option>Water Purifier (RO)</option>
-                                <option>Air Conditioner</option>
-                                <option>LED TV</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Service Address</label>
-                            <textarea rows="2" placeholder="Complete Location Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Issue Description / Symptom</label>
-                            <input type="text" placeholder="e.g. Not cooling, Water leakage" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                        </div>
-                    </div>
-                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium">Register Call</button>
-                        <button type="reset" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium">Reset</button>
                     </div>
                 </form>
             </div>
@@ -1153,17 +1041,12 @@
         }
 
         function showSection(sectionId) {
-            const sections = [
-                'dashboardSection', 'branchMasterSection', 'franchiseMasterSection', 
-                'technicianMasterSection', 'clientMasterSection', 'brandMasterSection', 
-                'sparesMasterSection', 'callRegistrationSection'
-            ];
-            sections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add('hidden');
-            });
-            const target = document.getElementById(sectionId);
-            if (target) target.classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('branchMasterSection').classList.add('hidden');
+            document.getElementById('franchiseMasterSection').classList.add('hidden');
+            document.getElementById('technicianMasterSection').classList.add('hidden');
+            document.getElementById('clientMasterSection').classList.add('hidden');
+            document.getElementById(sectionId).classList.remove('hidden');
         }
 
         // Branch Master Navigation
@@ -1268,41 +1151,6 @@
         function hideClientUploadDocumentView() {
             document.getElementById('clientUploadDocumentView').classList.add('hidden');
             document.getElementById('clientListView').classList.remove('hidden');
-        }
-
-        // Brand Master Navigation
-        function showBrandMasterMain() {
-            showSection('brandMasterSection');
-            document.getElementById('brandListView').classList.remove('hidden');
-            document.getElementById('brandAddFormView').classList.add('hidden');
-        }
-        function showBrandAddForm() {
-            document.getElementById('brandListView').classList.add('hidden');
-            document.getElementById('brandAddFormView').classList.remove('hidden');
-        }
-        function hideBrandAddForm() {
-            document.getElementById('brandAddFormView').classList.add('hidden');
-            document.getElementById('brandListView').classList.remove('hidden');
-        }
-
-        // Spares Master Navigation
-        function showSparesMasterMain() {
-            showSection('sparesMasterSection');
-            document.getElementById('sparesListView').classList.remove('hidden');
-            document.getElementById('sparesAddFormView').classList.add('hidden');
-        }
-        function showSparesAddForm() {
-            document.getElementById('sparesListView').classList.add('hidden');
-            document.getElementById('sparesAddFormView').classList.remove('hidden');
-        }
-        function hideSparesAddForm() {
-            document.getElementById('sparesAddFormView').classList.add('hidden');
-            document.getElementById('sparesListView').classList.remove('hidden');
-        }
-
-        // Call Registration Navigation
-        function showCallRegistrationMain() {
-            showSection('callRegistrationSection');
         }
 
         // Initialize Flatpickr Calendar for Date fields
