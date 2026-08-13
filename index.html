@@ -10,7 +10,7 @@
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
-    <!-- Exact Original Multi-Dropdown Sidebar -->
+    <!-- Sidebar with Complete Dropdowns -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto">
         <!-- Logo / Header -->
         <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
@@ -34,6 +34,17 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Product Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Model Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Symptom Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Cause Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Analysis Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Spares Master</a>
                 </div>
             </div>
 
@@ -43,7 +54,7 @@
                     <span>Call Management</span>
                     <span class="text-xs">▼</span>
                 </button>
-                <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                <div id="callMenu" class="bg-[#172033] py-1 pl-4 pr-2 space-y-1">
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
@@ -58,34 +69,28 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Allotment</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Jobsheet Print</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel PO</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update Serial No.</a>
                 </div>
             </div>
 
-            <!-- Master Data -->
+            <!-- Other Main Menu Items -->
             <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
                 <span>Master Data</span>
                 <span class="text-xs">›</span>
             </a>
-
-            <!-- Uploader -->
             <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
                 <span>Uploader</span>
                 <span class="text-xs">›</span>
             </a>
-
-            <!-- Reports -->
             <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
                 <span>Reports</span>
                 <span class="text-xs">›</span>
             </a>
-
-            <!-- Users -->
             <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
                 <span>Users</span>
                 <span class="text-xs">›</span>
             </a>
-
-            <!-- Password -->
             <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
                 <span>Password</span>
                 <span class="text-xs">›</span>
@@ -178,16 +183,12 @@
         </div>
     </div>
 
-    <!-- Script: Sidebar Toggle, Pincode Auto-Fill & Supabase -->
+    <!-- Script: Dropdowns & Pincode Auto-Fill -->
     <script>
-        // Toggle Sidebar Submenus
+        // Toggle Dropdown Menus
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
+            menu.classList.toggle('hidden');
         }
 
         // Pincode Auto-Fill Integration
