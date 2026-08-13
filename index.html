@@ -10,30 +10,86 @@
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
-    <!-- Exact Original Sidebar Layout -->
+    <!-- Exact Original Multi-Dropdown Sidebar -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto">
-        <div class="text-sm font-bold text-[#f8fafc] p-4 bg-[#172033] border-b border-[#334155]">
-            Admin Dashboard
+        <!-- Logo / Header -->
+        <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
+            <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
         </div>
-        <div class="p-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            MASTER
-        </div>
-        <nav class="px-2 space-y-1 pb-6">
-            <a href="index.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Dashboard / Home</a>
-            <a href="branch-add.html" class="block px-3 py-2 rounded text-sm bg-blue-600 text-white font-medium">Branch Master</a>
-            <a href="franchise-add.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Franchise Master</a>
-            <a href="freelancer-add.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Freelancer Master</a>
-            <a href="technician-add.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Technician Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Brand Mapping</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Category Mapping</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Client Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Category Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Product Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Model Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Symptom Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Cause Master</a>
-            <a href="#" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Analysis Master</a>
+
+        <nav class="py-2">
+            <!-- Admin Dashboard -->
+            <a href="index.html" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
+                <span>Admin Dashboard</span>
+            </a>
+
+            <!-- Master Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Master</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="masterMenu" class="bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="branch-add.html" class="block px-3 py-1.5 rounded text-xs bg-blue-600 text-white font-medium">Branch Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
+                </div>
+            </div>
+
+            <!-- Call Management Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Call Management</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reminder</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Appointment</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reschedule</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Transfer</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reopen</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Cancel</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call FeedBack</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Update</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Allotment</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Jobsheet Print</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
+                </div>
+            </div>
+
+            <!-- Master Data -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
+                <span>Master Data</span>
+                <span class="text-xs">›</span>
+            </a>
+
+            <!-- Uploader -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
+                <span>Uploader</span>
+                <span class="text-xs">›</span>
+            </a>
+
+            <!-- Reports -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
+                <span>Reports</span>
+                <span class="text-xs">›</span>
+            </a>
+
+            <!-- Users -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
+                <span>Users</span>
+                <span class="text-xs">›</span>
+            </a>
+
+            <!-- Password -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
+                <span>Password</span>
+                <span class="text-xs">›</span>
+            </a>
         </nav>
     </div>
 
@@ -122,8 +178,19 @@
         </div>
     </div>
 
-    <!-- Script: Pincode Auto-Fill & Supabase -->
+    <!-- Script: Sidebar Toggle, Pincode Auto-Fill & Supabase -->
     <script>
+        // Toggle Sidebar Submenus
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Pincode Auto-Fill Integration
         document.getElementById('pincodeInput').addEventListener('blur', async function() {
             let pincode = this.value.trim();
             if (pincode.length === 6) {
@@ -160,6 +227,7 @@
             }
         });
 
+        // Supabase Integration
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
