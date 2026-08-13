@@ -10,22 +10,37 @@
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
-    <!-- Sidebar (Aapke purane design ke mutabiq fix kiya gaya hai) -->
+    <!-- Complete Original Sidebar with All Masters -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto">
         <div class="text-sm font-bold text-[#f8fafc] p-4 bg-[#172033] flex items-center gap-2 border-b border-[#334155]">
             Admin Dashboard
         </div>
         <nav class="p-2 space-y-1">
-            <div class="text-xs font-semibold text-slate-400 px-3 py-2 uppercase">Master</div>
-            <a href="index.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Dashboard / Home</a>
-            <a href="branch-add.html" class="block px-3 py-2 rounded text-sm bg-blue-600 text-white font-medium">Branch Master</a>
-            <a href="franchise-add.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Franchise Master</a>
-            <a href="freelancer-add.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Freelancer Master</a>
-            <a href="technician-add.html" class="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-800">Technician Master</a>
+            <div class="flex justify-between items-center px-3 py-2 text-xs font-semibold text-slate-400 uppercase cursor-pointer hover:text-white">
+                <span>Master</span>
+                <span>▼</span>
+            </div>
+            <div class="pl-2 space-y-1">
+                <a href="branch-add.html" class="block px-3 py-1.5 rounded text-sm bg-blue-600 text-white font-medium">Branch Master</a>
+                <a href="franchise-add.html" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Franchise Master</a>
+                <a href="freelancer-add.html" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Freelancer Master</a>
+                <a href="technician-add.html" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Technician Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Brand Mapping</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Category Mapping</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Client Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Category Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Product Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Model Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Symptom Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Cause Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Analysis Master</a>
+                <a href="#" class="block px-3 py-1.5 rounded text-sm text-slate-300 hover:bg-slate-800">Spares Master</a>
+            </div>
         </nav>
     </div>
 
-    <!-- Main Content Area (ml-64 taaki sidebar ke niche na dabey) -->
+    <!-- Main Content Area (ml-64 taaki sidebar ke sath overlap na ho) -->
     <div class="ml-64 flex-1 p-8">
         <div class="max-w-5xl mx-auto bg-[#1e293b] rounded-xl shadow-2xl border border-[#334155] p-6">
             
@@ -112,7 +127,7 @@
 
     <!-- Script: Pincode Auto-Fill & Supabase -->
     <script>
-        // India Post API for Pincode Auto-correction
+        // India Post API Integration for accurate City, State, District based on Pincode
         document.getElementById('pincodeInput').addEventListener('blur', async function() {
             let pincode = this.value.trim();
             if (pincode.length === 6) {
@@ -123,12 +138,10 @@
                     if (data[0].Status === "Success") {
                         let details = data[0].PostOffice[0];
                         
-                        // Exact State, District, City fill hogi (jaise Ghaziabad / Uttar Pradesh)
                         document.getElementById('stateInput').value = details.State || '';
                         document.getElementById('districtInput').value = details.District || '';
                         document.getElementById('cityInput').value = details.Block || details.District || '';
 
-                        // Locality dropdown mein exact area names aayenge
                         let localitySelect = document.getElementById('localitySelect');
                         localitySelect.innerHTML = '<option value="">----Select Locality----</option>';
                         
@@ -151,7 +164,7 @@
             }
         });
 
-        // Supabase Configuration (Aapke credentials yahan configured rahenge)
+        // Supabase Configuration
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
