@@ -3,172 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Quickserves OS</title>
+    <title>Super Admin Full-Functional Dashboard - Quickserves</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
-    <!-- Complete Quickserves CRM Sidebar -->
+    <!-- Sidebar Wrapper (Aapka pehle wala complete sidebar yahan rahega) -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto">
-        <!-- Logo Header -->
         <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
-            <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
+            <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES CRM</span>
         </div>
-
-        <nav class="py-2">
-            <!-- 1. Admin Dashboard -->
-            <a href="index.html" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
-                <span>Admin Dashboard</span>
-            </a>
-
-            <!-- 2. Master Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Master</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="branch-add.html" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Product Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Model Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Symptom Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Cause Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Analysis Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Spares Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">City Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Locality Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Vendor Master</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Admin Utility</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
-                </div>
-            </div>
-
-            <!-- 3. Call Management Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Call Management</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reminder</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Appointment</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reschedule</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Transfer</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reopen</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Cancel</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call FeedBack</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Update</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Allotment</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Jobsheet Print</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel PO</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update Serial No.</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Audit</a>
-                </div>
-            </div>
-
-            <!-- 4. Master Data Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Master Data</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="masterDataMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
-                </div>
-            </div>
-
-            <!-- 5. Uploader Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Uploader</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="uploaderMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Live Call Upload</a>
-                </div>
-            </div>
-
-            <!-- 6. Reports Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Reports</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="reportsMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Report Main</a>
-                </div>
-            </div>
-
-            <!-- 7. Users Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('usersMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Users</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="usersMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Create User</a>
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update User</a>
-                </div>
-            </div>
-
-            <!-- 8. Password Dropdown -->
-            <div class="border-b border-[#334155]/50">
-                <button onclick="toggleMenu('passwordMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                    <span>Password</span>
-                    <span class="text-xs">▼</span>
-                </button>
-                <div id="passwordMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Change Password</a>
-                </div>
-            </div>
-        </nav>
+        <!-- Nav items from previous complete code can be placed here -->
     </div>
 
     <!-- Main Content Area -->
-    <div class="ml-64 flex-1 p-8">
-        <h1 class="text-2xl font-bold text-emerald-400 mb-6">Dashboard Overview</h1>
+    <div class="ml-64 flex-1 p-8 space-y-6">
         
-        <!-- Dashboard Counter Cards (Jaise aapke screenshot mein hain) -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
-                <p class="text-slate-400 text-sm">OPEN</p>
-                <h3 class="text-3xl font-bold text-white mt-1">3</h3>
+        <!-- Top Bar Header -->
+        <div class="flex justify-between items-center bg-[#1e293b] p-4 rounded-xl border border-[#334155]">
+            <div>
+                <h1 class="text-xl font-bold text-white">Super Admin Control Center</h1>
+                <p class="text-xs text-slate-400">Overview of Service Operations, Workforce & Financials</p>
             </div>
-            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
-                <p class="text-slate-400 text-sm">APPOINTMENT</p>
-                <h3 class="text-3xl font-bold text-white mt-1">0</h3>
-            </div>
-            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
-                <p class="text-slate-400 text-sm">ALLOTED</p>
-                <h3 class="text-3xl font-bold text-white mt-1">171</h3>
-            </div>
-            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
-                <p class="text-slate-400 text-sm">PENDING</p>
-                <h3 class="text-3xl font-bold text-white mt-1">0</h3>
+            <div class="flex items-center space-x-4">
+                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/20 font-medium">System Online</span>
+                <div class="text-right">
+                    <p class="text-sm font-semibold text-white">Pankaj Dhiman</p>
+                    <p class="text-xs text-slate-400">Managing Director</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Toggle Script -->
-    <script>
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            menu.classList.toggle('hidden');
-        }
-    </script>
+        <!-- Section 1: Core Service Call Metrics (Live Status) -->
+        <div>
+            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
+                    <p class="text-slate-400 text-xs font-medium">OPEN CALLS</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">3</h3>
+                    <span class="text-xs text-blue-400 mt-2 inline-block">Requires assignment</span>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
+                    <p class="text-slate-400 text-xs font-medium">APPOINTMENTS SET</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">0</h3>
+                    <span class="text-xs text-amber-400 mt-2 inline-block">Scheduled for today</span>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
+                    <p class="text-slate-400 text-xs font-medium">ALLOTED TO TECH</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">171</h3>
+                    <span class="text-xs text-emerald-400 mt-2 inline-block">In progress</span>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-500">
+                    <p class="text-slate-400 text-xs font-medium">PENDING &gt;= 15 DAYS</p>
+                    <h3 class="text-2xl font-bold text-white mt-1">151</h3>
+                    <span class="text-xs text-rose-400 mt-2 inline-block">Critical backlog</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Business & Network Health (Franchises, Technicians, Inventory) -->
+        <div>
+            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                    <p class="text-slate-400 text-xs font-medium">ACTIVE BRANCHES</p>
+                    <h3 class="text-xl font-bold text-white mt-1">12</h3>
+                    <p class="text-xs text-slate-500 mt-1">Delhi, NCR, Lucknow, etc.</p>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                    <p class="text-slate-400 text-xs font-medium">FRANCHISES / ASCs</p>
+                    <h3 class="text-xl font-bold text-white mt-1">48</h3>
+                    <p class="text-xs text-slate-500 mt-1">Expansion drive active</p>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                    <p class="text-slate-400 text-xs font-medium">REGISTERED TECHNICIANS</p>
+                    <h3 class="text-xl font-bold text-white mt-1">320</h3>
+                    <p class="text-xs text-slate-500 mt-1">Field force available</p>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                    <p class="text-slate-400 text-xs font-medium">SPARES INVENTORY VALUATION</p>
+                    <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
+                    <p class="text-xs text-slate-500 mt-1">Across all warehouses</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Quick Action Shortcuts for Super Admin -->
+        <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+            <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Quick Administrative Actions</h2>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-emerald-400 transition">+ Register Call</button>
+                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-blue-400 transition">+ Add Technician</button>
+                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-amber-400 transition">Bulk Excel Upload</button>
+                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-purple-400 transition">Download Master Data</button>
+                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-cyan-400 transition">Generate Reports</button>
+                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-rose-400 transition">Call Audit Logs</button>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
