@@ -291,7 +291,7 @@
                 </div>
             </div>
 
-            <!-- Upload Branch Document View (Updated with State & Region info in Branches) -->
+            <!-- Upload Branch Document View (Updated with State & Region only, no city names) -->
             <div id="uploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                     <h2 class="text-lg font-bold text-white">Upload Branch Document</h2>
@@ -301,16 +301,33 @@
                 <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Document Uploaded Successfully!');">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch (with State & Region)</label>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch (State & Region)</label>
                             <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
                                 <option>----Select----</option>
-                                <option>Lucknow (Uttar Pradesh) - East Region</option>
-                                <option>Meerut (Uttar Pradesh) - West Region</option>
-                                <option>Faridabad (Haryana) - North Region</option>
-                                <option>South Delhi (Delhi NCR) - North Region</option>
-                                <option>Noida (Uttar Pradesh) - North Region</option>
-                                <option>Ghaziabad (Uttar Pradesh) - North Region</option>
-                                <option>South Branch (Karnataka) - South Region</option>
+                                <option>Uttar Pradesh - East Region</option>
+                                <option>Uttar Pradesh - West Region</option>
+                                <option>Uttar Pradesh - North Region</option>
+                                <option>Haryana - North Region</option>
+                                <option>Delhi NCR - North Region</option>
+                                <option>Karnataka - South Region</option>
+                                <option>Maharashtra - West Region</option>
+                                <option>Tamil Nadu - South Region</option>
+                                <option>West Bengal - East Region</option>
+                                <option>Bihar - East Region</option>
+                                <option>Rajasthan - North Region</option>
+                                <option>Punjab - North Region</option>
+                                <option>Madhya Pradesh - Central Region</option>
+                                <option>Gujarat - West Region</option>
+                                <option>Andhra Pradesh - South Region</option>
+                                <option>Telangana - South Region</option>
+                                <option>Kerala - South Region</option>
+                                <option>Odisha - East Region</option>
+                                <option>Jharkhand - East Region</option>
+                                <option>Assam - North-East Region</option>
+                                <option>Uttarakhand - North Region</option>
+                                <option>Himachal Pradesh - North Region</option>
+                                <option>Jammu and Kashmir - North Region</option>
+                                <option>Goa - West Region</option>
                             </select>
                         </div>
                         <div>
@@ -354,6 +371,8 @@
                                 <option>West</option>
                                 <option>North</option>
                                 <option>South</option>
+                                <option>Central</option>
+                                <option>North-East</option>
                             </select>
                         </div>
                         <div>
