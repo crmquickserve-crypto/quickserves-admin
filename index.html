@@ -371,28 +371,48 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
-                                <input type="text" id="branchPincode" maxlength="6" placeholder="Pincode" onkeyup="fetchPincodeData(this, 'branch')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                            <!-- State Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
-                                <select id="branchState" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="branch_state" onchange="loadCities('branch_state', 'branch_city')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select State</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="UTTAR PRADESH">Uttar Pradesh</option>
+                                    <option value="HARYANA">Haryana</option>
                                 </select>
                             </div>
+                            <!-- District Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
-                                <input type="text" id="branchDistrict" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
-                                <select id="branchCity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option value="">Select City</option>
+                                <select id="branch_district" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select District</option>
+                                    <option value="CENTRAL DELHI">Central Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                    <option value="FARIDABAD">Faridabad</option>
                                 </select>
                             </div>
+                            <!-- City Dropdown -->
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <select id="branch_city" onchange="loadLocalities('branch_city', 'branch_locality')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select City</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                </select>
+                            </div>
+                            <!-- Locality Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
-                                <select id="branchLocality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="branch_locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select Locality</option>
+                                    <option value="CONNAUGHT PLACE">Connaught Place</option>
+                                    <option value="INDIRAPURAM">Indirapuram</option>
+                                    <option value="VAISHALI">Vaishali</option>
+                                    <option value="SECTOR 62">Sector 62</option>
                                 </select>
                             </div>
                         </div>
@@ -580,28 +600,48 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
-                                <input type="text" id="franchisePincode" maxlength="6" placeholder="Pincode" onkeyup="fetchPincodeData(this, 'franchise')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                            <!-- State Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
-                                <select id="franchiseState" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="franchise_state" onchange="loadCities('franchise_state', 'franchise_city')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select State</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="UTTAR PRADESH">Uttar Pradesh</option>
+                                    <option value="HARYANA">Haryana</option>
                                 </select>
                             </div>
+                            <!-- District Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
-                                <input type="text" id="franchiseDistrict" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
-                                <select id="franchiseCity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option value="">Select City</option>
+                                <select id="franchise_district" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select District</option>
+                                    <option value="CENTRAL DELHI">Central Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                    <option value="FARIDABAD">Faridabad</option>
                                 </select>
                             </div>
+                            <!-- City Dropdown -->
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <select id="franchise_city" onchange="loadLocalities('franchise_city', 'franchise_locality')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select City</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                </select>
+                            </div>
+                            <!-- Locality Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
-                                <select id="franchiseLocality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="franchise_locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select Locality</option>
+                                    <option value="CONNAUGHT PLACE">Connaught Place</option>
+                                    <option value="INDIRAPURAM">Indirapuram</option>
+                                    <option value="VAISHALI">Vaishali</option>
+                                    <option value="SECTOR 62">Sector 62</option>
                                 </select>
                             </div>
                         </div>
@@ -792,28 +832,48 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
-                                <input type="text" id="techPincode" maxlength="6" placeholder="Pincode" onkeyup="fetchPincodeData(this, 'tech')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                            <!-- State Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
-                                <select id="techState" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="tech_state" onchange="loadCities('tech_state', 'tech_city')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select State</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="UTTAR PRADESH">Uttar Pradesh</option>
+                                    <option value="HARYANA">Haryana</option>
                                 </select>
                             </div>
+                            <!-- District Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
-                                <input type="text" id="techDistrict" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
-                                <select id="techCity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option value="">Select City</option>
+                                <select id="tech_district" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select District</option>
+                                    <option value="CENTRAL DELHI">Central Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                    <option value="FARIDABAD">Faridabad</option>
                                 </select>
                             </div>
+                            <!-- City Dropdown -->
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <select id="tech_city" onchange="loadLocalities('tech_city', 'tech_locality')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select City</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                </select>
+                            </div>
+                            <!-- Locality Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
-                                <select id="techLocality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="tech_locality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select Locality</option>
+                                    <option value="CONNAUGHT PLACE">Connaught Place</option>
+                                    <option value="INDIRAPURAM">Indirapuram</option>
+                                    <option value="VAISHALI">Vaishali</option>
+                                    <option value="SECTOR 62">Sector 62</option>
                                 </select>
                             </div>
                         </div>
@@ -882,7 +942,7 @@
             </div>
         </div>
 
-        <!-- ================= SECTION 5: CLIENT MASTER (Fully Functional) ================= -->
+        <!-- ================= SECTION 5: CLIENT MASTER ================= -->
         <div id="clientMasterSection" class="hidden space-y-6">
             <!-- Client List View -->
             <div id="clientListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
@@ -919,15 +979,6 @@
                                 <td class="p-3 text-slate-300">8725078438</td>
                                 <td class="p-3 text-slate-300">NITIN VILECHA</td>
                             </tr>
-                            <tr>
-                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
-                                <td class="p-3"><a href="#" onclick="showClientAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
-                                <td class="p-3 text-emerald-400 font-mono">CDCL002</td>
-                                <td class="p-3 font-medium text-white">SAAR Home Appliances</td>
-                                <td class="p-3 text-slate-300 text-xs">Plot No- 155/354-355,356,357 1st Floor, Village Pooth Khurd</td>
-                                <td class="p-3 text-slate-300">9871184648</td>
-                                <td class="p-3 text-slate-300">Subhasish Bhattacharya</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -945,7 +996,6 @@
                             <label class="block text-xs font-medium text-slate-400 mb-1">Client Name / Code</label>
                             <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white">
                                 <option>CDCL001 - MACKAVM INTERNATIONAL PRIVATE LIMITED</option>
-                                <option>CDCL002 - SAAR Home Appliances</option>
                             </select>
                         </div>
                         <div>
@@ -1022,28 +1072,37 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
-                                <input type="text" id="clientPincode" maxlength="6" placeholder="Pincode" onkeyup="fetchPincodeData(this, 'client')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <input type="text" maxlength="6" placeholder="Pincode" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                             </div>
+                            <!-- State Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
-                                <select id="clientState" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                <select id="client_state" onchange="loadCities('client_state', 'client_city')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
                                     <option value="">Select State</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="UTTAR PRADESH">Uttar Pradesh</option>
+                                    <option value="HARYANA">Haryana</option>
                                 </select>
                             </div>
+                            <!-- District Dropdown -->
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
-                                <input type="text" id="clientDistrict" placeholder="District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
-                                <select id="clientCity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option value="">Select City</option>
+                                <select id="client_district" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select District</option>
+                                    <option value="CENTRAL DELHI">Central Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
+                                    <option value="FARIDABAD">Faridabad</option>
                                 </select>
                             </div>
+                            <!-- City Dropdown -->
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
-                                <select id="clientLocality" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
-                                    <option value="">Select Locality</option>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                                <select id="client_city" onchange="loadLocalities('client_city', 'client_locality')" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                                    <option value="">Select City</option>
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="GHAZIABAD">Ghaziabad</option>
+                                    <option value="NOIDA">Noida</option>
                                 </select>
                             </div>
                         </div>
@@ -1181,57 +1240,34 @@
             document.getElementById('clientListView').classList.remove('hidden');
         }
 
-        // Pincode Auto-select & Dropdown Function using India Post API
-        function fetchPincodeData(inputElement, prefix) {
-            const pincode = inputElement.value.trim();
-            if (pincode.length === 6) {
-                fetch(`https://api.postalpincode.in/pincode/${pincode}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data[0].Status === "Success") {
-                            const postOffices = data[0].PostOffice;
-                            
-                            // 1. Populate State Dropdown
-                            const stateSelect = document.getElementById(prefix + 'State');
-                            if (stateSelect) {
-                                stateSelect.innerHTML = `<option value="${postOffices[0].State}">${postOffices[0].State}</option>`;
-                            }
+        // Dependent Dropdown Mock Functions (Connect to your Database/API later)
+        function loadCities(stateElemId, cityElemId) {
+            // Sample city loading logic based on selected state
+            const state = document.getElementById(stateElemId).value;
+            const citySelect = document.getElementById(cityElemId);
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            
+            if (state === 'UTTAR PRADESH') {
+                citySelect.innerHTML += '<option value="GHAZIABAD">Ghaziabad</option><option value="NOIDA">Noida</option><option value="MEERUT">Meerut</option><option value="LUCKNOW">Lucknow</option>';
+            } else if (state === 'DELHI') {
+                citySelect.innerHTML += '<option value="NEW DELHI">New Delhi</option><option value="SOUTH DELHI">South Delhi</option>';
+            } else if (state === 'HARYANA') {
+                citySelect.innerHTML += '<option value="FARIDABAD">Faridabad</option><option value="GURUGRAM">Gurugram</option>';
+            }
+        }
 
-                            // 2. Populate District Field
-                            const districtInput = document.getElementById(prefix + 'District');
-                            if (districtInput) {
-                                districtInput.value = postOffices[0].District;
-                            }
+        function loadLocalities(cityElemId, localityElemId) {
+            const city = document.getElementById(cityElemId).value;
+            const localitySelect = document.getElementById(localityElemId);
+            if(!localitySelect) return;
+            localitySelect.innerHTML = '<option value="">Select Locality</option>';
 
-                            // 3. Populate City Dropdown (Unique blocks/districts)
-                            const citySelect = document.getElementById(prefix + 'City');
-                            if (citySelect) {
-                                citySelect.innerHTML = '';
-                                const uniqueCities = [...new Set(postOffices.map(po => po.Block || po.District))];
-                                uniqueCities.forEach(city => {
-                                    let option = document.createElement('option');
-                                    option.value = city;
-                                    option.textContent = city;
-                                    citySelect.appendChild(option);
-                                });
-                            }
-
-                            // 4. Populate Locality Dropdown (All Post Offices in area)
-                            const localitySelect = document.getElementById(prefix + 'Locality');
-                            if (localitySelect) {
-                                localitySelect.innerHTML = '<option value="">Select Locality</option>';
-                                postOffices.forEach(po => {
-                                    let option = document.createElement('option');
-                                    option.value = po.Name;
-                                    option.textContent = po.Name;
-                                    localitySelect.appendChild(option);
-                                });
-                            }
-                        } else {
-                            alert("Invalid Pincode entered.");
-                        }
-                    })
-                    .catch(error => console.error("Error fetching pincode details:", error));
+            if (city === 'GHAZIABAD') {
+                localitySelect.innerHTML += '<option value="INDIRAPURAM">Indirapuram</option><option value="VAISHALI">Vaishali</option><option value="KAUSHAMBI">Kaushambi</option>';
+            } else if (city === 'NOIDA') {
+                localitySelect.innerHTML += '<option value="SECTOR 62">Sector 62</option><option value="SECTOR 18">Sector 18</option>';
+            } else {
+                localitySelect.innerHTML += '<option value="CENTRAL AREA">Central Area</option>';
             }
         }
 
