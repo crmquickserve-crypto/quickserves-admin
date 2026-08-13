@@ -244,7 +244,7 @@
             </div>
         </div>
 
-        <!-- ================= SECTION 2: BRANCH MASTER LIST & ADD FORM ================= -->
+        <!-- ================= SECTION 2: BRANCH MASTER LIST, ADD FORM & UPLOAD DOCUMENT ================= -->
         <div id="branchMasterSection" class="hidden space-y-6">
             <!-- Branch Listing View -->
             <div id="branchListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
@@ -252,7 +252,7 @@
                     <h2 class="text-lg font-bold text-white">Branch Master</h2>
                     <div class="space-x-2">
                         <button onclick="showBranchAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
-                        <button class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
+                        <button onclick="showUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
                     </div>
                 </div>
 
@@ -289,6 +289,48 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            <!-- Upload Branch Document View (Mst_BranchDocument.aspx style) -->
+            <div id="uploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Upload Branch Document</h2>
+                    <button onclick="hideUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Document Uploaded Successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select----</option>
+                                <option>Uttar Pradesh (East)</option>
+                                <option>Uttar Pradesh (West)</option>
+                                <option>Delhi NCR (North)</option>
+                                <option>South Region</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>---Select---</option>
+                                <option>Address Proof Document</option>
+                                <option>Shop & Establishment Registration File Upload</option>
+                                <option>GST Number Proof Document</option>
+                                <option>Rent Agreement Document</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Upload</label>
+                            <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save</button>
+                        <button type="button" onclick="hideUploadDocumentView()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
+                    </div>
+                </form>
             </div>
 
             <!-- Add New Branch Form with Auto-Pincode & Interactive Calendar Datepickers -->
@@ -554,11 +596,23 @@
 
         function showBranchAddForm() {
             document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('uploadDocumentView').classList.add('hidden');
             document.getElementById('branchAddFormView').classList.remove('hidden');
         }
 
         function hideBranchAddForm() {
             document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('branchListView').classList.remove('hidden');
+        }
+
+        function showUploadDocumentView() {
+            document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('uploadDocumentView').classList.remove('hidden');
+        }
+
+        function hideUploadDocumentView() {
+            document.getElementById('uploadDocumentView').classList.add('hidden');
             document.getElementById('branchListView').classList.remove('hidden');
         }
 
