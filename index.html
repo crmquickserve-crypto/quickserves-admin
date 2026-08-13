@@ -3,34 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Branch Master - Quickserves OS</title>
+    <title>Admin Dashboard - Quickserves OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Supabase JS Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
-    <!-- Sidebar with Complete Dropdowns -->
+    <!-- Complete Quickserves CRM Sidebar -->
     <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto">
-        <!-- Logo / Header -->
+        <!-- Logo Header -->
         <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
             <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
         </div>
 
         <nav class="py-2">
-            <!-- Admin Dashboard -->
+            <!-- 1. Admin Dashboard -->
             <a href="index.html" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
                 <span>Admin Dashboard</span>
             </a>
 
-            <!-- Master Dropdown -->
+            <!-- 2. Master Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Master</span>
                     <span class="text-xs">▼</span>
                 </button>
-                <div id="masterMenu" class="bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="branch-add.html" class="block px-3 py-1.5 rounded text-xs bg-blue-600 text-white font-medium">Branch Master</a>
+                <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="branch-add.html" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
@@ -38,6 +36,7 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Product Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Model Master</a>
@@ -45,16 +44,22 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Cause Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Analysis Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Spares Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">City Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Locality Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Vendor Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Admin Utility</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
                 </div>
             </div>
 
-            <!-- Call Management Dropdown -->
+            <!-- 3. Call Management Dropdown -->
             <div class="border-b border-[#334155]/50">
                 <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                     <span>Call Management</span>
                     <span class="text-xs">▼</span>
                 </button>
-                <div id="callMenu" class="bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
@@ -71,183 +76,99 @@
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel PO</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update Serial No.</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Audit</a>
                 </div>
             </div>
 
-            <!-- Other Main Menu Items -->
-            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
-                <span>Master Data</span>
-                <span class="text-xs">›</span>
-            </a>
-            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
-                <span>Uploader</span>
-                <span class="text-xs">›</span>
-            </a>
-            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
-                <span>Reports</span>
-                <span class="text-xs">›</span>
-            </a>
-            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
-                <span>Users</span>
-                <span class="text-xs">›</span>
-            </a>
-            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50">
-                <span>Password</span>
-                <span class="text-xs">›</span>
-            </a>
+            <!-- 4. Master Data Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Master Data</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="masterDataMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
+                </div>
+            </div>
+
+            <!-- 5. Uploader Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Uploader</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="uploaderMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Live Call Upload</a>
+                </div>
+            </div>
+
+            <!-- 6. Reports Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Reports</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="reportsMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Report Main</a>
+                </div>
+            </div>
+
+            <!-- 7. Users Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('usersMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Users</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="usersMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Create User</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update User</a>
+                </div>
+            </div>
+
+            <!-- 8. Password Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('passwordMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Password</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="passwordMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Change Password</a>
+                </div>
+            </div>
         </nav>
     </div>
 
     <!-- Main Content Area -->
     <div class="ml-64 flex-1 p-8">
-        <div class="max-w-5xl mx-auto bg-[#1e293b] rounded-xl shadow-2xl border border-[#334155] p-6">
-            
-            <div class="flex justify-between items-center mb-6 border-b border-[#334155] pb-4">
-                <h1 class="text-xl font-bold text-emerald-400">Add Branch</h1>
-                <a href="index.html" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition">Back</a>
+        <h1 class="text-2xl font-bold text-emerald-400 mb-6">Dashboard Overview</h1>
+        
+        <!-- Dashboard Counter Cards (Jaise aapke screenshot mein hain) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+                <p class="text-slate-400 text-sm">OPEN</p>
+                <h3 class="text-3xl font-bold text-white mt-1">3</h3>
             </div>
-
-            <form id="branchForm" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    <!-- Region -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">REGION *</label>
-                        <select name="region" required class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                            <option value="">----Select----</option>
-                            <option value="North">North</option>
-                            <option value="South">South</option>
-                            <option value="East">East</option>
-                            <option value="West">West</option>
-                            <option value="Central">Central</option>
-                        </select>
-                    </div>
-
-                    <!-- Branch Name -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">BRANCH *</label>
-                        <input type="text" name="branch_name" required placeholder="Enter Branch Name" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                    </div>
-
-                    <!-- Address -->
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-slate-300 mb-1">ADDRESS *</label>
-                        <textarea name="address" rows="2" required placeholder="Enter Full Address" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
-                    </div>
-
-                    <!-- Landmark -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">LANDMARK</label>
-                        <input type="text" name="landmark" placeholder="Enter Landmark" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                    </div>
-
-                    <!-- Pincode -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">PINCODE *</label>
-                        <input type="text" id="pincodeInput" name="pincode" maxlength="6" required placeholder="Enter 6-digit Pincode" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                    </div>
-
-                    <!-- State -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">STATE *</label>
-                        <input type="text" id="stateInput" name="state" required placeholder="Auto-filled by Pincode" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                    </div>
-
-                    <!-- District -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">DISTRICT *</label>
-                        <input type="text" id="districtInput" name="district" required placeholder="Auto-filled by Pincode" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                    </div>
-
-                    <!-- City -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">CITY *</label>
-                        <input type="text" id="cityInput" name="city" required placeholder="Auto-filled by Pincode" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                    </div>
-
-                    <!-- Locality -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">LOCALITY *</label>
-                        <select id="localitySelect" name="locality" required class="w-full bg-[#0f172a] border border-[#334155] rounded-lg p-2.5 text-white focus:border-emerald-500 focus:outline-none">
-                            <option value="">----Select Pincode First----</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <!-- Submit Button -->
-                <div class="pt-4 border-t border-[#334155] flex justify-end">
-                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-2.5 rounded-lg shadow-lg transition">Save Branch</button>
-                </div>
-            </form>
+            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+                <p class="text-slate-400 text-sm">APPOINTMENT</p>
+                <h3 class="text-3xl font-bold text-white mt-1">0</h3>
+            </div>
+            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+                <p class="text-slate-400 text-sm">ALLOTED</p>
+                <h3 class="text-3xl font-bold text-white mt-1">171</h3>
+            </div>
+            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+                <p class="text-slate-400 text-sm">PENDING</p>
+                <h3 class="text-3xl font-bold text-white mt-1">0</h3>
+            </div>
         </div>
     </div>
 
-    <!-- Script: Dropdowns & Pincode Auto-Fill -->
+    <!-- Toggle Script -->
     <script>
-        // Toggle Dropdown Menus
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
             menu.classList.toggle('hidden');
         }
-
-        // Pincode Auto-Fill Integration
-        document.getElementById('pincodeInput').addEventListener('blur', async function() {
-            let pincode = this.value.trim();
-            if (pincode.length === 6) {
-                try {
-                    let response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
-                    let data = await response.json();
-                    
-                    if (data[0].Status === "Success") {
-                        let details = data[0].PostOffice[0];
-                        
-                        document.getElementById('stateInput').value = details.State || '';
-                        document.getElementById('districtInput').value = details.District || '';
-                        document.getElementById('cityInput').value = details.Block || details.District || '';
-
-                        let localitySelect = document.getElementById('localitySelect');
-                        localitySelect.innerHTML = '<option value="">----Select Locality----</option>';
-                        
-                        data[0].PostOffice.forEach(po => {
-                            let opt = document.createElement('option');
-                            opt.value = po.Name;
-                            opt.textContent = `${po.Name} (${po.BranchType})`;
-                            localitySelect.appendChild(opt);
-                        });
-                    } else {
-                        alert('Invalid Pincode! Please check.');
-                        document.getElementById('stateInput').value = '';
-                        document.getElementById('districtInput').value = '';
-                        document.getElementById('cityInput').value = '';
-                        document.getElementById('localitySelect').innerHTML = '<option value="">----Select Pincode First----</option>';
-                    }
-                } catch (error) {
-                    console.error('Error fetching pincode data:', error);
-                }
-            }
-        });
-
-        // Supabase Integration
-        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        document.getElementById('branchForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-
-            const { error } = await supabaseClient.from('branches').insert([data]);
-
-            if (error) {
-                alert('Error saving branch: ' + error.message);
-            } else {
-                alert('Branch saved successfully!');
-                e.target.reset();
-                document.getElementById('localitySelect').innerHTML = '<option value="">----Select Pincode First----</option>';
-            }
-        });
     </script>
 </body>
 </html>
