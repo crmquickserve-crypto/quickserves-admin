@@ -32,7 +32,7 @@
                 </button>
                 <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
                     <a href="#" onclick="showBranchMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
-                    <a href="#" onclick="showFranchiseMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
@@ -65,10 +65,79 @@
                 <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reminder</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Appointment</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reschedule</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Transfer</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reopen</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Cancel</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call FeedBack</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Update</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Allotment</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Jobsheet Print</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel PO</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update Serial No.</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Audit</a>
                 </div>
             </div>
 
-            <!-- 4. Other Menus (Reports, Users, etc.) omitted for brevity, keeping structure clean -->
+            <!-- 4. Master Data Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Master Data</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="masterDataMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
+                </div>
+            </div>
+
+            <!-- 5. Uploader Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Uploader</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="uploaderMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Live Call Upload</a>
+                </div>
+            </div>
+
+            <!-- 6. Reports Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Reports</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="reportsMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Report Main</a>
+                </div>
+            </div>
+
+            <!-- 7. Users Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('usersMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Users</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="usersMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Create User</a>
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update User</a>
+                </div>
+            </div>
+
+            <!-- 8. Password Dropdown -->
+            <div class="border-b border-[#334155]/50">
+                <button onclick="toggleMenu('passwordMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                    <span>Password</span>
+                    <span class="text-xs">▼</span>
+                </button>
+                <div id="passwordMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Change Password</a>
+                </div>
+            </div>
         </nav>
     </div>
 
@@ -92,11 +161,90 @@
 
         <!-- ================= SECTION 1: DASHBOARD ================= -->
         <div id="dashboardSection" class="space-y-6">
-            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Dashboard Overview</h2>
-            <!-- Dashboard content summary cards here -->
+            <div>
+                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
+                        <p class="text-slate-400 text-xs font-medium">OPEN</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">3</h3>
+                        <span class="text-xs text-blue-400 mt-2 inline-block">Requires assignment</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
+                        <p class="text-slate-400 text-xs font-medium">APPOINTMENT</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">0</h3>
+                        <span class="text-xs text-amber-400 mt-2 inline-block">Scheduled for today</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
+                        <p class="text-slate-400 text-xs font-medium">ALLOTED</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">171</h3>
+                        <span class="text-xs text-emerald-400 mt-2 inline-block">In progress</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
+                        <p class="text-slate-400 text-xs font-medium">PART PENDING CALLS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">14</h3>
+                        <span class="text-xs text-purple-400 mt-2 inline-block">Awaiting spare parts</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-600">
+                        <p class="text-slate-400 text-xs font-medium">COMPLETED CALLS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">1,280</h3>
+                        <span class="text-xs text-emerald-400 mt-2 inline-block">Successfully closed</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-500">
+                        <p class="text-slate-400 text-xs font-medium">CANCEL CALLS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">22</h3>
+                        <span class="text-xs text-rose-400 mt-2 inline-block">Dropped / Cancelled</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-700">
+                        <p class="text-slate-400 text-xs font-medium">PENDING &gt;= 15 DAYS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">151</h3>
+                        <span class="text-xs text-rose-400 mt-2 inline-block">Critical backlog</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">ACTIVE BRANCHES</p>
+                        <h3 class="text-xl font-bold text-white mt-1">12</h3>
+                        <p class="text-xs text-slate-500 mt-1">Regional hubs active</p>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">FRANCHISES / ASCs</p>
+                        <h3 class="text-xl font-bold text-white mt-1">48</h3>
+                        <p class="text-xs text-slate-500 mt-1">Expansion partners</p>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">REGISTERED TECHNICIANS</p>
+                        <h3 class="text-xl font-bold text-white mt-1">320</h3>
+                        <p class="text-xs text-slate-500 mt-1">Field force available</p>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">SPARES INVENTORY VALUATION</p>
+                        <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
+                        <p class="text-xs text-slate-500 mt-1">Stock status tracked</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+                <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Quick Administrative Actions</h2>
+                <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-emerald-400 transition">+ Register Call</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-blue-400 transition">+ Add Technician</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-amber-400 transition">Bulk Excel Upload</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-purple-400 transition">Download Master Data</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-cyan-400 transition">Generate Reports</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-rose-400 transition">Call Audit Logs</button>
+                </div>
+            </div>
         </div>
 
-        <!-- ================= SECTION 2: BRANCH MASTER ================= -->
+        <!-- ================= SECTION 2: BRANCH MASTER LIST, ADD FORM & UPLOAD DOCUMENT ================= -->
         <div id="branchMasterSection" class="hidden space-y-6">
             <!-- Branch Listing View -->
             <div id="branchListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
@@ -107,21 +255,6 @@
                         <button onclick="showUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
                     </div>
                 </div>
-            </div>
-            <!-- Upload & Add Branch forms... -->
-        </div>
-
-        <!-- ================= SECTION 3: FRANCHISE MASTER ================= -->
-        <div id="franchiseMasterSection" class="hidden space-y-6">
-            <!-- Franchise Listing View -->
-            <div id="franchiseListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Franchise Master</h2>
-                    <div class="space-x-2">
-                        <button onclick="showFranchiseAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD FRANCHISE</button>
-                        <button onclick="showFranchiseUploadDocView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Franchise Document</button>
-                    </div>
-                </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm text-slate-300">
@@ -129,111 +262,339 @@
                             <tr>
                                 <th class="p-3">Select</th>
                                 <th class="p-3">Edit</th>
-                                <th class="p-3">Franchise / ASC Name</th>
-                                <th class="p-3">City / Region</th>
-                                <th class="p-3">Status</th>
+                                <th class="p-3">Region</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-[#334155]">
                             <tr>
                                 <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
-                                <td class="p-3"><a href="#" onclick="showFranchiseAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
-                                <td class="p-3 font-medium text-white">Quickserves North Hub ASC</td>
-                                <td class="p-3">Delhi NCR</td>
-                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded text-xs">Active</span></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">East</td>
                             </tr>
                             <tr>
                                 <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
-                                <td class="p-3"><a href="#" onclick="showFranchiseAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
-                                <td class="p-3 font-medium text-white">Padma Shakti Service Center</td>
-                                <td class="p-3">Lucknow</td>
-                                <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded text-xs">Active</span></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">West</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">North</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">South</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Upload Franchise Document View -->
-            <div id="franchiseUploadDocView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+            <!-- Upload Branch Document View -->
+            <div id="uploadDocumentView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">Upload Franchise Document</h2>
-                    <button onclick="hideFranchiseUploadDocView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                    <h2 class="text-lg font-bold text-white">Upload Branch Document</h2>
+                    <button onclick="hideUploadDocumentView()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
                 </div>
 
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Document Uploaded Successfully!');">
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Document Uploaded Successfully!');">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Select Franchise</label>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch (State & Region)</label>
                             <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
-                                <option>----Select Franchise----</option>
-                                <option>Quickserves North Hub ASC</option>
-                                <option>Padma Shakti Service Center</option>
+                                <option>----Select----</option>
+                                <option>Uttar Pradesh - East Region</option>
+                                <option>Uttar Pradesh - West Region</option>
+                                <option>Uttar Pradesh - North Region</option>
+                                <option>Haryana - North Region</option>
+                                <option>Delhi NCR - North Region</option>
+                                <option>Karnataka - South Region</option>
+                                <option>Maharashtra - West Region</option>
+                                <option>Tamil Nadu - South Region</option>
+                                <option>West Bengal - East Region</option>
+                                <option>Bihar - East Region</option>
+                                <option>Rajasthan - North Region</option>
+                                <option>Punjab - North Region</option>
+                                <option>Madhya Pradesh - Central Region</option>
+                                <option>Gujarat - West Region</option>
+                                <option>Andhra Pradesh - South Region</option>
+                                <option>Telangana - South Region</option>
+                                <option>Kerala - South Region</option>
+                                <option>Odisha - East Region</option>
+                                <option>Jharkhand - East Region</option>
+                                <option>Assam - North-East Region</option>
+                                <option>Uttarakhand - North Region</option>
+                                <option>Himachal Pradesh - North Region</option>
+                                <option>Jammu and Kashmir - North Region</option>
+                                <option>Goa - West Region</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-400 mb-1">Document Type</label>
                             <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
                                 <option>---Select---</option>
-                                <option>ASC Agreement / MOU</option>
-                                <option>GST Certificate</option>
-                                <option>Owner PAN / Aadhaar</option>
-                                <option>Cancelled Cheque</option>
+                                <option>Address Proof Document</option>
+                                <option>Shop & Establishment Registration File Upload</option>
+                                <option>GST Number Proof Document</option>
+                                <option>Rent Agreement Document</option>
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Upload Document File</label>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Document Upload</label>
                             <input type="file" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
                         </div>
                     </div>
 
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
                         <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save</button>
-                        <button type="button" onclick="hideFranchiseUploadDocView()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
+                        <button type="button" onclick="hideUploadDocumentView()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
                     </div>
                 </form>
             </div>
 
-            <!-- Add Franchise Form View -->
-            <div id="franchiseAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+            <!-- Add New Branch Form with Auto-Pincode & Interactive Calendar Datepickers -->
+            <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                 <div class="flex justify-between items-center border-b border-[#334155] pb-4">
-                    <h2 class="text-lg font-bold text-white">ADD FRANCHISE / ASC</h2>
-                    <button onclick="hideFranchiseAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                    <h2 class="text-lg font-bold text-white">ADD BRANCH</h2>
+                    <button onclick="hideBranchAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
                 </div>
 
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Franchise Saved Successfully!');">
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Saved Successfully!');">
+                    <!-- General Details -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Franchise / ASC Name</label>
-                            <input type="text" placeholder="Enter Franchise Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Associated Branch</label>
-                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
-                                <option>----Select Branch----</option>
-                                <option>North Region</option>
-                                <option>East Region</option>
-                                <option>West Region</option>
-                                <option>South Region</option>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select----</option>
+                                <option>East</option>
+                                <option>West</option>
+                                <option>North</option>
+                                <option>South</option>
+                                <option>Central</option>
+                                <option>North-East</option>
                             </select>
                         </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch</label>
+                            <input type="text" placeholder="Enter Branch Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Full Address</label>
-                            <textarea rows="2" placeholder="Enter Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"></textarea>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Address</label>
+                            <textarea rows="2" placeholder="Enter Full Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">GST Number</label>
-                            <input type="text" placeholder="Enter GSTIN" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
+                            <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Contact Person</label>
-                            <input type="text" placeholder="Owner / Manager Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Pincode (Auto-Fill)</label>
+                            <input type="text" id="pincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 201001)" onblur="fetchPincodeDetails(this.value)" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            <span id="pincodeLoader" class="text-xs text-blue-400 hidden mt-1">Fetching location details...</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
+                            <input type="text" id="stateInput" placeholder="Auto-filled State" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
+                            <input type="text" id="districtInput" placeholder="Auto-filled District" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                            <input type="text" id="cityInput" placeholder="Auto-filled City" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
+                            <select id="localitySelect" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select Locality----</option>
+                            </select>
                         </div>
                     </div>
 
+                    <!-- GST Details Section -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Gst Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Shop & Establishment Registration</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">GST Number</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premises Details Section -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Premises Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Premises Ownership</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Rented</option>
+                                    <option>Owned</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Rent Agreement</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Agreement Period</label>
+                                <input type="text" placeholder="e.g. 11 Months" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Renewal Date</label>
+                                <input type="text" id="renewalDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Rent Date</label>
+                                <input type="text" id="rentDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Area in Sq. Ft</label>
+                                <input type="text" placeholder="Enter Area" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Warehouse</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connection & IT Infrastructure -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Connection & Infrastructure</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Broadband Connection</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Available</option>
+                                    <option>Not Available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Alternate Connection</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Mobile Hotspot / Dongle</option>
+                                    <option>Secondary Broadband</option>
+                                    <option>None</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">System Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Available</option>
+                                    <option>Not Available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Printer Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Available</option>
+                                    <option>Not Available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Landline Number</label>
+                                <input type="text" placeholder="Enter Landline No." class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Billing Due Date</label>
+                                <input type="text" id="billingDueDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Power Section -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Power Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Electricity Connection</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Single Phase</option>
+                                    <option>Three Phase</option>
+                                    <option>Not Available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Wattage</label>
+                                <input type="text" placeholder="Enter Wattage" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Capacity</label>
+                                <input type="text" placeholder="Enter Capacity" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Fire Safety Norms</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                                    <option>--Select--</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Refilling Date</label>
+                                <input type="text" id="refillingDate" placeholder="dd-mm-yyyy" class="calendar-input w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Management Contacts Section -->
+                    <div class="border-t border-[#334155] pt-4 space-y-4">
+                        <h3 class="text-sm font-semibold text-emerald-400">Branch Manager</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Name</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Cell Number</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Email Id</label><input type="email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-emerald-400 pt-2">Store Manager</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Name</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Contact Number</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Email ID</label><input type="email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-emerald-400 pt-2">Branch Coordinator</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Name</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Contact Number</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Email ID</label><input type="email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
                     <div class="flex space-x-3 pt-4 border-t border-[#334155]">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save Franchise</button>
-                        <button type="button" onclick="hideFranchiseAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Cancel</button>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save</button>
+                        <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
+                        <button type="button" onclick="hideBranchAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Abort</button>
                     </div>
                 </form>
             </div>
@@ -241,21 +602,21 @@
 
     </div>
 
-    <!-- Scripts -->
+    <!-- Flatpickr JS Library for Calendar Popups -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         function toggleMenu(menuId) {
-            document.getElementById(menuId).classList.toggle('hidden');
+            const menu = document.getElementById(menuId);
+            menu.classList.toggle('hidden');
         }
 
         function showSection(sectionId) {
             document.getElementById('dashboardSection').classList.add('hidden');
             document.getElementById('branchMasterSection').classList.add('hidden');
-            document.getElementById('franchiseMasterSection').classList.add('hidden');
             document.getElementById(sectionId).classList.remove('hidden');
         }
 
-        // Branch Master Nav Control
+        // Dedicated function for Sidebar Branch Master Click (Resets everything back to Main List view)
         function showBranchMasterMain() {
             showSection('branchMasterSection');
             document.getElementById('branchListView').classList.remove('hidden');
@@ -263,34 +624,74 @@
             document.getElementById('uploadDocumentView').classList.add('hidden');
         }
 
-        // Franchise Master Nav Control (Ensures sidebar click resets back to listing view cleanly)
-        function showFranchiseMasterMain() {
-            showSection('franchiseMasterSection');
-            document.getElementById('franchiseListView').classList.remove('hidden');
-            document.getElementById('franchiseAddFormView').classList.add('hidden');
-            document.getElementById('franchiseUploadDocView').classList.add('hidden');
+        function showBranchAddForm() {
+            document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('uploadDocumentView').classList.add('hidden');
+            document.getElementById('branchAddFormView').classList.remove('hidden');
         }
 
-        function showFranchiseAddForm() {
-            document.getElementById('franchiseListView').classList.add('hidden');
-            document.getElementById('franchiseUploadDocView').classList.add('hidden');
-            document.getElementById('franchiseAddFormView').classList.remove('hidden');
+        function hideBranchAddForm() {
+            document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('branchListView').classList.remove('hidden');
         }
 
-        function hideFranchiseAddForm() {
-            document.getElementById('franchiseAddFormView').classList.add('hidden');
-            document.getElementById('franchiseListView').classList.remove('hidden');
+        function showUploadDocumentView() {
+            document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('uploadDocumentView').classList.remove('hidden');
         }
 
-        function showFranchiseUploadDocView() {
-            document.getElementById('franchiseListView').classList.add('hidden');
-            document.getElementById('franchiseAddFormView').classList.add('hidden');
-            document.getElementById('franchiseUploadDocView').classList.remove('hidden');
+        function hideUploadDocumentView() {
+            document.getElementById('uploadDocumentView').classList.add('hidden');
+            document.getElementById('branchListView').classList.remove('hidden');
         }
 
-        function hideFranchiseUploadDocView() {
-            document.getElementById('franchiseUploadDocView').classList.add('hidden');
-            document.getElementById('franchiseListView').classList.remove('hidden');
+        // Initialize Flatpickr Interactive Calendar on all date inputs
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr(".calendar-input", {
+                dateFormat: "d-m-Y",
+                allowInput: true,
+                altInput: true,
+                altFormat: "d-m-Y"
+            });
+        });
+
+        // India Post Pincode API Integration Script
+        async function fetchPincodeDetails(pincode) {
+            if (pincode.length !== 6 || isNaN(pincode)) return;
+
+            const loader = document.getElementById('pincodeLoader');
+            loader.classList.remove('hidden');
+
+            try {
+                let response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                let data = await response.json();
+
+                loader.classList.add('hidden');
+
+                if (data[0].Status === "Success") {
+                    let postOfficeDetails = data[0].PostOffice;
+                    
+                    document.getElementById('stateInput').value = postOfficeDetails[0].State || '';
+                    document.getElementById('districtInput').value = postOfficeDetails[0].District || '';
+                    document.getElementById('cityInput').value = postOfficeDetails[0].Division || postOfficeDetails[0].District || '';
+
+                    let localitySelect = document.getElementById('localitySelect');
+                    localitySelect.innerHTML = '<option>----Select Locality----</option>';
+                    
+                    postOfficeDetails.forEach(po => {
+                        let opt = document.createElement('option');
+                        opt.value = po.Name;
+                        opt.textContent = po.Name + ' (' + po.BranchType + ')';
+                        localitySelect.appendChild(opt);
+                    });
+                } else {
+                    alert('Invalid Pincode or data not found!');
+                }
+            } catch (error) {
+                loader.classList.add('hidden');
+                console.error('Error fetching pincode data:', error);
+            }
         }
     </script>
 </body>
