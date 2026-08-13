@@ -9,7 +9,7 @@
 <body class="bg-[#0f172a] text-[#f8fafc] font-sans min-h-screen flex">
 
     <!-- Complete Quickserves CRM Sidebar with All Masters -->
-    <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto">
+    <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto z-20">
         <!-- Logo Header -->
         <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-center">
             <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
@@ -17,7 +17,7 @@
 
         <nav class="py-2">
             <!-- 1. Admin Dashboard -->
-            <a href="#" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50 bg-slate-800/50">
+            <a href="#" onclick="showSection('dashboardSection')" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50 bg-slate-800/50">
                 <span>Admin Dashboard</span>
             </a>
 
@@ -28,7 +28,7 @@
                     <span class="text-xs">▼</span>
                 </button>
                 <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
+                    <a href="#" onclick="showSection('branchMasterSection')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
                     <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
@@ -138,7 +138,7 @@
         </nav>
     </div>
 
-    <!-- Main Content Area with Updated Dashboard -->
+    <!-- Main Content Area -->
     <div class="ml-64 flex-1 p-8 space-y-6">
         
         <!-- Top Bar Header -->
@@ -156,99 +156,379 @@
             </div>
         </div>
 
-        <!-- Section 1: Core Service Call Metrics (Updated with Part Pending, Cancel & Completed) -->
-        <div>
-            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
-                    <p class="text-slate-400 text-xs font-medium">OPEN</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">3</h3>
-                    <span class="text-xs text-blue-400 mt-2 inline-block">Requires assignment</span>
+        <!-- ================= SECTION 1: DASHBOARD (Default View) ================= -->
+        <div id="dashboardSection" class="space-y-6">
+            <!-- Service & Call Operations -->
+            <div>
+                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
+                        <p class="text-slate-400 text-xs font-medium">OPEN</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">3</h3>
+                        <span class="text-xs text-blue-400 mt-2 inline-block">Requires assignment</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
+                        <p class="text-slate-400 text-xs font-medium">APPOINTMENT</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">0</h3>
+                        <span class="text-xs text-amber-400 mt-2 inline-block">Scheduled for today</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
+                        <p class="text-slate-400 text-xs font-medium">ALLOTED</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">171</h3>
+                        <span class="text-xs text-emerald-400 mt-2 inline-block">In progress</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
+                        <p class="text-slate-400 text-xs font-medium">PART PENDING CALLS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">14</h3>
+                        <span class="text-xs text-purple-400 mt-2 inline-block">Awaiting spare parts</span>
+                    </div>
                 </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
-                    <p class="text-slate-400 text-xs font-medium">APPOINTMENT</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">0</h3>
-                    <span class="text-xs text-amber-400 mt-2 inline-block">Scheduled for today</span>
-                </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
-                    <p class="text-slate-400 text-xs font-medium">ALLOTED</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">171</h3>
-                    <span class="text-xs text-emerald-400 mt-2 inline-block">In progress</span>
-                </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
-                    <p class="text-slate-400 text-xs font-medium">PART PENDING CALLS</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">14</h3>
-                    <span class="text-xs text-purple-400 mt-2 inline-block">Awaiting spare parts</span>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-600">
+                        <p class="text-slate-400 text-xs font-medium">COMPLETED CALLS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">1,280</h3>
+                        <span class="text-xs text-emerald-400 mt-2 inline-block">Successfully closed</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-500">
+                        <p class="text-slate-400 text-xs font-medium">CANCEL CALLS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">22</h3>
+                        <span class="text-xs text-rose-400 mt-2 inline-block">Dropped / Cancelled</span>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-700">
+                        <p class="text-slate-400 text-xs font-medium">PENDING &gt;= 15 DAYS</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">151</h3>
+                        <span class="text-xs text-rose-400 mt-2 inline-block">Critical backlog</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Second Row of Call Metrics -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-600">
-                    <p class="text-slate-400 text-xs font-medium">COMPLETED CALLS</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">1,280</h3>
-                    <span class="text-xs text-emerald-400 mt-2 inline-block">Successfully closed</span>
+            <!-- Network & Resource Management -->
+            <div>
+                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">ACTIVE BRANCHES</p>
+                        <h3 class="text-xl font-bold text-white mt-1">12</h3>
+                        <p class="text-xs text-slate-500 mt-1">Regional hubs active</p>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">FRANCHISES / ASCs</p>
+                        <h3 class="text-xl font-bold text-white mt-1">48</h3>
+                        <p class="text-xs text-slate-500 mt-1">Expansion partners</p>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">REGISTERED TECHNICIANS</p>
+                        <h3 class="text-xl font-bold text-white mt-1">320</h3>
+                        <p class="text-xs text-slate-500 mt-1">Field force available</p>
+                    </div>
+                    <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                        <p class="text-slate-400 text-xs font-medium">SPARES INVENTORY VALUATION</p>
+                        <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
+                        <p class="text-xs text-slate-500 mt-1">Stock status tracked</p>
+                    </div>
                 </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-500">
-                    <p class="text-slate-400 text-xs font-medium">CANCEL CALLS</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">22</h3>
-                    <span class="text-xs text-rose-400 mt-2 inline-block">Dropped / Cancelled</span>
-                </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-700">
-                    <p class="text-slate-400 text-xs font-medium">PENDING &gt;= 15 DAYS</p>
-                    <h3 class="text-2xl font-bold text-white mt-1">151</h3>
-                    <span class="text-xs text-rose-400 mt-2 inline-block">Critical backlog</span>
+            </div>
+
+            <!-- Quick Action Shortcuts -->
+            <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
+                <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Quick Administrative Actions</h2>
+                <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-emerald-400 transition">+ Register Call</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-blue-400 transition">+ Add Technician</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-amber-400 transition">Bulk Excel Upload</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-purple-400 transition">Download Master Data</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-cyan-400 transition">Generate Reports</button>
+                    <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-rose-400 transition">Call Audit Logs</button>
                 </div>
             </div>
         </div>
 
-        <!-- Section 2: Network & Resource Management -->
-        <div>
-            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
-                    <p class="text-slate-400 text-xs font-medium">ACTIVE BRANCHES</p>
-                    <h3 class="text-xl font-bold text-white mt-1">12</h3>
-                    <p class="text-xs text-slate-500 mt-1">Regional hubs active</p>
+        <!-- ================= SECTION 2: BRANCH MASTER LIST & ADD FORM ================= -->
+        <div id="branchMasterSection" class="hidden space-y-6">
+            <!-- Branch Listing View -->
+            <div id="branchListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Branch Master</h2>
+                    <div class="space-x-2">
+                        <button onclick="showBranchAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                        <button class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
+                    </div>
                 </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
-                    <p class="text-slate-400 text-xs font-medium">FRANCHISES / ASCs</p>
-                    <h3 class="text-xl font-bold text-white mt-1">48</h3>
-                    <p class="text-xs text-slate-500 mt-1">Expansion partners</p>
-                </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
-                    <p class="text-slate-400 text-xs font-medium">REGISTERED TECHNICIANS</p>
-                    <h3 class="text-xl font-bold text-white mt-1">320</h3>
-                    <p class="text-xs text-slate-500 mt-1">Field force available</p>
-                </div>
-                <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
-                    <p class="text-slate-400 text-xs font-medium">SPARES INVENTORY VALUATION</p>
-                    <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
-                    <p class="text-xs text-slate-500 mt-1">Stock status tracked</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr>
+                                <th class="p-3">Select</th>
+                                <th class="p-3">Edit</th>
+                                <th class="p-3">Region</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#334155]">
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">East</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">West</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">North</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                <td class="p-3"><a href="#" onclick="showBranchAddForm()" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                <td class="p-3 font-medium text-white">South</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
 
-        <!-- Section 3: Quick Action Shortcuts -->
-        <div class="bg-[#1e293b] border border-[#334155] p-5 rounded-xl">
-            <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Quick Administrative Actions</h2>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
-                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-emerald-400 transition">+ Register Call</button>
-                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-blue-400 transition">+ Add Technician</button>
-                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-amber-400 transition">Bulk Excel Upload</button>
-                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-purple-400 transition">Download Master Data</button>
-                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-cyan-400 transition">Generate Reports</button>
-                <button class="bg-[#172033] hover:bg-slate-800 border border-[#334155] p-3 rounded-lg text-center text-xs font-medium text-rose-400 transition">Call Audit Logs</button>
+            <!-- Add New Branch Comprehensive Form (Hidden by default, shown on ADD click) -->
+            <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">ADD BRANCH</h2>
+                    <button onclick="hideBranchAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back to List</button>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Branch Saved Successfully!');">
+                    <!-- General Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Region</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select----</option>
+                                <option>East</option>
+                                <option>West</option>
+                                <option>North</option>
+                                <option>South</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Branch</label>
+                            <input type="text" placeholder="Enter Branch Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Address</label>
+                            <textarea rows="2" placeholder="Enter Full Address" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Landmark</label>
+                            <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Pincode</label>
+                            <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">State</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select----</option>
+                                <option>Uttar Pradesh</option>
+                                <option>Delhi</option>
+                                <option>Maharashtra</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">District</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select----</option>
+                                <option>Ghaziabad</option>
+                                <option>Noida</option>
+                                <option>Meerut</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">City</label>
+                            <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                                <option>----Select----</option>
+                                <option>Ghaziabad</option>
+                                <option>Noida</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Locality</label>
+                            <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <!-- GST Details Section -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Gst Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Shop & Establishment Registration</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">GST Number</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premises Details Section -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Premises Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Premises Ownership</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Rented</option><option>Owned</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Rent Agreement</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Yes</option><option>No</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Agreement Period</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Renewal Date</label>
+                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Rent Date</label>
+                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Area in Sq. Ft</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Warehouse</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Yes</option><option>No</option></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connection & IT Infrastructure -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Connection & Infrastructure</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Broadband Connection</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option><option>Available</option><option>Not Available</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Alternate Connection</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">System Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Printer Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Landline Number</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Billing Due Date</label>
+                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Power Section -->
+                    <div class="border-t border-[#334155] pt-4">
+                        <h3 class="text-sm font-semibold text-emerald-400 mb-3">Power Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Electricity Connection</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Wattage</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Availability</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Inverter Capacity</label>
+                                <input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Fire Safety Norms</label>
+                                <select class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none"><option>--Select--</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Refilling Date</label>
+                                <input type="date" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Management Contacts Section -->
+                    <div class="border-t border-[#334155] pt-4 space-y-4">
+                        <h3 class="text-sm font-semibold text-emerald-400">Branch Manager</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Name</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Cell Number</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-400 mb-1">Branch Manager Email Id</label><input type="email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-emerald-400 pt-2">Store Manager</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Name</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Contact Number</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-400 mb-1">Store Manager Email ID</label><input type="email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-emerald-400 pt-2">Branch Coordinator</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Name</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div><label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Contact Number</label><input type="text" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                            <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-400 mb-1">Branch Coordinator Email ID</label><input type="email" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white"></div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex space-x-3 pt-4 border-t border-[#334155]">
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Save</button>
+                        <button type="reset" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Reset</button>
+                        <button type="button" onclick="hideBranchAddForm()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs px-6 py-2.5 rounded font-medium transition">Abort</button>
+                    </div>
+                </form>
             </div>
         </div>
 
     </div>
 
-    <!-- Toggle Script -->
+    <!-- Scripts for Toggle & Switching Views -->
     <script>
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
             menu.classList.toggle('hidden');
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('branchMasterSection').classList.add('hidden');
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function showBranchAddForm() {
+            document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('branchAddFormView').classList.remove('hidden');
+        }
+
+        function hideBranchAddForm() {
+            document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('branchListView').classList.remove('hidden');
         }
     </script>
 </body>
