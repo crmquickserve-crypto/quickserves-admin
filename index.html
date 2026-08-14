@@ -98,7 +98,7 @@
                     <span class="text-xs">▼</span>
                 </button>
                 <div id="masterDataMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                    <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
+                    <a href="#" onclick="showMasterDataDownload()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
                 </div>
             </div>
 
@@ -237,6 +237,47 @@
                         <p class="text-slate-400 text-xs font-medium">SPARES INVENTORY VALUATION</p>
                         <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
                         <p class="text-xs text-slate-500 mt-1">Stock status tracked</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SECTION: MASTER DATA DOWNLOAD ================= -->
+        <div id="masterDataDownloadSection" class="hidden space-y-6">
+            <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6 max-w-xl">
+                <div class="border-b border-[#334155] pb-4">
+                    <h2 class="text-lg font-bold text-white">Master Data Download</h2>
+                    <p class="text-xs text-slate-400 mt-1">Select a master option below to download data in Excel format.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">Master Name</label>
+                        <select id="masterDownloadSelect" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <option value="">--Select Master--</option>
+                            <option value="Branch Master">Branch Master</option>
+                            <option value="Franchise Master">Franchise Master</option>
+                            <option value="Freelancer Master">Freelancer Master</option>
+                            <option value="Technician Master">Technician Master</option>
+                            <option value="Client Master">Client Master</option>
+                            <option value="City Master">City Master</option>
+                            <option value="Category Master">Category Master</option>
+                            <option value="Product Master">Product Master</option>
+                            <option value="Model Master">Model Master</option>
+                            <option value="Spare Master">Spare Master</option>
+                            <option value="Vendor Master">Vendor Master</option>
+                            <option value="Symptom Cause Analysis Master">Symptom Cause Analysis Master</option>
+                            <option value="Pincode Master">Pincode Master</option>
+                            <option value="CRM User Master">CRM User Master</option>
+                            <option value="Client/Brand Master">Client/Brand Master</option>
+                            <option value="ASF Brand Mapping">ASF Brand Mapping</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="downloadMasterData()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-5 py-2.5 rounded font-medium transition flex items-center space-x-2">
+                            <span>📥 Download Excel</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1152,11 +1193,25 @@
 
         function showSection(sectionId) {
             document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('masterDataDownloadSection').classList.add('hidden');
             document.getElementById('branchMasterSection').classList.add('hidden');
             document.getElementById('franchiseMasterSection').classList.add('hidden');
             document.getElementById('technicianMasterSection').classList.add('hidden');
             document.getElementById('clientMasterSection').classList.add('hidden');
             document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function showMasterDataDownload() {
+            showSection('masterDataDownloadSection');
+        }
+
+        function downloadMasterData() {
+            const selectedMaster = document.getElementById('masterDownloadSelect').value;
+            if(!selectedMaster) {
+                alert('Please select a Master Name to download.');
+                return;
+            }
+            alert('Downloading Excel data for: ' + selectedMaster);
         }
 
         // Branch Master Navigation
