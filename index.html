@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin Full Dashboard & CRM - Quickserves</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flatpickr CSS for Advanced Interactive Calendar Pop-up -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
 <body class="bg-[#0f172a] font-sans text-[#f8fafc] min-h-screen flex">
 
+    <!-- ================= LOGIN OVERLAY WINDOW ================= -->
     <div id="loginOverlay" class="fixed inset-0 z-50 bg-[#0f172a] flex items-center justify-center p-4">
         <div class="bg-[#1e293b] border border-[#334155] rounded-2xl p-8 w-full max-w-md shadow-2xl space-y-6">
             <div class="text-center space-y-2">
@@ -23,10 +25,18 @@
                     <label class="block text-xs font-medium text-slate-400 mb-1">Username</label>
                     <input type="text" id="loginUser" required placeholder="Enter username (admin)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
+                
+                <!-- Password Field with Show/Hide Toggle -->
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Password</label>
-                    <input type="password" id="loginPass" required placeholder="Enter password (qsadmin@123)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                    <div class="relative">
+                        <input type="password" id="loginPass" required placeholder="Enter password (qsadmin@123)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-slate-400 hover:text-white focus:outline-none">
+                            <span id="eyeIcon">👁️</span>
+                        </button>
+                    </div>
                 </div>
+
                 <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password! Please use admin / qsadmin@123</div>
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm py-3 rounded-lg transition shadow-lg shadow-emerald-600/20">
                     Secure Login
@@ -38,19 +48,24 @@
         </div>
     </div>
 
+    <!-- ================= MAIN APP CONTAINER (Hidden until login) ================= -->
     <div id="appContainer" class="hidden flex w-full min-h-screen">
         
+        <!-- Complete Quickserves CRM Sidebar with Reorganized & Grouped Masters -->
         <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto z-20">
+            <!-- Logo Header -->
             <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-between">
                 <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
                 <button onclick="handleLogout()" title="Logout" class="text-xs text-rose-400 hover:text-rose-300 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">Logout</button>
             </div>
 
             <nav class="py-2">
+                <!-- 1. Admin Dashboard -->
                 <a href="#" onclick="showSection('dashboardSection')" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50 bg-slate-800/50">
                     <span>Admin Dashboard</span>
                 </a>
 
+                <!-- 2. Master Dropdown -->
                 <div class="border-b border-[#334155]/50">
                     <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Master</span>
@@ -76,45 +91,7 @@
                     </div>
                 </div>
 
-                <div class="border-b border-[#334155]/50">
-                    <button onclick="toggleMenu('mappingMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                        <span>Mapping</span>
-                        <span class="text-xs">▼</span>
-                    </button>
-                    <div id="mappingMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
-                    </div>
-                </div>
-
-                <div class="border-b border-[#334155]/50">
-                    <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                        <span>Call Management</span>
-                        <span class="text-xs">▼</span>
-                    </button>
-                    <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reminder</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Appointment</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reschedule</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Transfer</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reopen</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Cancel</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call FeedBack</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Update</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Allotment</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Jobsheet Print</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel PO</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update Serial No.</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Audit</a>
-                    </div>
-                </div>
-
+                <!-- 3. Master Data Download Dropdown -->
                 <div class="border-b border-[#334155]/50">
                     <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Master Data</span>
@@ -124,22 +101,169 @@
                         <a href="#" onclick="showMasterDataDownload()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
                     </div>
                 </div>
+            </nav>
+        </div>
 
-                <div class="border-b border-[#334155]/50">
-                    <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                        <span>Uploader</span>
-                        <span class="text-xs">▼</span>
-                    </button>
-                    <div id="uploaderMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Live Call Upload</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
+        <!-- Main Content Area -->
+        <div class="ml-64 flex-1 p-8 space-y-6">
+            
+            <!-- Top Bar Header -->
+            <div class="flex justify-between items-center bg-[#1e293b] p-4 rounded-xl border border-[#334155]">
+                <div>
+                    <h1 class="text-xl font-bold text-white">Super Admin Control Center</h1>
+                    <p class="text-xs text-slate-400">Overview of Service Operations, Workforce & Financials</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/20 font-medium">System Online</span>
+                    <div class="text-right">
+                        <p class="text-sm font-semibold text-white">Admin Panel</p>
+                        <p class="text-xs text-slate-400">Quickserves OS</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="border-b border-[#334155]/50">
-                    <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
-                        <span>Reports</span>
-                        <span class="text-xs">▼</span>
-                    </button>
-                    <div id="reportsMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate
+            <!-- ================= SECTION 1: DASHBOARD ================= -->
+            <div id="dashboardSection" class="space-y-6">
+                <div>
+                    <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
+                            <p class="text-slate-400 text-xs font-medium">OPEN</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">3</h3>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
+                            <p class="text-slate-400 text-xs font-medium">APPOINTMENT</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">0</h3>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
+                            <p class="text-slate-400 text-xs font-medium">ALLOTED</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">171</h3>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
+                            <p class="text-slate-400 text-xs font-medium">PART PENDING CALLS</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">14</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SECTION: MASTER DATA DOWNLOAD ================= -->
+            <div id="masterDataDownloadSection" class="hidden space-y-6">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6 max-w-xl">
+                    <div class="border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Master Data Download</h2>
+                        <p class="text-xs text-slate-400 mt-1">Select a master option below to download data in Excel format.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-2">Master Name</label>
+                            <select id="masterDownloadSelect" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                                <option value="">--Select Master--</option>
+                                <option value="Branch Master">Branch Master</option>
+                                <option value="Franchise Master">Franchise Master</option>
+                                <option value="Technician Master">Technician Master</option>
+                                <option value="Client Master">Client Master</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button onclick="downloadMasterData()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-5 py-2.5 rounded font-medium transition flex items-center space-x-2">
+                                <span>📥 Download Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Handling Authentication, Show Password & Navigation -->
+    <script>
+        // Check Session Authentication on Page Load
+        document.addEventListener("DOMContentLoaded", function() {
+            const isLoggedIn = sessionStorage.getItem("quickserves_admin_logged_in");
+            if (isLoggedIn === "true") {
+                document.getElementById("loginOverlay").classList.add("hidden");
+                document.getElementById("appContainer").classList.remove("hidden");
+            } else {
+                document.getElementById("loginOverlay").classList.remove("hidden");
+                document.getElementById("appContainer").classList.add("hidden");
+            }
+        });
+
+        // Show/Hide Password Toggle Function
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById("loginPass");
+            const eyeIcon = document.getElementById("eyeIcon");
+            if (passInput.type === "password") {
+                passInput.type = "text";
+                eyeIcon.textContent = "🙈";
+            } else {
+                passInput.type = "password";
+                eyeIcon.textContent = "👁️";
+            }
+        }
+
+        // Handle Admin Login Form Submission
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById("loginUser").value.trim();
+            const pass = document.getElementById("loginPass").value.trim();
+            const errorDiv = document.getElementById("loginError");
+
+            if (user === "admin" && pass === "qsadmin@123") {
+                sessionStorage.setItem("quickserves_admin_logged_in", "true");
+                errorDiv.classList.add("hidden");
+                document.getElementById("loginOverlay").classList.add("hidden");
+                document.getElementById("appContainer").classList.remove("hidden");
+            } else {
+                errorDiv.classList.remove("hidden");
+            }
+        }
+
+        // Handle Admin Logout
+        function handleLogout() {
+            sessionStorage.removeItem("quickserves_admin_logged_in");
+            location.reload();
+        }
+
+        // Toggle Sidebar Dropdowns
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        }
+
+        // Section Switcher Logic
+        function hideAllSections() {
+            const sections = ['dashboardSection', 'masterDataDownloadSection'];
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.add('hidden');
+            });
+        }
+
+        function showSection(sectionId) {
+            hideAllSections();
+            const target = document.getElementById(sectionId);
+            if(target) target.classList.remove('hidden');
+        }
+
+        function showMasterDataDownload() {
+            showSection('masterDataDownloadSection');
+        }
+
+        function downloadMasterData() {
+            const select = document.getElementById('masterDownloadSelect');
+            const val = select.value;
+            if(!val) {
+                alert('Please select a master option to download!');
+                return;
+            }
+            alert('Downloading Excel report for: ' + val);
+        }
+    </script>
+</body>
+</html>
