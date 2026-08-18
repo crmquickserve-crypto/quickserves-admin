@@ -23,21 +23,21 @@
             <form id="loginForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Username</label>
-                    <input type="text" id="loginUser" required placeholder="Enter username (admin)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                    <input type="text" id="loginUser" required placeholder="Enter username" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
                 
                 <!-- Password Field with Show/Hide Toggle -->
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Password</label>
                     <div class="relative">
-                        <input type="password" id="loginPass" required placeholder="Enter password (qsadmin@123)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        <input type="password" id="loginPass" required placeholder="Enter password" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-500">
                         <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-slate-400 hover:text-white focus:outline-none">
                             <span id="eyeIcon">👁️</span>
                         </button>
                     </div>
                 </div>
 
-                <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password! Please use admin / qsadmin@123</div>
+                <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password!</div>
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm py-3 rounded-lg transition shadow-lg shadow-emerald-600/20">
                     Secure Login
                 </button>
