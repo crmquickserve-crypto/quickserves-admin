@@ -23,21 +23,21 @@
             <form id="loginForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Username</label>
-                    <input type="text" id="loginUser" required placeholder="Enter username" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                    <input type="text" id="loginUser" required placeholder="Enter username (admin)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
                 
                 <!-- Password Field with Show/Hide Toggle -->
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Password</label>
                     <div class="relative">
-                        <input type="password" id="loginPass" required placeholder="Enter password" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        <input type="password" id="loginPass" required placeholder="Enter password (qsadmin@123)" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-500">
                         <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-slate-400 hover:text-white focus:outline-none">
                             <span id="eyeIcon">👁️</span>
                         </button>
                     </div>
                 </div>
 
-                <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password! Please try again.</div>
+                <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password! Please use admin / qsadmin@123</div>
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm py-3 rounded-lg transition shadow-lg shadow-emerald-600/20">
                     Secure Login
                 </button>
@@ -51,7 +51,7 @@
     <!-- ================= MAIN APP CONTAINER (Hidden until login) ================= -->
     <div id="appContainer" class="hidden flex w-full min-h-screen">
         
-        <!-- Complete Quickserves CRM Sidebar with Reorganized & Grouped Masters -->
+        <!-- Complete Quickserves CRM Sidebar with All Restored Masters & Menus -->
         <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto z-20">
             <!-- Logo Header -->
             <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-between">
@@ -65,7 +65,7 @@
                     <span>Admin Dashboard</span>
                 </a>
 
-                <!-- 2. Master Dropdown (All Core Masters Grouped Together) -->
+                <!-- 2. Master Dropdown (All Core & Previous Masters Restored) -->
                 <div class="border-b border-[#334155]/50">
                     <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Master</span>
@@ -112,9 +112,23 @@
                         <span class="text-xs">▼</span>
                     </button>
                     <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
-                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
+                        <a href="#" onclick="showGenericMaster('Call Registration')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
+                        <a href="#" onclick="showGenericMaster('Call View')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
+                        <a href="#" onclick="showGenericMaster('Call Edit')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
+                        <a href="#" onclick="showGenericMaster('Call Reminder')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reminder</a>
+                        <a href="#" onclick="showGenericMaster('Call Appointment')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Appointment</a>
+                        <a href="#" onclick="showGenericMaster('Call Reschedule')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reschedule</a>
+                        <a href="#" onclick="showGenericMaster('Call Transfer')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Transfer</a>
+                        <a href="#" onclick="showGenericMaster('Call Reopen')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Reopen</a>
+                        <a href="#" onclick="showGenericMaster('Call Cancel')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Cancel</a>
+                        <a href="#" onclick="showGenericMaster('Call FeedBack')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call FeedBack</a>
+                        <a href="#" onclick="showGenericMaster('Call Update')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Update</a>
+                        <a href="#" onclick="showGenericMaster('Call Allotment')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Allotment</a>
+                        <a href="#" onclick="showGenericMaster('Jobsheet Print')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Jobsheet Print</a>
+                        <a href="#" onclick="showGenericMaster('Direct Cancel')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel</a>
+                        <a href="#" onclick="showGenericMaster('Direct Cancel PO')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Direct Cancel PO</a>
+                        <a href="#" onclick="showGenericMaster('Update Serial No.')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update Serial No.</a>
+                        <a href="#" onclick="showGenericMaster('Call Audit')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Audit</a>
                     </div>
                 </div>
 
@@ -126,6 +140,53 @@
                     </button>
                     <div id="masterDataMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
                         <a href="#" onclick="showMasterDataDownload()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
+                    </div>
+                </div>
+
+                <!-- 6. Uploader Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                        <span>Uploader</span>
+                        <span class="text-xs">▼</span>
+                    </button>
+                    <div id="uploaderMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showGenericMaster('Live Call Upload')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Live Call Upload</a>
+                        <a href="#" onclick="showGenericMaster('Bulk Excel Upload')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Bulk Excel Upload</a>
+                    </div>
+                </div>
+
+                <!-- 7. Reports Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                        <span>Reports</span>
+                        <span class="text-xs">▼</span>
+                    </button>
+                    <div id="reportsMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showGenericMaster('Report Main')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Report Main</a>
+                    </div>
+                </div>
+
+                <!-- 8. Users Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('usersMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                        <span>Users</span>
+                        <span class="text-xs">▼</span>
+                    </button>
+                    <div id="usersMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showGenericMaster('Create User')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Create User</a>
+                        <a href="#" onclick="showGenericMaster('Update User')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Update User</a>
+                    </div>
+                </div>
+
+                <!-- 9. Utilities & Settings Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('utilitiesMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
+                        <span>Utilities & Settings</span>
+                        <span class="text-xs">▼</span>
+                    </button>
+                    <div id="utilitiesMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showGenericMaster('Admin Utility')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Admin Utility</a>
+                        <a href="#" onclick="showGenericMaster('Change Password')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Change Password</a>
                     </div>
                 </div>
             </nav>
@@ -157,18 +218,66 @@
                         <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
                             <p class="text-slate-400 text-xs font-medium">OPEN</p>
                             <h3 class="text-2xl font-bold text-white mt-1">3</h3>
+                            <span class="text-xs text-blue-400 mt-2 inline-block">Requires assignment</span>
                         </div>
                         <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
                             <p class="text-slate-400 text-xs font-medium">APPOINTMENT</p>
                             <h3 class="text-2xl font-bold text-white mt-1">0</h3>
+                            <span class="text-xs text-amber-400 mt-2 inline-block">Scheduled for today</span>
                         </div>
                         <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
                             <p class="text-slate-400 text-xs font-medium">ALLOTED</p>
                             <h3 class="text-2xl font-bold text-white mt-1">171</h3>
+                            <span class="text-xs text-emerald-400 mt-2 inline-block">In progress</span>
                         </div>
                         <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
-                            <p class="text-slate-400 text-xs font-medium">PART PENDING</p>
+                            <p class="text-slate-400 text-xs font-medium">PART PENDING CALLS</p>
                             <h3 class="text-2xl font-bold text-white mt-1">14</h3>
+                            <span class="text-xs text-purple-400 mt-2 inline-block">Awaiting spare parts</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-600">
+                            <p class="text-slate-400 text-xs font-medium">COMPLETED CALLS</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">1,280</h3>
+                            <span class="text-xs text-emerald-400 mt-2 inline-block">Successfully closed</span>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-500">
+                            <p class="text-slate-400 text-xs font-medium">CANCEL CALLS</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">22</h3>
+                            <span class="text-xs text-rose-400 mt-2 inline-block">Dropped / Cancelled</span>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-rose-700">
+                            <p class="text-slate-400 text-xs font-medium">PENDING &gt;= 15 DAYS</p>
+                            <h3 class="text-2xl font-bold text-white mt-1">151</h3>
+                            <span class="text-xs text-rose-400 mt-2 inline-block">Critical backlog</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                            <p class="text-slate-400 text-xs font-medium">ACTIVE BRANCHES</p>
+                            <h3 class="text-xl font-bold text-white mt-1">12</h3>
+                            <p class="text-xs text-slate-500 mt-1">Regional hubs active</p>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                            <p class="text-slate-400 text-xs font-medium">FRANCHISES / ASCs</p>
+                            <h3 class="text-xl font-bold text-white mt-1">48</h3>
+                            <p class="text-xs text-slate-500 mt-1">Expansion partners</p>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                            <p class="text-slate-400 text-xs font-medium">REGISTERED TECHNICIANS</p>
+                            <h3 class="text-xl font-bold text-white mt-1">320</h3>
+                            <p class="text-xs text-slate-500 mt-1">Field force available</p>
+                        </div>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl">
+                            <p class="text-slate-400 text-xs font-medium">SPARES INVENTORY VALUATION</p>
+                            <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
+                            <p class="text-xs text-slate-500 mt-1">Stock status tracked</p>
                         </div>
                     </div>
                 </div>
@@ -198,6 +307,11 @@
                                 <option value="Model Master">Model Master</option>
                                 <option value="Spare Master">Spare Master</option>
                                 <option value="Vendor Master">Vendor Master</option>
+                                <option value="Symptom Cause Analysis Master">Symptom Cause Analysis Master</option>
+                                <option value="Pincode Master">Pincode Master</option>
+                                <option value="CRM User Master">CRM User Master</option>
+                                <option value="Client/Brand Master">Client/Brand Master</option>
+                                <option value="ASF Brand Mapping">ASF Brand Mapping</option>
                             </select>
                         </div>
 
@@ -247,7 +361,10 @@
                 <div id="branchListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
                     <div class="flex justify-between items-center border-b border-[#334155] pb-4">
                         <h2 class="text-lg font-bold text-white">Branch Master</h2>
-                        <button onclick="showBranchAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                        <div class="space-x-2">
+                            <button onclick="showBranchAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                            <button onclick="showUploadDocumentView()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
+                        </div>
                     </div>
                     <table class="w-full text-left text-sm text-slate-300">
                         <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
@@ -268,6 +385,7 @@
                         </tbody>
                     </table>
                 </div>
+
                 <!-- Add Branch Form -->
                 <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
                     <div class="flex justify-between items-center border-b border-[#334155] pb-4">
