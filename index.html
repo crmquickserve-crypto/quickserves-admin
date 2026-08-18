@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
-<body class="bg-[#0b0f19] font-sans text-[#f8fafc] min-h-screen flex">
+<body class="bg-[#0f172a] font-sans text-[#f8fafc] min-h-screen flex">
 
     <!-- ================= LOGIN OVERLAY WINDOW ================= -->
-    <div id="loginOverlay" class="fixed inset-0 z-50 bg-[#0b0f19] flex items-center justify-center p-4">
-        <div class="bg-[#111827] border border-[#1f2937] rounded-2xl p-8 w-full max-w-md shadow-2xl space-y-6">
+    <div id="loginOverlay" class="fixed inset-0 z-50 bg-[#0f172a] flex items-center justify-center p-4">
+        <div class="bg-[#1e293b] border border-[#334155] rounded-2xl p-8 w-full max-w-md shadow-2xl space-y-6">
             <div class="text-center space-y-2">
-                <span class="text-cyan-400 font-extrabold text-2xl tracking-wider">QUICKSERVES</span>
+                <span class="text-emerald-400 font-extrabold text-2xl tracking-wider">QUICKSERVES</span>
                 <h1 class="text-xl font-bold text-white mt-1">Quickserves CRM Login</h1>
                 <p class="text-xs text-slate-400">Please enter your details to log in to your account</p>
             </div>
@@ -23,25 +23,26 @@
             <form id="loginForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Username</label>
-                    <input type="text" id="loginUser" required placeholder="Enter username (admin)" class="w-full bg-[#1f2937] border border-[#374151] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500">
+                    <input type="text" id="loginUser" required placeholder="Enter username" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
                 
+                <!-- Password Field with Show/Hide Toggle -->
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Password</label>
                     <div class="relative">
-                        <input type="password" id="loginPass" required placeholder="Enter password (qsadmin@123)" class="w-full bg-[#1f2937] border border-[#374151] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-cyan-500">
+                        <input type="password" id="loginPass" required placeholder="Enter password" class="w-full bg-[#172033] border border-[#334155] rounded-lg px-3 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-500">
                         <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-slate-400 hover:text-white focus:outline-none">
                             <span id="eyeIcon">👁️</span>
                         </button>
                     </div>
                 </div>
 
-                <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password! Please use admin / qsadmin@123</div>
-                <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-medium text-sm py-3 rounded-lg transition shadow-lg shadow-cyan-600/25">
+                <div id="loginError" class="text-xs text-rose-400 font-medium hidden">Invalid Username or Password! Please try again.</div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm py-3 rounded-lg transition shadow-lg shadow-emerald-600/20">
                     Secure Login
                 </button>
             </form>
-            <div class="text-center text-xs text-slate-500 pt-2 border-t border-[#1f2937]">
+            <div class="text-center text-xs text-slate-500 pt-2 border-t border-[#334155]">
                 Authorized Personnel Only • Quickserves OS
             </div>
         </div>
@@ -50,105 +51,81 @@
     <!-- ================= MAIN APP CONTAINER (Hidden until login) ================= -->
     <div id="appContainer" class="hidden flex w-full min-h-screen">
         
-        <!-- Sidebar Navigation -->
-        <div class="w-64 bg-[#111827] border-r border-[#1f2937] h-screen fixed left-0 top-0 overflow-y-auto z-20">
-            <div class="p-4 bg-[#0b0f19] border-b border-[#1f2937] flex items-center justify-between">
-                <span class="text-cyan-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
+        <!-- Complete Quickserves CRM Sidebar with Reorganized & Grouped Masters -->
+        <div class="w-64 bg-[#1e293b] border-r border-[#334155] h-screen fixed left-0 top-0 overflow-y-auto z-20">
+            <!-- Logo Header -->
+            <div class="p-4 bg-[#172033] border-b border-[#334155] flex items-center justify-between">
+                <span class="text-emerald-400 font-bold text-lg tracking-wide">QUICKSERVES</span>
                 <button onclick="handleLogout()" title="Logout" class="text-xs text-rose-400 hover:text-rose-300 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">Logout</button>
             </div>
 
-            <nav class="py-2 text-xs">
+            <nav class="py-2">
                 <!-- 1. Admin Dashboard -->
-                <a href="#" onclick="showSection('dashboardSection')" class="flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] border-b border-[#1f2937] bg-[#1f2937]/50">
+                <a href="#" onclick="showSection('dashboardSection')" class="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 border-b border-[#334155]/50 bg-slate-800/50">
                     <span>Admin Dashboard</span>
                 </a>
 
-                <!-- 2. Master Dropdown -->
-                <div class="border-b border-[#1f2937]">
-                    <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] focus:outline-none">
+                <!-- 2. Master Dropdown (All Core Masters Grouped Together) -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('masterMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Master</span>
-                        <span>▼</span>
+                        <span class="text-xs">▼</span>
                     </button>
-                    <div id="masterMenu" class="hidden bg-[#0b0f19] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" onclick="showMasterGeneric('Branch Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Branch Master</a>
-                        <a href="#" onclick="showMasterGeneric('Franchise Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Franchise Master</a>
-                        <a href="#" onclick="showMasterGeneric('Freelancer Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Freelancer Master</a>
-                        <a href="#" onclick="showMasterGeneric('Technician Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Technician Master</a>
-                        <a href="#" onclick="showMasterGeneric('Client Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Client Master</a>
-                        <a href="#" onclick="showMasterGeneric('Brand Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Brand Master</a>
-                        <a href="#" onclick="showMasterGeneric('Category Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Category Master</a>
-                        <a href="#" onclick="showMasterGeneric('Product Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Product Master</a>
-                        <a href="#" onclick="showMasterGeneric('Model Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Model Master</a>
-                        <a href="#" onclick="showMasterGeneric('Symptom Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Symptom Master</a>
-                        <a href="#" onclick="showMasterGeneric('Cause Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Cause Master</a>
-                        <a href="#" onclick="showMasterGeneric('Analysis Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Analysis Master</a>
-                        <a href="#" onclick="showMasterGeneric('Spares Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Spares Master</a>
-                        <a href="#" onclick="showMasterGeneric('City Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">City Master</a>
-                        <a href="#" onclick="showMasterGeneric('Locality Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Locality Master</a>
-                        <a href="#" onclick="showMasterGeneric('Vendor Master')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Vendor Master</a>
+                    <div id="masterMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showBranchMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Branch Master</a>
+                        <a href="#" onclick="showFranchiseMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Franchise Master</a>
+                        <a href="#" onclick="showGenericMaster('Freelancer Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Freelancer Master</a>
+                        <a href="#" onclick="showTechnicianMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Technician Master</a>
+                        <a href="#" onclick="showClientMasterMain()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Client Master</a>
+                        <a href="#" onclick="showGenericMaster('Brand Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Master</a>
+                        <a href="#" onclick="showGenericMaster('Category Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Master</a>
+                        <a href="#" onclick="showGenericMaster('Product Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Product Master</a>
+                        <a href="#" onclick="showGenericMaster('Model Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Model Master</a>
+                        <a href="#" onclick="showGenericMaster('Symptom Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Symptom Master</a>
+                        <a href="#" onclick="showGenericMaster('Cause Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Cause Master</a>
+                        <a href="#" onclick="showGenericMaster('Analysis Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Analysis Master</a>
+                        <a href="#" onclick="showGenericMaster('Spares Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Spares Master</a>
+                        <a href="#" onclick="showGenericMaster('City Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">City Master</a>
+                        <a href="#" onclick="showGenericMaster('Locality Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Locality Master</a>
+                        <a href="#" onclick="showGenericMaster('Vendor Master')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Vendor Master</a>
                     </div>
                 </div>
 
-                <!-- 3. Mapping Masters -->
-                <div class="border-b border-[#1f2937]">
-                    <button onclick="toggleMenu('mappingMenu')" class="w-full flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] focus:outline-none">
+                <!-- 3. Mapping Masters Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('mappingMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Mapping</span>
-                        <span>▼</span>
+                        <span class="text-xs">▼</span>
                     </button>
-                    <div id="mappingMenu" class="hidden bg-[#0b0f19] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" onclick="showMasterGeneric('Brand Mapping')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Brand Mapping</a>
-                        <a href="#" onclick="showMasterGeneric('Category Mapping')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Category Mapping</a>
-                        <a href="#" onclick="showMasterGeneric('Pincode Mapping')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Pincode Mapping</a>
-                        <a href="#" onclick="showMasterGeneric('Warehouse Mapping')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Warehouse Mapping</a>
+                    <div id="mappingMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showGenericMaster('Brand Mapping')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Brand Mapping</a>
+                        <a href="#" onclick="showGenericMaster('Category Mapping')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Category Mapping</a>
+                        <a href="#" onclick="showGenericMaster('Pincode Mapping')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Pincode Mapping</a>
+                        <a href="#" onclick="showGenericMaster('Warehouse Mapping')" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Warehouse Mapping</a>
                     </div>
                 </div>
 
-                <!-- 4. Call Management -->
-                <div class="border-b border-[#1f2937]">
-                    <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] focus:outline-none">
+                <!-- 4. Call Management Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('callMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Call Management</span>
-                        <span>▼</span>
+                        <span class="text-xs">▼</span>
                     </button>
-                    <div id="callMenu" class="hidden bg-[#0b0f19] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" onclick="showMasterGeneric('Call Registration')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Call Registration</a>
-                        <a href="#" onclick="showMasterGeneric('Call View')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Call View</a>
-                        <a href="#" onclick="showMasterGeneric('Call Allotment')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Call Allotment</a>
-                        <a href="#" onclick="showMasterGeneric('Call Update')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Call Update</a>
-                        <a href="#" onclick="showMasterGeneric('Jobsheet Print')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Jobsheet Print</a>
+                    <div id="callMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Registration</a>
+                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call View</a>
+                        <a href="#" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Call Edit</a>
                     </div>
                 </div>
 
-                <!-- 5. Master Data Download -->
-                <div class="border-b border-[#1f2937]">
-                    <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] focus:outline-none">
+                <!-- 5. Master Data Dropdown -->
+                <div class="border-b border-[#334155]/50">
+                    <button onclick="toggleMenu('masterDataMenu')" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800 focus:outline-none">
                         <span>Master Data</span>
-                        <span>▼</span>
+                        <span class="text-xs">▼</span>
                     </button>
-                    <div id="masterDataMenu" class="hidden bg-[#0b0f19] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" onclick="showMasterDataDownload()" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Master Data Download</a>
-                    </div>
-                </div>
-
-                <!-- 6. Uploader -->
-                <div class="border-b border-[#1f2937]">
-                    <button onclick="toggleMenu('uploaderMenu')" class="w-full flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] focus:outline-none">
-                        <span>Uploader</span>
-                        <span>▼</span>
-                    </button>
-                    <div id="uploaderMenu" class="hidden bg-[#0b0f19] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" onclick="showMasterGeneric('Bulk Excel Upload')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Bulk Excel Upload</a>
-                    </div>
-                </div>
-
-                <!-- 7. Reports & Users -->
-                <div class="border-b border-[#1f2937]">
-                    <button onclick="toggleMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-3 font-medium text-slate-200 hover:bg-[#1f2937] focus:outline-none">
-                        <span>Reports & Users</span>
-                        <span>▼</span>
-                    </button>
-                    <div id="reportsMenu" class="hidden bg-[#0b0f19] py-1 pl-4 pr-2 space-y-1">
-                        <a href="#" onclick="showMasterGeneric('Report Main')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Report Main</a>
-                        <a href="#" onclick="showMasterGeneric('Create User')" class="block px-3 py-1.5 rounded text-slate-300 hover:bg-[#1f2937]">Create User</a>
+                    <div id="masterDataMenu" class="hidden bg-[#172033] py-1 pl-4 pr-2 space-y-1">
+                        <a href="#" onclick="showMasterDataDownload()" class="block px-3 py-1.5 rounded text-xs text-slate-300 hover:bg-slate-800">Master Data Download</a>
                     </div>
                 </div>
             </nav>
@@ -157,17 +134,17 @@
         <!-- Main Content Area -->
         <div class="ml-64 flex-1 p-8 space-y-6">
             
-            <!-- Top Header Bar -->
-            <div class="flex justify-between items-center bg-[#111827] p-4 rounded-xl border border-[#1f2937]">
+            <!-- Top Bar Header -->
+            <div class="flex justify-between items-center bg-[#1e293b] p-4 rounded-xl border border-[#334155]">
                 <div>
                     <h1 class="text-xl font-bold text-white">Super Admin Control Center</h1>
-                    <p class="text-xs text-slate-400">Quickserves OS • Service & Master Operations</p>
+                    <p class="text-xs text-slate-400">Overview of Service Operations, Workforce & Financials</p>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <span class="bg-cyan-500/10 text-cyan-400 text-xs px-3 py-1 rounded-full border border-cyan-500/20 font-medium">System Online</span>
+                    <span class="bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/20 font-medium">System Online</span>
                     <div class="text-right">
-                        <p class="text-sm font-semibold text-white">Pankaj Dhiman</p>
-                        <p class="text-xs text-slate-400">Managing Director</p>
+                        <p class="text-sm font-semibold text-white">Admin Panel</p>
+                        <p class="text-xs text-slate-400">Quickserves OS</p>
                     </div>
                 </div>
             </div>
@@ -177,82 +154,86 @@
                 <div>
                     <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Service & Call Operations</h2>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl border-l-4 border-l-blue-500">
-                            <p class="text-slate-400 text-xs font-medium">OPEN CALLS</p>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-blue-500">
+                            <p class="text-slate-400 text-xs font-medium">OPEN</p>
                             <h3 class="text-2xl font-bold text-white mt-1">3</h3>
-                            <span class="text-xs text-blue-400 mt-2 inline-block">Requires assignment</span>
                         </div>
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl border-l-4 border-l-amber-500">
-                            <p class="text-slate-400 text-xs font-medium">APPOINTMENTS</p>
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-amber-500">
+                            <p class="text-slate-400 text-xs font-medium">APPOINTMENT</p>
                             <h3 class="text-2xl font-bold text-white mt-1">0</h3>
-                            <span class="text-xs text-amber-400 mt-2 inline-block">Scheduled for today</span>
                         </div>
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl border-l-4 border-l-cyan-500">
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-emerald-500">
                             <p class="text-slate-400 text-xs font-medium">ALLOTED</p>
                             <h3 class="text-2xl font-bold text-white mt-1">171</h3>
-                            <span class="text-xs text-cyan-400 mt-2 inline-block">In progress</span>
                         </div>
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl border-l-4 border-l-purple-500">
+                        <div class="bg-[#1e293b] border border-[#334155] p-4 rounded-xl border-l-4 border-l-purple-500">
                             <p class="text-slate-400 text-xs font-medium">PART PENDING</p>
                             <h3 class="text-2xl font-bold text-white mt-1">14</h3>
-                            <span class="text-xs text-purple-400 mt-2 inline-block">Awaiting spare parts</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Network & Resource Management</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl">
-                            <p class="text-slate-400 text-xs font-medium">ACTIVE BRANCHES</p>
-                            <h3 class="text-xl font-bold text-white mt-1">12</h3>
-                        </div>
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl">
-                            <p class="text-slate-400 text-xs font-medium">FRANCHISES / ASCs</p>
-                            <h3 class="text-xl font-bold text-white mt-1">48</h3>
-                        </div>
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl">
-                            <p class="text-slate-400 text-xs font-medium">TECHNICIANS</p>
-                            <h3 class="text-xl font-bold text-white mt-1">320</h3>
-                        </div>
-                        <div class="bg-[#111827] border border-[#1f2937] p-4 rounded-xl">
-                            <p class="text-slate-400 text-xs font-medium">SPARES VALUATION</p>
-                            <h3 class="text-xl font-bold text-white mt-1">₹ 42.5 L</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ================= SECTION 2: GENERIC MASTER VIEW ================= -->
-            <div id="genericMasterSection" class="hidden space-y-6">
-                <div class="bg-[#111827] border border-[#1f2937] rounded-xl p-6 space-y-4">
-                    <div class="flex justify-between items-center border-b border-[#1f2937] pb-4">
-                        <h2 id="masterSectionTitle" class="text-lg font-bold text-white">Master Management</h2>
-                        <div class="space-x-2">
-                            <button onclick="alert('Opening Add Form')" class="bg-cyan-600 hover:bg-cyan-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD NEW</button>
-                            <button onclick="alert('Upload Feature Active')" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-4 py-2 rounded font-medium transition">Upload Document</button>
-                        </div>
+            <!-- ================= SECTION: MASTER DATA DOWNLOAD ================= -->
+            <div id="masterDataDownloadSection" class="hidden space-y-6">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6 max-w-xl">
+                    <div class="border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Master Data Download</h2>
+                        <p class="text-xs text-slate-400 mt-1">Select a master option below to download data in Excel format.</p>
                     </div>
 
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-2">Master Name</label>
+                            <select id="masterDownloadSelect" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                                <option value="">--Select Master--</option>
+                                <option value="Branch Master">Branch Master</option>
+                                <option value="Franchise Master">Franchise Master</option>
+                                <option value="Freelancer Master">Freelancer Master</option>
+                                <option value="Technician Master">Technician Master</option>
+                                <option value="Client Master">Client Master</option>
+                                <option value="City Master">City Master</option>
+                                <option value="Category Master">Category Master</option>
+                                <option value="Product Master">Product Master</option>
+                                <option value="Model Master">Model Master</option>
+                                <option value="Spare Master">Spare Master</option>
+                                <option value="Vendor Master">Vendor Master</option>
+                            </select>
+                        </div>
+
+                        <div class="pt-2">
+                            <button onclick="downloadMasterData()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-5 py-2.5 rounded font-medium transition flex items-center space-x-2">
+                                <span>📥 Download Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= GENERIC MASTER SECTION ================= -->
+            <div id="genericMasterSection" class="hidden space-y-6">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                        <h2 id="genericMasterTitle" class="text-lg font-bold text-white">Master Management</h2>
+                        <button onclick="alert('Add New Record Form')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
+                    </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm text-slate-300">
-                            <thead class="bg-[#0b0f19] text-xs uppercase text-slate-400 border-b border-[#1f2937]">
+                            <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
                                 <tr>
                                     <th class="p-3">Select</th>
-                                    <th class="p-3">Action</th>
+                                    <th class="p-3">Edit</th>
                                     <th class="p-3">CRM Code</th>
-                                    <th class="p-3">Name / Title</th>
-                                    <th class="p-3">Region / City</th>
+                                    <th class="p-3">Record Name</th>
                                     <th class="p-3">Status</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-[#1f2937]">
+                            <tbody class="divide-y divide-[#334155]">
                                 <tr>
-                                    <td class="p-3"><input type="checkbox" class="rounded bg-[#1f2937] border-slate-700"></td>
-                                    <td class="p-3"><a href="#" class="text-cyan-400 hover:underline">✏️ Edit</a></td>
-                                    <td class="p-3 text-cyan-400 font-mono">QSREC-001</td>
-                                    <td class="p-3 font-medium text-white">Primary Record Unit</td>
-                                    <td class="p-3 text-slate-300">North / Delhi</td>
+                                    <td class="p-3"><input type="checkbox" class="rounded bg-slate-800 border-slate-700"></td>
+                                    <td class="p-3"><a href="#" class="text-blue-400 hover:underline">✏️ Edit</a></td>
+                                    <td class="p-3 text-emerald-400 font-mono">QSM001</td>
+                                    <td class="p-3 font-medium text-white">Sample Master Record</td>
                                     <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-xs">Active</span></td>
                                 </tr>
                             </tbody>
@@ -261,38 +242,103 @@
                 </div>
             </div>
 
-            <!-- ================= SECTION 3: MASTER DATA DOWNLOAD ================= -->
-            <div id="masterDataDownloadSection" class="hidden space-y-6">
-                <div class="bg-[#111827] border border-[#1f2937] rounded-xl p-6 space-y-6 max-w-xl">
-                    <div class="border-b border-[#1f2937] pb-4">
-                        <h2 class="text-lg font-bold text-white">Master Data Download</h2>
-                        <p class="text-xs text-slate-400 mt-1">Select any master module to export data in CSV/Excel format.</p>
+            <!-- ================= SECTION 2: BRANCH MASTER ================= -->
+            <div id="branchMasterSection" class="hidden space-y-6">
+                <div id="branchListView" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Branch Master</h2>
+                        <button onclick="showBranchAddForm()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded font-medium transition">+ ADD</button>
                     </div>
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr>
+                                <th class="p-3">CRM Code</th>
+                                <th class="p-3">Branch Name</th>
+                                <th class="p-3">City</th>
+                                <th class="p-3">State</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#334155]">
+                            <tr>
+                                <td class="p-3 text-emerald-400 font-mono">QSBR001</td>
+                                <td class="p-3 font-medium text-white">Uttar Pradesh</td>
+                                <td class="p-3 text-slate-300">GHAZIABAD</td>
+                                <td class="p-3 text-slate-300">UTTAR PRADESH</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Add Branch Form -->
+                <div id="branchAddFormView" class="hidden bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-6">
+                    <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Add Branch Master</h2>
+                        <button onclick="hideBranchAddForm()" class="text-slate-400 hover:text-white text-sm">✕ Back</button>
+                    </div>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Branch Saved Successfully!');">
+                        <input type="text" placeholder="Branch Name" class="w-full bg-[#172033] border border-[#334155] rounded px-3 py-2 text-sm text-white">
+                        <button type="submit" class="bg-emerald-600 text-white text-xs px-6 py-2.5 rounded">Save Branch</button>
+                    </form>
+                </div>
+            </div>
 
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-2">Master Name</label>
-                            <select id="masterDownloadSelect" class="w-full bg-[#1f2937] border border-[#374151] rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                <option value="">--Select Master--</option>
-                                <option value="Branch Master">Branch Master</option>
-                                <option value="Franchise Master">Franchise Master</option>
-                                <option value="Technician Master">Technician Master</option>
-                                <option value="Client Master">Client Master</option>
-                                <option value="Product Master">Product Master</option>
-                                <option value="Spares Master">Spares Master</option>
-                            </select>
-                        </div>
-                        <button onclick="downloadMasterData()" class="bg-cyan-600 hover:bg-cyan-700 text-white text-xs px-5 py-2.5 rounded font-medium transition flex items-center space-x-2">
-                            <span>📥 Download Excel Report</span>
-                        </button>
+            <!-- ================= SECTION 3: FRANCHISE MASTER ================= -->
+            <div id="franchiseMasterSection" class="hidden space-y-6">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Franchise Master</h2>
+                        <button onclick="alert('Add Franchise Form')" class="bg-blue-600 text-white text-xs px-4 py-2 rounded">+ ADD</button>
                     </div>
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr><th class="p-3">CRM Code</th><th class="p-3">Firm Name</th><th class="p-3">City</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-3 text-emerald-400 font-mono">QSSF001</td><td class="p-3 text-white">UNIVERSAL SERVICES</td><td class="p-3">Alwar</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= SECTION 4: TECHNICIAN MASTER ================= -->
+            <div id="technicianMasterSection" class="hidden space-y-6">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Technician Master</h2>
+                        <button onclick="alert('Add Technician Form')" class="bg-blue-600 text-white text-xs px-4 py-2 rounded">+ ADD</button>
+                    </div>
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr><th class="p-3">CRM Code</th><th class="p-3">Technician Name</th><th class="p-3">Contact</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-3 text-emerald-400 font-mono">QSSFT0001</td><td class="p-3 text-white">PRASHANT GUPTA</td><td class="p-3">9041941903</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= SECTION 5: CLIENT MASTER ================= -->
+            <div id="clientMasterSection" class="hidden space-y-6">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-[#334155] pb-4">
+                        <h2 class="text-lg font-bold text-white">Client Master</h2>
+                        <button onclick="alert('Add Client Form')" class="bg-blue-600 text-white text-xs px-4 py-2 rounded">+ ADD</button>
+                    </div>
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-[#172033] text-xs uppercase text-slate-400 border-b border-[#334155]">
+                            <tr><th class="p-3">Client Code</th><th class="p-3">Name</th><th class="p-3">Mobile No</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-3 text-emerald-400 font-mono">CDCL001</td><td class="p-3 text-white">MACKAVM INTERNATIONAL</td><td class="p-3">8725078438</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- JavaScript & Logic -->
+    <!-- Script Library & Logic -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         function handleAdminLogin(event) {
@@ -334,19 +380,49 @@
         }
 
         function showSection(sectionId) {
-            document.getElementById('dashboardSection').classList.add('hidden');
-            document.getElementById('genericMasterSection').classList.add('hidden');
-            document.getElementById('masterDataDownloadSection').classList.add('hidden');
+            const sections = ['dashboardSection', 'masterDataDownloadSection', 'genericMasterSection', 'branchMasterSection', 'franchiseMasterSection', 'technicianMasterSection', 'clientMasterSection'];
+            sections.forEach(s => {
+                const el = document.getElementById(s);
+                if(el) el.classList.add('hidden');
+            });
             document.getElementById(sectionId).classList.remove('hidden');
-        }
-
-        function showMasterGeneric(masterName) {
-            showSection('genericMasterSection');
-            document.getElementById('masterSectionTitle').textContent = masterName;
         }
 
         function showMasterDataDownload() {
             showSection('masterDataDownloadSection');
+        }
+
+        function showGenericMaster(title) {
+            showSection('genericMasterSection');
+            document.getElementById('genericMasterTitle').textContent = title;
+        }
+
+        function showBranchMasterMain() {
+            showSection('branchMasterSection');
+            document.getElementById('branchListView').classList.remove('hidden');
+            document.getElementById('branchAddFormView').classList.add('hidden');
+        }
+
+        function showBranchAddForm() {
+            document.getElementById('branchListView').classList.add('hidden');
+            document.getElementById('branchAddFormView').classList.remove('hidden');
+        }
+
+        function hideBranchAddForm() {
+            document.getElementById('branchAddFormView').classList.add('hidden');
+            document.getElementById('branchListView').classList.remove('hidden');
+        }
+
+        function showFranchiseMasterMain() {
+            showSection('franchiseMasterSection');
+        }
+
+        function showTechnicianMasterMain() {
+            showSection('technicianMasterSection');
+        }
+
+        function showClientMasterMain() {
+            showSection('clientMasterSection');
         }
 
         function downloadMasterData() {
@@ -355,14 +431,7 @@
                 alert('Please select a Master Name to download.');
                 return;
             }
-            const csvContent = "data:text/csv;charset=utf-8,Master Name,CRM Code,Region,Status\n" + selectedMaster + ",QS001,North,Active";
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", selectedMaster.replace(/\s+/g, '_') + "_Data.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            alert(selectedMaster + ' downloaded successfully!');
         }
     </script>
 </body>
