@@ -92,3 +92,30 @@ button[data-nextjs-dev-tools-button],
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* Mobile Optimization Utilities */
+.safe-area-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-area-top {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+}
+
+button, a, input, select {
+  touch-action: manipulation;
+}
+
+/* Prevent iOS Safari auto-zoom on input focus while keeping crisp appearance */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}

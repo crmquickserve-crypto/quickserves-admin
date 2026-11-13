@@ -196,14 +196,14 @@ export default function Sidebar({
   const isCurrent = (sec: string) => currentSection === sec;
 
   const itemClass = (sec: string) =>
-    `w-full text-left block pl-6 pr-3 py-2 text-xs transition duration-150 ${
+    `w-full text-left block pl-6 pr-3 py-2.5 sm:py-2 text-xs transition duration-150 min-h-[38px] flex items-center ${
       isCurrent(sec)
         ? 'bg-[#1e2a3e] text-white font-medium border-l-2 border-emerald-400 pl-5.5'
         : 'text-slate-300 hover:text-white hover:bg-[#1a2538]'
     }`;
 
   const headerButtonClass = (isActive: boolean) =>
-    `w-full flex items-center justify-between px-4 py-3 text-sm font-medium transition select-none ${
+    `w-full flex items-center justify-between px-4 py-3 sm:py-2.5 text-sm font-medium transition select-none min-h-[44px] ${
       isActive
         ? 'bg-[#182335] text-white font-semibold'
         : 'text-slate-200 hover:bg-[#182335]/70'
@@ -222,7 +222,7 @@ export default function Sidebar({
 
       {/* Sidebar Container: Fixed on Desktop, Slide-In Drawer on Mobile */}
       <div
-        className={`w-64 max-w-[85vw] bg-[#111c2e] border-r border-[#1e293b] h-screen fixed left-0 top-0 overflow-y-auto z-50 md:z-20 flex flex-col justify-between select-none transition-transform duration-300 ease-in-out ${
+        className={`w-72 max-w-[88vw] md:w-64 bg-[#111c2e] border-r border-[#1e293b] h-screen fixed left-0 top-0 overflow-y-auto z-50 md:z-20 flex flex-col justify-between select-none transition-transform duration-300 ease-in-out ${
           isOpenMobile ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'
         }`}
       >

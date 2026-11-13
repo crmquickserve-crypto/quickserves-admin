@@ -65,6 +65,7 @@ export default function EscalationManagementView({
 
   // Selected Escalation for View / Review Modal
   const [selectedEscalation, setSelectedEscalation] = useState<any | null>(null);
+  const [mobileViewMode, setMobileViewMode] = useState<'cards' | 'table'>('cards');
 
   // Approval / Decision Modal State
   const [decisionModalOpen, setDecisionModalOpen] = useState(false);
@@ -1129,157 +1130,275 @@ export default function EscalationManagementView({
       {['allEscalations', 'myEscalations', 'pendingMyApproval', 'approvedEscalations', 'rejectedEscalations'].includes(activeTab) && (
         <div className="bg-[#1e293b] border border-[#334155] rounded-xl shadow-xl overflow-hidden space-y-4">
           {/* Filter Bar */}
-          <div className="bg-[#172033] p-4 border-b border-[#334155] flex flex-wrap items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="bg-[#172033] p-3 sm:p-4 border-b border-[#334155] flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 flex-1">
               <input
                 type="text"
                 placeholder="Search Escalation ID, Customer, Serial, Part..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 w-64"
+                className="bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2 sm:py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 w-full sm:w-64"
               />
 
-              {activeTab === 'allEscalations' && (
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
+                {activeTab === 'allEscalations' && (
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="bg-[#0f172a] border border-[#334155] rounded-lg px-2.5 py-2 sm:py-1.5 text-xs text-slate-300 w-full sm:w-auto"
+                  >
+                    <option value="ALL">All Statuses</option>
+                    <option value="PENDING_APPROVAL">Pending Approval</option>
+                    <option value="UNDER_REVIEW">Under Review</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="REJECTED">Rejected</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="COMPLETED">Completed</option>
+                  </select>
+                )}
+
                 <select
-                  value={filterStatus}
-                  onChange={(e) => setFilterStatus(e.target.value)}
-                  className="bg-[#0f172a] border border-[#334155] rounded-lg px-2.5 py-1.5 text-xs text-slate-300"
+                  value={filterPriority}
+                  onChange={(e) => setFilterPriority(e.target.value)}
+                  className="bg-[#0f172a] border border-[#334155] rounded-lg px-2.5 py-2 sm:py-1.5 text-xs text-slate-300 w-full sm:w-auto"
                 >
-                  <option value="ALL">All Statuses</option>
-                  <option value="PENDING_APPROVAL">Pending Approval</option>
-                  <option value="UNDER_REVIEW">Under Review</option>
-                  <option value="APPROVED">Approved</option>
-                  <option value="REJECTED">Rejected</option>
-                  <option value="IN_PROGRESS">In Progress</option>
-                  <option value="COMPLETED">Completed</option>
+                  <option value="ALL">All Priorities</option>
+                  <option value="CRITICAL">Critical</option>
+                  <option value="HIGH">High</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="LOW">Low</option>
                 </select>
-              )}
 
-              <select
-                value={filterPriority}
-                onChange={(e) => setFilterPriority(e.target.value)}
-                className="bg-[#0f172a] border border-[#334155] rounded-lg px-2.5 py-1.5 text-xs text-slate-300"
-              >
-                <option value="ALL">All Priorities</option>
-                <option value="CRITICAL">Critical</option>
-                <option value="HIGH">High</option>
-                <option value="MEDIUM">Medium</option>
-                <option value="LOW">Low</option>
-              </select>
-
-              <select
-                value={filterProductCat}
-                onChange={(e) => setFilterProductCat(e.target.value)}
-                className="bg-[#0f172a] border border-[#334155] rounded-lg px-2.5 py-1.5 text-xs text-slate-300"
-              >
-                <option value="ALL">All Products</option>
-                <option value="Television">Television</option>
-                <option value="Refrigerator">Refrigerator</option>
-                <option value="Washing Machine">Washing Machine</option>
-                <option value="Air Conditioner">Air Conditioner</option>
-              </select>
+                <select
+                  value={filterProductCat}
+                  onChange={(e) => setFilterProductCat(e.target.value)}
+                  className="bg-[#0f172a] border border-[#334155] rounded-lg px-2.5 py-2 sm:py-1.5 text-xs text-slate-300 col-span-2 sm:col-span-1 w-full sm:w-auto"
+                >
+                  <option value="ALL">All Products</option>
+                  <option value="Television">Television</option>
+                  <option value="Refrigerator">Refrigerator</option>
+                  <option value="Washing Machine">Washing Machine</option>
+                  <option value="Air Conditioner">Air Conditioner</option>
+                </select>
+              </div>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <span className="text-xs text-slate-400 font-mono">Total: {escalations.length}</span>
+            <div className="flex items-center justify-between md:justify-end space-x-2 pt-2 md:pt-0 border-t md:border-t-0 border-[#334155]/60">
+              {/* Responsive Cards vs Table Toggle */}
+              <div className="flex items-center bg-[#0f172a] p-0.5 rounded-lg border border-[#334155]">
+                <button
+                  type="button"
+                  onClick={() => setMobileViewMode('cards')}
+                  title="Mobile Card Layout"
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                    mobileViewMode === 'cards'
+                      ? 'bg-emerald-600 text-white font-bold shadow'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  📱 Cards
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileViewMode('table')}
+                  title="Full Table Layout"
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                    mobileViewMode === 'table'
+                      ? 'bg-emerald-600 text-white font-bold shadow'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  🖥️ Table
+                </button>
+              </div>
+
+              <span className="text-xs text-slate-400 font-mono hidden sm:inline">Total: {escalations.length}</span>
               <button
                 onClick={fetchEscalations}
-                className="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700"
+                className="bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition"
               >
                 🔄 Refresh
               </button>
             </div>
           </div>
 
-          {/* Table */}
-          <div className="overflow-x-auto custom-horizontal-scrollbar">
-            {loading ? (
-              <div className="p-8 text-center text-slate-400 text-xs">Loading escalations...</div>
-            ) : escalations.length === 0 ? (
-              <div className="p-8 text-center text-slate-400 text-xs">No escalations found in this queue.</div>
-            ) : (
-              <table className="w-full text-left text-xs text-slate-300 min-w-[1050px]">
-                <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
-                  <tr>
-                    <th className="p-3">Escalation ID</th>
-                    <th className="p-3">Date</th>
-                    <th className="p-3">Customer & Mobile</th>
-                    <th className="p-3">Product & Category</th>
-                    <th className="p-3">Requested Part</th>
-                    <th className="p-3">Assigned Manager</th>
-                    <th className="p-3">Priority</th>
-                    <th className="p-3">Approval Status</th>
-                    <th className="p-3">Fulfilment</th>
-                    <th className="p-3 text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
-                  {escalations.map((esc) => {
-                    const isAssignedToMe = currentUserId && esc.assignedManagerId?.toString() === currentUserId.toString();
-                    const canMakeDecision = (isSuperAdmin || isAssignedToMe) && ['PENDING_APPROVAL', 'UNDER_REVIEW'].includes(esc.status);
+          {loading ? (
+            <div className="p-8 text-center text-slate-400 text-xs">Loading escalations...</div>
+          ) : escalations.length === 0 ? (
+            <div className="p-8 text-center text-slate-400 text-xs">No escalations found in this queue.</div>
+          ) : (
+            <>
+              {/* 1. Mobile Cards View (Active on mobile or when Cards mode chosen) */}
+              <div className={`${mobileViewMode === 'cards' ? 'block md:hidden' : 'hidden'} divide-y divide-[#334155]/60 bg-[#1e293b]`}>
+                {escalations.map((esc) => {
+                  const isAssignedToMe = currentUserId && esc.assignedManagerId?.toString() === currentUserId.toString();
+                  const canMakeDecision = (isSuperAdmin || isAssignedToMe) && ['PENDING_APPROVAL', 'UNDER_REVIEW'].includes(esc.status);
 
-                    return (
-                      <tr key={esc._id} className="hover:bg-slate-800/40 transition">
-                        <td className="p-3">
-                          <span className="font-mono text-emerald-400 font-bold block">{esc.escalationNo}</span>
+                  return (
+                    <div key={esc._id} className="p-3.5 space-y-3 hover:bg-slate-800/30 transition">
+                      {/* Top Row: Escalation ID + Status & Priority Badges */}
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <span className="font-mono text-emerald-400 font-bold text-xs block">{esc.escalationNo}</span>
                           {esc.complaintNo && (
                             <span className="text-[10px] text-slate-400 font-mono">Ref: {esc.complaintNo}</span>
                           )}
-                        </td>
-                        <td className="p-3 font-mono text-[11px] text-slate-400">
-                          {new Date(esc.createdAt).toLocaleDateString()}
-                        </td>
-                        <td className="p-3">
-                          <span className="text-white font-semibold block">{esc.customerName}</span>
-                          <span className="text-[10px] text-slate-400 font-mono">{esc.customerMobile}</span>
-                        </td>
-                        <td className="p-3">
-                          <span className="text-slate-200 font-medium block">{esc.productCategory}</span>
-                          <span className="text-[10px] text-slate-400">{esc.brandName} {esc.modelNo}</span>
-                        </td>
-                        <td className="p-3 font-semibold text-amber-300">
-                          {esc.requestedPart}
-                        </td>
-                        <td className="p-3">
-                          <span className="text-slate-300 font-medium block">{esc.assignedManagerName}</span>
-                          {esc.isOverdue && (
-                            <span className="text-[10px] bg-rose-500/20 text-rose-400 px-1 rounded font-bold">OVERDUE</span>
-                          )}
-                        </td>
-                        <td className="p-3">{getPriorityBadge(esc.priority)}</td>
-                        <td className="p-3">{getStatusBadge(esc.status)}</td>
-                        <td className="p-3">
-                          <span className="text-[10px] text-slate-400 font-mono uppercase">{esc.fulfilmentStatus || 'NOT_STARTED'}</span>
-                        </td>
-                        <td className="p-3 text-right">
-                          <div className="flex justify-end gap-1.5">
-                            <button
-                              onClick={() => setSelectedEscalation(esc)}
-                              className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
+                        </div>
+                        <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                          {getPriorityBadge(esc.priority)}
+                          {getStatusBadge(esc.status)}
+                        </div>
+                      </div>
+
+                      {/* Middle Row: Customer Info + Product / Part */}
+                      <div className="grid grid-cols-2 gap-3 text-xs bg-[#111c2e] p-2.5 rounded-lg border border-[#334155]/60">
+                        <div>
+                          <span className="text-[10px] text-slate-400 uppercase font-semibold block">Customer</span>
+                          <span className="text-white font-semibold block truncate">{esc.customerName}</span>
+                          {esc.customerMobile && (
+                            <a
+                              href={`tel:${esc.customerMobile}`}
+                              className="text-emerald-400 font-mono text-[11px] hover:underline flex items-center gap-1 mt-0.5"
                             >
-                              View
-                            </button>
-                            {canMakeDecision && (
-                              <button
-                                onClick={() => {
-                                  setSelectedEscalation(esc);
-                                  setDecisionAction('APPROVE');
-                                  setDecisionModalOpen(true);
-                                }}
-                                className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded text-xs transition"
-                              >
-                                Review & Decide
-                              </button>
+                              <span>📞</span> <span>{esc.customerMobile}</span>
+                            </a>
+                          )}
+                        </div>
+
+                        <div className="text-right">
+                          <span className="text-[10px] text-slate-400 uppercase font-semibold block">Requested Component</span>
+                          <span className="text-amber-300 font-bold block truncate">{esc.requestedPart}</span>
+                          <span className="text-[10px] text-slate-300 block truncate">
+                            {esc.productCategory} • {esc.brandName}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Manager & SLA Row */}
+                      <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                        <div>
+                          <span>Manager: </span>
+                          <strong className="text-slate-200">{esc.assignedManagerName || 'Super Admin'}</strong>
+                          {esc.isOverdue && (
+                            <span className="ml-1.5 text-[9px] bg-rose-500/20 text-rose-400 px-1 py-0.5 rounded font-bold border border-rose-500/30">
+                              OVERDUE
+                            </span>
+                          )}
+                        </div>
+                        <span className="font-mono text-[10px]">{new Date(esc.createdAt).toLocaleDateString()}</span>
+                      </div>
+
+                      {/* Bottom Action Buttons */}
+                      <div className="flex items-center gap-2 pt-1 border-t border-[#334155]/50">
+                        <button
+                          onClick={() => setSelectedEscalation(esc)}
+                          className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 text-center transition min-h-[38px] flex items-center justify-center cursor-pointer"
+                        >
+                          👁️ View Details
+                        </button>
+                        {canMakeDecision && (
+                          <button
+                            onClick={() => {
+                              setSelectedEscalation(esc);
+                              setDecisionAction('APPROVE');
+                              setDecisionModalOpen(true);
+                            }}
+                            className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold rounded-lg text-xs transition shadow min-h-[38px] flex items-center justify-center cursor-pointer"
+                          >
+                            ⚡ Review & Decide
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* 2. Desktop Table View (Active on desktop or when Table mode chosen) */}
+              <div className={`${mobileViewMode === 'table' ? 'block' : 'hidden md:block'} overflow-x-auto custom-horizontal-scrollbar`}>
+                <table className="w-full text-left text-xs text-slate-300 min-w-[1050px]">
+                  <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
+                    <tr>
+                      <th className="p-3">Escalation ID</th>
+                      <th className="p-3">Date</th>
+                      <th className="p-3">Customer & Mobile</th>
+                      <th className="p-3">Product & Category</th>
+                      <th className="p-3">Requested Part</th>
+                      <th className="p-3">Assigned Manager</th>
+                      <th className="p-3">Priority</th>
+                      <th className="p-3">Approval Status</th>
+                      <th className="p-3">Fulfilment</th>
+                      <th className="p-3 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
+                    {escalations.map((esc) => {
+                      const isAssignedToMe = currentUserId && esc.assignedManagerId?.toString() === currentUserId.toString();
+                      const canMakeDecision = (isSuperAdmin || isAssignedToMe) && ['PENDING_APPROVAL', 'UNDER_REVIEW'].includes(esc.status);
+
+                      return (
+                        <tr key={esc._id} className="hover:bg-slate-800/40 transition">
+                          <td className="p-3">
+                            <span className="font-mono text-emerald-400 font-bold block">{esc.escalationNo}</span>
+                            {esc.complaintNo && (
+                              <span className="text-[10px] text-slate-400 font-mono">Ref: {esc.complaintNo}</span>
                             )}
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            )}
-          </div>
+                          </td>
+                          <td className="p-3 font-mono text-[11px] text-slate-400">
+                            {new Date(esc.createdAt).toLocaleDateString()}
+                          </td>
+                          <td className="p-3">
+                            <span className="text-white font-semibold block">{esc.customerName}</span>
+                            <span className="text-[10px] text-slate-400 font-mono">{esc.customerMobile}</span>
+                          </td>
+                          <td className="p-3">
+                            <span className="text-slate-200 font-medium block">{esc.productCategory}</span>
+                            <span className="text-[10px] text-slate-400">{esc.brandName} {esc.modelNo}</span>
+                          </td>
+                          <td className="p-3 font-semibold text-amber-300">
+                            {esc.requestedPart}
+                          </td>
+                          <td className="p-3">
+                            <span className="text-slate-300 font-medium block">{esc.assignedManagerName}</span>
+                            {esc.isOverdue && (
+                              <span className="text-[10px] bg-rose-500/20 text-rose-400 px-1 rounded font-bold">OVERDUE</span>
+                            )}
+                          </td>
+                          <td className="p-3">{getPriorityBadge(esc.priority)}</td>
+                          <td className="p-3">{getStatusBadge(esc.status)}</td>
+                          <td className="p-3">
+                            <span className="text-[10px] text-slate-400 font-mono uppercase">{esc.fulfilmentStatus || 'NOT_STARTED'}</span>
+                          </td>
+                          <td className="p-3 text-right">
+                            <div className="flex justify-end gap-1.5">
+                              <button
+                                onClick={() => setSelectedEscalation(esc)}
+                                className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
+                              >
+                                View
+                              </button>
+                              {canMakeDecision && (
+                                <button
+                                  onClick={() => {
+                                    setSelectedEscalation(esc);
+                                    setDecisionAction('APPROVE');
+                                    setDecisionModalOpen(true);
+                                  }}
+                                  className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded text-xs transition"
+                                >
+                                  Review & Decide
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
         </div>
       )}
 

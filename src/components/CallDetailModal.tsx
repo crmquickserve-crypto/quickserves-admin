@@ -89,25 +89,35 @@ export default function CallDetailModal({
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
       <div className="bg-[#111c2e] border border-blue-500/30 rounded-2xl w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden my-auto animate-in fade-in duration-200">
         {/* HEADER BAR */}
-        <div className="bg-[#18263e] border-b border-[#334155] p-4 flex flex-wrap justify-between items-center gap-3">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-blue-600/20 text-blue-400 rounded-lg border border-blue-500/30 text-lg">
-              📋
+        <div className="bg-[#18263e] border-b border-[#334155] p-3 sm:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+            <div className="flex items-center space-x-2.5">
+              <div className="p-2 bg-blue-600/20 text-blue-400 rounded-lg border border-blue-500/30 text-base sm:text-lg">
+                📋
+              </div>
+              <div>
+                <h2 className="text-sm sm:text-base font-bold text-white flex items-center space-x-2">
+                  <span>Complaint History</span>
+                  <span className="font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full text-xs">
+                    #{call.callNo}
+                  </span>
+                </h2>
+                <p className="text-[10px] sm:text-[11px] text-slate-400">
+                  Quickserves 11-Section Complaint Lifecycle
+                </p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-base font-bold text-white flex items-center space-x-2">
-                <span>Complaint View / History Details</span>
-                <span className="font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-xs">
-                  #{call.callNo}
-                </span>
-              </h2>
-              <p className="text-[11px] text-slate-400">
-                Official Comprehensive Complaint Lifecycle Record • Quickserves CRM
-              </p>
-            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="sm:hidden text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg text-sm transition min-w-[32px] min-h-[32px] flex items-center justify-center"
+            >
+              ✕
+            </button>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap w-full sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#334155]/60">
             {onRaiseEscalation && (
               <button
                 type="button"
@@ -115,10 +125,10 @@ export default function CallDetailModal({
                   onClose();
                   onRaiseEscalation(call);
                 }}
-                className="text-xs px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded font-semibold transition shadow flex items-center space-x-1"
+                className="text-xs px-2.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded font-semibold transition shadow flex items-center space-x-1 flex-1 sm:flex-none justify-center min-h-[36px]"
                 title="Raise Escalation for TV Panel, Major Spare or Exceptional Approval"
               >
-                <span>⚡ Raise Escalation</span>
+                <span>⚡ Escalate</span>
               </button>
             )}
             {onOpenJobSheet && (
@@ -128,9 +138,9 @@ export default function CallDetailModal({
                   onClose();
                   onOpenJobSheet(call);
                 }}
-                className="text-xs px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded font-semibold transition shadow flex items-center space-x-1"
+                className="text-xs px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded font-semibold transition shadow flex items-center space-x-1 flex-1 sm:flex-none justify-center min-h-[36px]"
               >
-                <span>✏️ Update Job Sheet</span>
+                <span>✏️ Job Sheet</span>
               </button>
             )}
             {onOpenPrint && (
@@ -140,15 +150,15 @@ export default function CallDetailModal({
                   onClose();
                   onOpenPrint(call);
                 }}
-                className="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded font-semibold transition flex items-center space-x-1"
+                className="text-xs px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded font-semibold transition flex items-center space-x-1 flex-1 sm:flex-none justify-center min-h-[36px]"
               >
-                <span>🖨️ Jobsheet Print</span>
+                <span>🖨️ Print</span>
               </button>
             )}
             <button
               type="button"
               onClick={onClose}
-              className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg text-sm transition"
+              className="hidden sm:flex text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg text-sm transition items-center justify-center min-w-[32px] min-h-[32px]"
             >
               ✕
             </button>

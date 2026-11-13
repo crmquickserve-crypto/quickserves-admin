@@ -25,6 +25,7 @@ export default function UserManagementView({ initialMode = 'createUser', current
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState('ALL');
   const [filterScope, setFilterScope] = useState('ALL');
+  const [userViewMode, setUserViewMode] = useState<'cards' | 'table'>('cards');
 
   const initialForm = {
     role: 'Super Admin',
@@ -1125,7 +1126,7 @@ export default function UserManagementView({ initialMode = 'createUser', current
 
       {/* 2. Existing Users List & Filter Table */}
       <div id="user-directory-section" className="bg-[#1e293b] border border-[#334155] rounded-xl shadow-xl overflow-hidden">
-        <div className="bg-[#172033] px-6 py-4 border-b border-[#334155] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="bg-[#172033] px-4 sm:px-6 py-4 border-b border-[#334155] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h3 className="text-base font-semibold text-slate-200">User Accounts Directory</h3>
             <p className="text-xs text-slate-400 mt-0.5">
@@ -1134,6 +1135,32 @@ export default function UserManagementView({ initialMode = 'createUser', current
           </div>
 
           <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            {/* View Mode Toggle */}
+            <div className="flex items-center bg-[#0f172a] p-0.5 rounded-lg border border-[#334155]">
+              <button
+                type="button"
+                onClick={() => setUserViewMode('cards')}
+                className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                  userViewMode === 'cards'
+                    ? 'bg-emerald-600 text-white font-bold shadow'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                📱 Cards
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserViewMode('table')}
+                className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                  userViewMode === 'table'
+                    ? 'bg-emerald-600 text-white font-bold shadow'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                🖥️ Table
+              </button>
+            </div>
+
             <select
               value={filterScope}
               onChange={(e) => setFilterScope(e.target.value)}
@@ -1166,100 +1193,28 @@ export default function UserManagementView({ initialMode = 'createUser', current
               placeholder="Search user, name, client, branch..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500 w-full sm:w-56"
+              className="bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500 w-full sm:w-52"
             />
           </div>
         </div>
 
-        <div className="overflow-x-auto custom-horizontal-scrollbar">
-          {loading ? (
-            <div className="p-8 text-center text-slate-400 text-xs">Loading provisioned users...</div>
-          ) : filteredUsers.length === 0 ? (
-            <div className="p-8 text-center text-slate-400 text-xs">No users found matching query.</div>
-          ) : (
-            <table className="w-full text-left text-xs text-slate-300 min-w-[1100px]">
-              <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
-                <tr>
-                  <th className="p-3">User Name</th>
-                  <th className="p-3">Full Name</th>
-                  <th className="p-3">Assigned Role</th>
-                  <th className="p-3">Organizational Scope & Entity</th>
-                  <th className="p-3">Reports To</th>
-                  <th className="p-3">Mobile & City</th>
-                  <th className="p-3">Status</th>
-                  <th className="p-3 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
-                {filteredUsers.map((u) => {
-                  const scope = u.organizationalScope || 'NATIONAL';
-                  return (
-                    <tr key={u._id} className="hover:bg-slate-800/40 transition">
-                      <td className="p-3 font-mono text-emerald-400 font-semibold">{u.username}</td>
-                      <td className="p-3 text-white font-medium">{u.fullName}</td>
-                      <td className="p-3">
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 border border-slate-700 text-slate-200">
-                          {u.role}
-                        </span>
-                      </td>
-                      <td className="p-3">
-                        {scope === 'CLIENT' && (
-                          <div>
-                            <span className="text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
-                              CLIENT
-                            </span>
-                            <span className="text-white font-semibold">{u.clientName || 'Assigned Client'}</span>
-                            {u.brandName && (
-                              <span className="text-[10px] text-slate-400 block">• Brand: {u.brandName}</span>
-                            )}
-                          </div>
-                        )}
-                        {scope === 'BRANCH' && (
-                          <div>
-                            <span className="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
-                              BRANCH
-                            </span>
-                            <span className="text-white font-semibold">{u.branchName || u.assignedBranch}</span>
-                          </div>
-                        )}
-                        {scope === 'ZONE' && (
-                          <div>
-                            <span className="text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
-                              ZONE
-                            </span>
-                            <span className="text-white font-semibold">{u.zoneName || u.assignedZone} Zone</span>
-                          </div>
-                        )}
-                        {scope === 'FRANCHISE' && (
-                          <div>
-                            <span className="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
-                              FRANCHISE
-                            </span>
-                            <span className="text-white font-semibold">{u.franchiseName}</span>
-                          </div>
-                        )}
-                        {scope === 'TECHNICIAN' && (
-                          <div>
-                            <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
-                              TECHNICIAN
-                            </span>
-                            <span className="text-white font-semibold">{u.technicianName}</span>
-                          </div>
-                        )}
-                        {scope === 'NATIONAL' && (
-                          <span className="text-[10px] bg-slate-800 text-slate-400 border border-slate-700 px-1.5 py-0.5 rounded font-mono">
-                            All Zones / National
-                          </span>
-                        )}
-                      </td>
-                      <td className="p-3 text-slate-400">{u.reportingTo || '—'}</td>
-                      <td className="p-3">
-                        <span className="font-mono text-slate-300 block">{u.mobile || '—'}</span>
-                        <span className="text-[10px] text-slate-500">{u.city || ''}</span>
-                      </td>
-                      <td className="p-3">
+        {loading ? (
+          <div className="p-8 text-center text-slate-400 text-xs">Loading provisioned users...</div>
+        ) : filteredUsers.length === 0 ? (
+          <div className="p-8 text-center text-slate-400 text-xs">No users found matching query.</div>
+        ) : (
+          <>
+            {/* 1. Mobile Cards View (Active on mobile or when Cards mode chosen) */}
+            <div className={`${userViewMode === 'cards' ? 'block md:hidden' : 'hidden'} divide-y divide-[#334155]/60 bg-[#1e293b]`}>
+              {filteredUsers.map((u) => {
+                const scope = u.organizationalScope || 'NATIONAL';
+                return (
+                  <div key={u._id} className="p-3.5 space-y-2.5 hover:bg-slate-800/30 transition">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <span className="font-mono text-emerald-400 font-bold text-xs">@{u.username}</span>
                         <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                          className={`px-1.5 py-0.2 text-[9px] font-bold rounded border ${
                             u.status === 'ACTIVE'
                               ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                               : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
@@ -1267,34 +1222,189 @@ export default function UserManagementView({ initialMode = 'createUser', current
                         >
                           {u.status || 'ACTIVE'}
                         </span>
-                      </td>
-                      <td className="p-3 text-right">
-                        <div className="flex justify-end gap-1.5">
+                      </div>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 border border-slate-700 text-slate-200">
+                        {u.role}
+                      </span>
+                    </div>
+
+                    <div className="flex items-start justify-between text-xs">
+                      <div>
+                        <span className="text-white font-semibold block">{u.fullName}</span>
+                        {u.mobile && (
+                          <a
+                            href={`tel:${u.mobile}`}
+                            className="text-emerald-400 font-mono text-[11px] hover:underline flex items-center gap-1 mt-0.5"
+                          >
+                            <span>📞</span> <span>{u.mobile}</span>
+                          </a>
+                        )}
+                        <span className="text-[10px] text-slate-400 block mt-0.5">{u.city || ''}</span>
+                      </div>
+
+                      <div className="text-right">
+                        <span className="text-[10px] text-slate-400 uppercase font-semibold block">Scope / Entity</span>
+                        <span className="text-slate-300 font-medium block">
+                          {scope === 'CLIENT' && (u.clientName || 'Client')}
+                          {scope === 'BRANCH' && (u.branchName || u.assignedBranch || 'Branch')}
+                          {scope === 'ZONE' && `${u.zoneName || u.assignedZone} Zone`}
+                          {scope === 'FRANCHISE' && (u.franchiseName || 'Franchise')}
+                          {scope === 'TECHNICIAN' && (u.technicianName || 'Field Tech')}
+                          {scope === 'NATIONAL' && 'National (All Zones)'}
+                        </span>
+                        <span className="text-[10px] text-slate-500 block">Scope: {scope}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-1 border-t border-[#334155]/50">
+                      <span className="text-[10px] text-slate-400">
+                        Reports to: <strong className="text-slate-300">{u.reportingTo || 'Top Admin'}</strong>
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => handleEdit(u)}
+                          className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs font-medium border border-slate-700 transition"
+                        >
+                          ✏️ Edit
+                        </button>
+                        {u.username !== 'admin' && (
                           <button
                             type="button"
-                            onClick={() => handleEdit(u)}
-                            className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
+                            onClick={() => handleDeleteUser(u._id, u.username)}
+                            className="px-2.5 py-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded text-xs transition"
                           >
-                            Edit
+                            🗑️
                           </button>
-                          {u.username !== 'admin' && (
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* 2. Desktop Table View (Active on desktop or when Table mode chosen) */}
+            <div className={`${userViewMode === 'table' ? 'block' : 'hidden md:block'} overflow-x-auto custom-horizontal-scrollbar`}>
+              <table className="w-full text-left text-xs text-slate-300 min-w-[1100px]">
+                <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
+                  <tr>
+                    <th className="p-3">User Name</th>
+                    <th className="p-3">Full Name</th>
+                    <th className="p-3">Assigned Role</th>
+                    <th className="p-3">Organizational Scope & Entity</th>
+                    <th className="p-3">Reports To</th>
+                    <th className="p-3">Mobile & City</th>
+                    <th className="p-3">Status</th>
+                    <th className="p-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
+                  {filteredUsers.map((u) => {
+                    const scope = u.organizationalScope || 'NATIONAL';
+                    return (
+                      <tr key={u._id} className="hover:bg-slate-800/40 transition">
+                        <td className="p-3 font-mono text-emerald-400 font-semibold">{u.username}</td>
+                        <td className="p-3 text-white font-medium">{u.fullName}</td>
+                        <td className="p-3">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 border border-slate-700 text-slate-200">
+                            {u.role}
+                          </span>
+                        </td>
+                        <td className="p-3">
+                          {scope === 'CLIENT' && (
+                            <div>
+                              <span className="text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
+                                CLIENT
+                              </span>
+                              <span className="text-white font-semibold">{u.clientName || 'Assigned Client'}</span>
+                              {u.brandName && (
+                                <span className="text-[10px] text-slate-400 block">• Brand: {u.brandName}</span>
+                              )}
+                            </div>
+                          )}
+                          {scope === 'BRANCH' && (
+                            <div>
+                              <span className="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
+                                BRANCH
+                              </span>
+                              <span className="text-white font-semibold">{u.branchName || u.assignedBranch}</span>
+                            </div>
+                          )}
+                          {scope === 'ZONE' && (
+                            <div>
+                              <span className="text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
+                                ZONE
+                              </span>
+                              <span className="text-white font-semibold">{u.zoneName || u.assignedZone} Zone</span>
+                            </div>
+                          )}
+                          {scope === 'FRANCHISE' && (
+                            <div>
+                              <span className="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
+                                FRANCHISE
+                              </span>
+                              <span className="text-white font-semibold">{u.franchiseName}</span>
+                            </div>
+                          )}
+                          {scope === 'TECHNICIAN' && (
+                            <div>
+                              <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded font-mono font-bold mr-1">
+                                TECHNICIAN
+                              </span>
+                              <span className="text-white font-semibold">{u.technicianName}</span>
+                            </div>
+                          )}
+                          {scope === 'NATIONAL' && (
+                            <span className="text-[10px] bg-slate-800 text-slate-400 border border-slate-700 px-1.5 py-0.5 rounded font-mono">
+                              All Zones / National
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-3 text-slate-400">{u.reportingTo || '—'}</td>
+                        <td className="p-3">
+                          <span className="font-mono text-slate-300 block">{u.mobile || '—'}</span>
+                          <span className="text-[10px] text-slate-500">{u.city || ''}</span>
+                        </td>
+                        <td className="p-3">
+                          <span
+                            className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                              u.status === 'ACTIVE'
+                                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                                : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                            }`}
+                          >
+                            {u.status || 'ACTIVE'}
+                          </span>
+                        </td>
+                        <td className="p-3 text-right">
+                          <div className="flex justify-end gap-1.5">
                             <button
                               type="button"
-                              onClick={() => handleDeleteUser(u._id, u.username)}
-                              className="px-2 py-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded text-xs transition"
+                              onClick={() => handleEdit(u)}
+                              className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
                             >
-                              Delete
+                              Edit
                             </button>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
+                            {u.username !== 'admin' && (
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteUser(u._id, u.username)}
+                                className="px-2 py-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded text-xs transition"
+                              >
+                                Delete
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

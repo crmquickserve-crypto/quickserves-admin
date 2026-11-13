@@ -313,32 +313,13 @@ export default function DashboardView({ currentUser }: DashboardViewProps) {
               No service calls recorded for this organizational scope.
             </div>
           ) : (
-            <table className="w-full text-left text-xs text-slate-300 min-w-[900px]">
-              <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
-                <tr>
-                  <th className="p-3">Call No</th>
-                  <th className="p-3">Customer</th>
-                  <th className="p-3">City</th>
-                  <th className="p-3">Product / Brand</th>
-                  <th className="p-3">Status</th>
-                  <th className="p-3">Technician</th>
-                  {!isClientUser && <th className="p-3 text-right">Action</th>}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
+            <>
+              {/* Mobile Recent Activity Cards (md:hidden) */}
+              <div className="md:hidden divide-y divide-[#334155]/60 bg-[#1e293b]">
                 {recentCalls.slice(0, 15).map((call) => (
-                  <tr key={call._id} className="hover:bg-slate-800/40 transition">
-                    <td className="p-3 text-emerald-400 font-mono font-bold">{call.callNo}</td>
-                    <td className="p-3">
-                      <p className="font-semibold text-white">{call.customerName}</p>
-                      <p className="text-slate-400 text-[10px] font-mono">{call.customerMobile}</p>
-                    </td>
-                    <td className="p-3 text-white">{call.city}</td>
-                    <td className="p-3">
-                      <span className="font-semibold text-slate-200 block">{call.brandName}</span>
-                      <span className="text-[10px] text-slate-400">{call.categoryName}</span>
-                    </td>
-                    <td className="p-3">
+                  <div key={call._id} className="p-3.5 space-y-2.5 hover:bg-slate-800/30 transition">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-emerald-400 font-bold text-xs">{call.callNo}</span>
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
                           call.callStatus === 'OPEN'
@@ -354,24 +335,102 @@ export default function DashboardView({ currentUser }: DashboardViewProps) {
                       >
                         {call.callStatus}
                       </span>
-                    </td>
-                    <td className="p-3 text-indigo-300 font-medium">
-                      {call.technicianName || <span className="text-slate-500 italic">Unassigned</span>}
-                    </td>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs bg-[#111c2e] p-2.5 rounded-lg border border-[#334155]/60">
+                      <div>
+                        <p className="font-semibold text-white truncate">{call.customerName}</p>
+                        {call.customerMobile && (
+                          <a href={`tel:${call.customerMobile}`} className="text-emerald-400 font-mono text-[11px] hover:underline flex items-center gap-1 mt-0.5">
+                            <span>📞</span> <span>{call.customerMobile}</span>
+                          </a>
+                        )}
+                        <span className="text-[10px] text-slate-400 block mt-0.5">{call.city || ''}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="font-semibold text-slate-200 block truncate">{call.brandName}</span>
+                        <span className="text-[10px] text-slate-400 block truncate">{call.categoryName}</span>
+                        <span className="text-[10px] text-indigo-300 block truncate mt-1">
+                          {call.technicianName ? `Tech: ${call.technicianName}` : 'Unassigned'}
+                        </span>
+                      </div>
+                    </div>
+
                     {!isClientUser && (
-                      <td className="p-3 text-right">
+                      <div className="flex justify-end pt-1">
                         <button
                           onClick={() => handleOpenEdit(call)}
-                          className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
+                          className="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs font-semibold border border-slate-700 text-center transition min-h-[36px]"
                         >
-                          Quick Status
+                          ⚡ Quick Status Update
                         </button>
-                      </td>
+                      </div>
                     )}
-                  </tr>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+
+              {/* Desktop Recent Activity Table (hidden md:table) */}
+              <table className="hidden md:table w-full text-left text-xs text-slate-300 min-w-[900px]">
+                <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
+                  <tr>
+                    <th className="p-3">Call No</th>
+                    <th className="p-3">Customer</th>
+                    <th className="p-3">City</th>
+                    <th className="p-3">Product / Brand</th>
+                    <th className="p-3">Status</th>
+                    <th className="p-3">Technician</th>
+                    {!isClientUser && <th className="p-3 text-right">Action</th>}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
+                  {recentCalls.slice(0, 15).map((call) => (
+                    <tr key={call._id} className="hover:bg-slate-800/40 transition">
+                      <td className="p-3 text-emerald-400 font-mono font-bold">{call.callNo}</td>
+                      <td className="p-3">
+                        <p className="font-semibold text-white">{call.customerName}</p>
+                        <p className="text-slate-400 text-[10px] font-mono">{call.customerMobile}</p>
+                      </td>
+                      <td className="p-3 text-white">{call.city}</td>
+                      <td className="p-3">
+                        <span className="font-semibold text-slate-200 block">{call.brandName}</span>
+                        <span className="text-[10px] text-slate-400">{call.categoryName}</span>
+                      </td>
+                      <td className="p-3">
+                        <span
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                            call.callStatus === 'OPEN'
+                              ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                              : call.callStatus === 'COMPLETED'
+                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                              : call.callStatus === 'ALLOTED'
+                              ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
+                              : call.callStatus === 'PART_PENDING'
+                              ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                              : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                          }`}
+                        >
+                          {call.callStatus}
+                        </span>
+                      </td>
+                      <td className="p-3 text-indigo-300 font-medium">
+                        {call.technicianName || <span className="text-slate-500 italic">Unassigned</span>}
+                      </td>
+                      {!isClientUser && (
+                        <td className="p-3 text-right">
+                          <button
+                            onClick={() => handleOpenEdit(call)}
+                            className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
+                          >
+                            Quick Status
+                          </button>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
           )}
         </div>
       </div>

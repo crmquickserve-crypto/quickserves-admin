@@ -130,6 +130,8 @@ export default function CallManagementView({
   // Search & Filter state
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('ALL');
+  const [callViewMode, setCallViewMode] = useState<'cards' | 'table'>('cards');
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [searchParams, setSearchParams] = useState({
     complaintNo: '',
     customerName: '',
@@ -752,8 +754,25 @@ export default function CallManagementView({
       {activeTab !== 'callRegistration' && activeTab !== 'callUpdate' && activeTab !== 'callAudit' && activeTab !== 'callFeedback' && (
         <div className="space-y-4">
           {/* MULTI-FIELD SEARCH ACCORDION / FILTER BAR */}
-          <div className="bg-[#1e293b] border border-[#334155] rounded-xl p-4 shadow-lg space-y-3">
-            <form onSubmit={handleSearchSubmit} className="space-y-3">
+          <div className="bg-[#1e293b] border border-[#334155] rounded-xl p-3.5 sm:p-4 shadow-lg space-y-3">
+            {/* Mobile Filter Toggle */}
+            <div className="md:hidden flex items-center justify-between pb-2 border-b border-[#334155]">
+              <button
+                type="button"
+                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+                className="w-full flex items-center justify-between px-3 py-2 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-xs font-semibold text-slate-200 transition"
+              >
+                <span className="flex items-center space-x-1.5">
+                  <span>🔍 Search & Filters</span>
+                  {(searchParams.complaintNo || searchParams.customerName || searchParams.mobile || searchParams.serialNo || filterStatus !== 'ALL') && (
+                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  )}
+                </span>
+                <span className="text-[10px] text-slate-400">{mobileFilterOpen ? '▲ Hide' : '▼ Expand'}</span>
+              </button>
+            </div>
+
+            <form onSubmit={handleSearchSubmit} className={`space-y-3 ${!mobileFilterOpen ? 'hidden md:block' : 'block'}`}>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
                 <div>
                   <label className="block text-[11px] font-semibold text-slate-300 mb-1">Complaint / Call No</label>
@@ -852,110 +871,97 @@ export default function CallManagementView({
                     placeholder="Search visible records..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="bg-[#0f172a] border border-[#334155] rounded px-3 py-1 text-xs text-white focus:outline-none focus:border-blue-500 w-48"
+                    className="bg-[#0f172a] border border-[#334155] rounded px-3 py-1 text-xs text-white focus:outline-none focus:border-blue-500 w-full sm:w-48"
                   />
                 </div>
               </div>
             </form>
           </div>
 
-          {/* MAIN SERVICE CALLS TABLE */}
+          {/* MAIN SERVICE CALLS TABLE & CARDS */}
           <div className="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden shadow-xl">
-            <div className="p-3.5 bg-[#172033] border-b border-[#334155] flex justify-between items-center">
+            <div className="p-3 sm:p-3.5 bg-[#172033] border-b border-[#334155] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
               <span className="text-xs font-bold text-white tracking-wider uppercase flex items-center space-x-2">
                 <span>Service Calls Directory</span>
                 <span className="bg-slate-800 text-emerald-400 px-2 py-0.5 rounded-full font-mono text-[10px] border border-slate-700">
                   {displayedCalls.length} records found
                 </span>
               </span>
-              <span className="text-[11px] text-slate-400">
-                Click any <strong className="text-emerald-400">Call No</strong> to open comprehensive 11-section complaint view
-              </span>
+
+              <div className="flex items-center justify-between w-full sm:w-auto gap-2">
+                {/* View Mode Switcher */}
+                <div className="flex items-center bg-[#0f172a] p-0.5 rounded-lg border border-[#334155]">
+                  <button
+                    type="button"
+                    onClick={() => setCallViewMode('cards')}
+                    title="Mobile Card Layout"
+                    className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                      callViewMode === 'cards'
+                        ? 'bg-emerald-600 text-white font-bold shadow'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    📱 Cards
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCallViewMode('table')}
+                    title="Full Table Layout"
+                    className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                      callViewMode === 'table'
+                        ? 'bg-emerald-600 text-white font-bold shadow'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    🖥️ Table
+                  </button>
+                </div>
+
+                <span className="text-[11px] text-slate-400 hidden lg:inline">
+                  Click <strong className="text-emerald-400">Call No</strong> for 11-section complaint view
+                </span>
+              </div>
             </div>
 
-            <div className="overflow-x-auto custom-horizontal-scrollbar">
-              {loading ? (
-                <div className="p-12 text-center text-slate-400 text-xs">
-                  <div className="animate-spin text-2xl mb-2">⏳</div>
-                  Loading service calls from database...
-                </div>
-              ) : displayedCalls.length === 0 ? (
-                <div className="p-12 text-center text-slate-400 text-xs">
-                  No service calls found matching the query criteria.
-                </div>
-              ) : (
-                <table className="w-full text-left text-xs text-slate-300 min-w-[1250px]">
-                  <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
-                    <tr>
-                      <th className="p-3 whitespace-nowrap">Call No</th>
-                      <th className="p-3 whitespace-nowrap">Reg. Date</th>
-                      <th className="p-3 whitespace-nowrap">Customer Name</th>
-                      <th className="p-3 whitespace-nowrap">Mobile</th>
-                      <th className="p-3 whitespace-nowrap">City / Locality</th>
-                      <th className="p-3 whitespace-nowrap">Brand / Category</th>
-                      <th className="p-3 whitespace-nowrap">Serial Number</th>
-                      <th className="p-3 whitespace-nowrap">Technician</th>
-                      <th className="p-3 whitespace-nowrap">Status</th>
-                      <th className="p-3 whitespace-nowrap text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
-                    {displayedCalls.map((c) => {
-                      const isClosed = c.callStatus === 'COMPLETED' || c.callStatus === 'CANCEL';
-                      const isReopened = c.callStatus === 'REOPENED';
-                      const currentSerial = c.unitSerialNumber || c.serialNo || '—';
+            {loading ? (
+              <div className="p-12 text-center text-slate-400 text-xs">
+                <div className="animate-spin text-2xl mb-2">⏳</div>
+                Loading service calls from database...
+              </div>
+            ) : displayedCalls.length === 0 ? (
+              <div className="p-12 text-center text-slate-400 text-xs">
+                No service calls found matching the query criteria.
+              </div>
+            ) : (
+              <>
+                {/* 1. Mobile Service Call Cards (Active on mobile or when Cards mode chosen) */}
+                <div className={`${callViewMode === 'cards' ? 'block md:hidden' : 'hidden'} divide-y divide-[#334155]/60 bg-[#1e293b]`}>
+                  {displayedCalls.map((c) => {
+                    const isClosed = c.callStatus === 'COMPLETED' || c.callStatus === 'CANCEL';
+                    const isReopened = c.callStatus === 'REOPENED';
+                    const currentSerial = c.unitSerialNumber || c.serialNo || '—';
 
-                      return (
-                        <tr key={c._id} className="hover:bg-slate-800/40 transition">
-                          <td className="p-3 whitespace-nowrap">
+                    return (
+                      <div key={c._id} className="p-3.5 space-y-3 hover:bg-slate-800/30 transition">
+                        {/* Top Row: Call No & Status */}
+                        <div className="flex items-center justify-between">
+                          <div>
                             <button
                               type="button"
                               onClick={() => setDetailModalCall(c)}
-                              className="font-mono font-bold text-emerald-400 hover:text-emerald-300 underline decoration-dotted text-left"
+                              className="font-mono font-bold text-emerald-400 hover:text-emerald-300 text-left text-xs underline decoration-dotted"
                               title="Click to view full 11-section complaint view"
                             >
-                              {c.callNo}
+                              #{c.callNo}
                             </button>
                             {isReopened && (
                               <span className="block mt-0.5 text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 rounded w-fit">
                                 🔄 Reopened
                               </span>
                             )}
-                          </td>
-                          <td className="p-3 whitespace-nowrap text-slate-400 font-mono text-[11px]">
-                            {c.createdAt ? new Date(c.createdAt).toLocaleDateString() : '—'}
-                          </td>
-                          <td className="p-3 whitespace-nowrap font-medium text-white">
-                            {c.customerName || '—'}
-                          </td>
-                          <td className="p-3 whitespace-nowrap font-mono text-slate-300">
-                            {c.customerMobile || '—'}
-                          </td>
-                          <td className="p-3 whitespace-nowrap">
-                            <span className="text-white block">{c.city || '—'}</span>
-                            <span className="text-[10px] text-slate-400">{c.pincode || ''}</span>
-                          </td>
-                          <td className="p-3 whitespace-nowrap">
-                            <span className="font-semibold text-slate-200 block">{c.brandName || '—'}</span>
-                            <span className="text-[10px] text-slate-400">{c.categoryName || ''}</span>
-                          </td>
-                          <td className="p-3 whitespace-nowrap font-mono text-[11px] text-slate-300">
-                            {currentSerial !== '—' ? (
-                              <span className="bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700">
-                                {currentSerial}
-                              </span>
-                            ) : (
-                              <span className="text-slate-600">—</span>
-                            )}
-                          </td>
-                          <td className="p-3 whitespace-nowrap">
-                            {c.technicianName ? (
-                              <span className="text-indigo-300 font-medium">{c.technicianName}</span>
-                            ) : (
-                              <span className="text-slate-500 italic text-[11px]">Unassigned</span>
-                            )}
-                          </td>
-                          <td className="p-3 whitespace-nowrap">
+                          </div>
+
+                          <div className="flex items-center gap-2">
                             <span
                               className={`px-2 py-0.5 rounded text-[10px] font-bold border ${c.callStatus === 'OPEN'
                                   ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
@@ -974,171 +980,406 @@ export default function CallManagementView({
                             >
                               {c.callStatus}
                             </span>
-                          </td>
-                          <td className="p-3 whitespace-nowrap text-right">
-                            <div className="flex items-center justify-end gap-1 flex-wrap">
-                              {/* VIEW ACTION (Opens 11-section complaint view) */}
+                            <span className="text-slate-400 font-mono text-[10px]">
+                              {c.createdAt ? new Date(c.createdAt).toLocaleDateString() : ''}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Middle Box: Customer Coordinates + Product */}
+                        <div className="grid grid-cols-2 gap-3 text-xs bg-[#111c2e] p-2.5 rounded-lg border border-[#334155]/60">
+                          <div>
+                            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Customer</span>
+                            <span className="text-white font-semibold block truncate">{c.customerName || 'Customer'}</span>
+                            {c.customerMobile && (
+                              <a
+                                href={`tel:${c.customerMobile}`}
+                                className="text-emerald-400 font-mono text-[11px] hover:underline flex items-center gap-1 mt-0.5"
+                              >
+                                <span>📞</span> <span>{c.customerMobile}</span>
+                              </a>
+                            )}
+                            <span className="text-[10px] text-slate-400 block truncate mt-0.5">{c.city || '—'} {c.pincode ? `(${c.pincode})` : ''}</span>
+                          </div>
+
+                          <div className="text-right">
+                            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Appliance / Brand</span>
+                            <span className="text-slate-200 font-semibold block truncate">{c.brandName || 'Brand'}</span>
+                            <span className="text-[10px] text-slate-400 block truncate">{c.categoryName || 'Appliance'}</span>
+                            {currentSerial !== '—' && (
+                              <span className="font-mono text-[9px] bg-slate-800 text-slate-300 px-1 py-0.5 rounded border border-slate-700 mt-1 inline-block">
+                                SN: {currentSerial}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Technician Row */}
+                        <div className="flex items-center justify-between text-[11px] text-slate-400">
+                          <span>
+                            Tech:{' '}
+                            <strong className="text-indigo-300">
+                              {c.technicianName || <span className="text-slate-500 italic">Unassigned</span>}
+                            </strong>
+                          </span>
+                        </div>
+
+                        {/* Mobile Action Buttons */}
+                        <div className="flex items-center gap-1.5 flex-wrap pt-1 border-t border-[#334155]/50">
+                          <button
+                            type="button"
+                            onClick={() => setDetailModalCall(c)}
+                            className="flex-1 py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs font-medium border border-slate-700 text-center transition min-h-[36px] flex items-center justify-center cursor-pointer"
+                          >
+                            👁️ 11-Sec View
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setUpdateCallId(c._id);
+                              setActiveTab('callUpdate');
+                            }}
+                            className="flex-1 py-1.5 px-2 bg-emerald-600/80 hover:bg-emerald-600 text-white rounded text-xs font-semibold text-center transition min-h-[36px] flex items-center justify-center cursor-pointer"
+                          >
+                            📋 Job Sheet
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setPrintModalCall(c)}
+                            className="py-1.5 px-2.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 rounded text-xs font-medium border border-indigo-500/30 transition min-h-[36px] flex items-center justify-center cursor-pointer"
+                            title="Print A4 Customer Job Sheet"
+                          >
+                            🖨️
+                          </button>
+
+                          {/* Quick Module Specific Actions for Mobile */}
+                          {activeTab === 'callAllotment' && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'allot')}
+                              className="py-1.5 px-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              👷 Allot
+                            </button>
+                          )}
+                          {activeTab === 'callAppointment' && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'appointment')}
+                              className="py-1.5 px-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              📅 Appoint
+                            </button>
+                          )}
+                          {activeTab === 'callReschedule' && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'reschedule')}
+                              className="py-1.5 px-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              🔄 Resched
+                            </button>
+                          )}
+                          {activeTab === 'callReminder' && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'reminder')}
+                              className="py-1.5 px-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              ⏰ Remind
+                            </button>
+                          )}
+                          {activeTab === 'callTransfer' && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'transfer')}
+                              className="py-1.5 px-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              🔀 Transfer
+                            </button>
+                          )}
+                          {activeTab === 'callReopen' && isClosed && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'reopen')}
+                              className="py-1.5 px-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              🔓 Reopen
+                            </button>
+                          )}
+                          {activeTab === 'callCancel' && !isClosed && (
+                            <button
+                              type="button"
+                              onClick={() => openActionDialog(c, 'cancel')}
+                              className="py-1.5 px-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded text-xs font-bold shadow min-h-[36px] flex items-center justify-center cursor-pointer"
+                            >
+                              ❌ Cancel
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* 2. Desktop Table View (Active on desktop or when Table mode chosen) */}
+                <div className={`${callViewMode === 'table' ? 'block' : 'hidden md:block'} overflow-x-auto custom-horizontal-scrollbar`}>
+                  <table className="w-full text-left text-xs text-slate-300 min-w-[1250px]">
+                    <thead className="bg-[#111c2e] text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#334155]">
+                      <tr>
+                        <th className="p-3 whitespace-nowrap">Call No</th>
+                        <th className="p-3 whitespace-nowrap">Reg. Date</th>
+                        <th className="p-3 whitespace-nowrap">Customer Name</th>
+                        <th className="p-3 whitespace-nowrap">Mobile</th>
+                        <th className="p-3 whitespace-nowrap">City / Locality</th>
+                        <th className="p-3 whitespace-nowrap">Brand / Category</th>
+                        <th className="p-3 whitespace-nowrap">Serial Number</th>
+                        <th className="p-3 whitespace-nowrap">Technician</th>
+                        <th className="p-3 whitespace-nowrap">Status</th>
+                        <th className="p-3 whitespace-nowrap text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#334155]/60 bg-[#1e293b]">
+                      {displayedCalls.map((c) => {
+                        const isClosed = c.callStatus === 'COMPLETED' || c.callStatus === 'CANCEL';
+                        const isReopened = c.callStatus === 'REOPENED';
+                        const currentSerial = c.unitSerialNumber || c.serialNo || '—';
+
+                        return (
+                          <tr key={c._id} className="hover:bg-slate-800/40 transition">
+                            <td className="p-3 whitespace-nowrap">
                               <button
                                 type="button"
                                 onClick={() => setDetailModalCall(c)}
-                                className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[11px] font-medium transition"
-                                title="View 11-section complaint view"
+                                className="font-mono font-bold text-emerald-400 hover:text-emerald-300 underline decoration-dotted text-left cursor-pointer"
+                                title="Click to view full 11-section complaint view"
                               >
-                                👁️ View
+                                {c.callNo}
                               </button>
-
-                              {/* PRINT ACTION (Opens A4 printable job sheet) */}
-                              <button
-                                type="button"
-                                onClick={() => setPrintModalCall(c)}
-                                className="px-2 py-1 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 rounded text-[11px] font-medium transition border border-indigo-500/20"
-                                title="Print A4 Customer Job Sheet"
+                              {isReopened && (
+                                <span className="block mt-0.5 text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 rounded w-fit">
+                                  🔄 Reopened
+                                </span>
+                              )}
+                            </td>
+                            <td className="p-3 whitespace-nowrap text-slate-400 font-mono text-[11px]">
+                              {c.createdAt ? new Date(c.createdAt).toLocaleDateString() : '—'}
+                            </td>
+                            <td className="p-3 whitespace-nowrap font-medium text-white">
+                              {c.customerName || '—'}
+                            </td>
+                            <td className="p-3 whitespace-nowrap font-mono text-slate-300">
+                              {c.customerMobile || '—'}
+                            </td>
+                            <td className="p-3 whitespace-nowrap">
+                              <span className="text-white block">{c.city || '—'}</span>
+                              <span className="text-[10px] text-slate-400">{c.pincode || ''}</span>
+                            </td>
+                            <td className="p-3 whitespace-nowrap">
+                              <span className="font-semibold text-slate-200 block">{c.brandName || '—'}</span>
+                              <span className="text-[10px] text-slate-400">{c.categoryName || ''}</span>
+                            </td>
+                            <td className="p-3 whitespace-nowrap font-mono text-[11px] text-slate-300">
+                              {currentSerial !== '—' ? (
+                                <span className="bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700">
+                                  {currentSerial}
+                                </span>
+                              ) : (
+                                <span className="text-slate-600">—</span>
+                              )}
+                            </td>
+                            <td className="p-3 whitespace-nowrap">
+                              {c.technicianName ? (
+                                <span className="text-indigo-300 font-medium">{c.technicianName}</span>
+                              ) : (
+                                <span className="text-slate-500 italic text-[11px]">Unassigned</span>
+                              )}
+                            </td>
+                            <td className="p-3 whitespace-nowrap">
+                              <span
+                                className={`px-2 py-0.5 rounded text-[10px] font-bold border ${c.callStatus === 'OPEN'
+                                    ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                                    : c.callStatus === 'ALLOTED'
+                                      ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
+                                      : c.callStatus === 'APPOINTMENT'
+                                        ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                                        : c.callStatus === 'PART_PENDING'
+                                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                                          : c.callStatus === 'COMPLETED'
+                                            ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20'
+                                            : c.callStatus === 'REOPENED'
+                                              ? 'bg-orange-500/20 text-orange-300 border-orange-500/30'
+                                              : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                                  }`}
                               >
-                                🖨️ Print
-                              </button>
-
-                              {/* JOB SHEET / UPDATE ACTION */}
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  setUpdateCallId(c._id);
-                                  setActiveTab('callUpdate');
-                                }}
-                                className="px-2 py-1 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 rounded text-[11px] font-medium transition border border-emerald-500/20"
-                                title="Update Job Sheet, dynamic parts & charges"
-                              >
-                                📋 Job Sheet
-                              </button>
-
-                              {/* MODULE-SPECIFIC QUICK ACTIONS */}
-                              {activeTab === 'callAllotment' && (
+                                {c.callStatus}
+                              </span>
+                            </td>
+                            <td className="p-3 whitespace-nowrap text-right">
+                              <div className="flex items-center justify-end gap-1 flex-wrap">
+                                {/* VIEW ACTION (Opens 11-section complaint view) */}
                                 <button
                                   type="button"
-                                  onClick={() => openActionDialog(c, 'allot')}
-                                  className="px-2 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-[11px] font-bold shadow"
+                                  onClick={() => setDetailModalCall(c)}
+                                  className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[11px] font-medium transition cursor-pointer"
+                                  title="View 11-section complaint view"
                                 >
-                                  👷 Allot Eng.
+                                  👁️ View
                                 </button>
-                              )}
 
-                              {activeTab === 'callAppointment' && (
+                                {/* PRINT ACTION (Opens A4 printable job sheet) */}
                                 <button
                                   type="button"
-                                  onClick={() => openActionDialog(c, 'appointment')}
-                                  className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-[11px] font-bold shadow"
+                                  onClick={() => setPrintModalCall(c)}
+                                  className="px-2 py-1 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 rounded text-[11px] font-medium transition border border-indigo-500/20 cursor-pointer"
+                                  title="Print A4 Customer Job Sheet"
                                 >
-                                  📅 Appoint
+                                  🖨️ Print
                                 </button>
-                              )}
 
-                              {activeTab === 'callReschedule' && (
+                                {/* JOB SHEET / UPDATE ACTION */}
                                 <button
                                   type="button"
-                                  onClick={() => openActionDialog(c, 'reschedule')}
-                                  className="px-2 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded text-[11px] font-bold shadow"
+                                  onClick={() => {
+                                    setUpdateCallId(c._id);
+                                    setActiveTab('callUpdate');
+                                  }}
+                                  className="px-2 py-1 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 rounded text-[11px] font-medium transition border border-emerald-500/20 cursor-pointer"
+                                  title="Update Job Sheet, dynamic parts & charges"
                                 >
-                                  🔄 Reschedule
+                                  📋 Job Sheet
                                 </button>
-                              )}
 
-                              {activeTab === 'callReminder' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'reminder')}
-                                  className="px-2 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  ⏰ Add Reminder
-                                </button>
-                              )}
+                                {/* MODULE-SPECIFIC QUICK ACTIONS */}
+                                {activeTab === 'callAllotment' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'allot')}
+                                    className="px-2 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    👷 Allot Eng.
+                                  </button>
+                                )}
 
-                              {activeTab === 'callTransfer' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'transfer')}
-                                  className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  🔀 Transfer
-                                </button>
-                              )}
+                                {activeTab === 'callAppointment' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'appointment')}
+                                    className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    📅 Appoint
+                                  </button>
+                                )}
 
-                              {activeTab === 'callReopen' && isClosed && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'reopen')}
-                                  className="px-2 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  🔓 Reopen Call
-                                </button>
-                              )}
+                                {activeTab === 'callReschedule' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'reschedule')}
+                                    className="px-2 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    🔄 Reschedule
+                                  </button>
+                                )}
 
-                              {activeTab === 'callCancel' && !isClosed && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'cancel')}
-                                  className="px-2 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  ❌ Cancel Call
-                                </button>
-                              )}
+                                {activeTab === 'callReminder' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'reminder')}
+                                    className="px-2 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    ⏰ Add Reminder
+                                  </button>
+                                )}
 
-                              {activeTab === 'directCancel' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'directCancel')}
-                                  className="px-2 py-1 bg-rose-700 hover:bg-rose-600 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  🚫 Direct Cancel
-                                </button>
-                              )}
+                                {activeTab === 'callTransfer' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'transfer')}
+                                    className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    🔀 Transfer
+                                  </button>
+                                )}
 
-                              {activeTab === 'directCancelPo' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'directCancelPo')}
-                                  className="px-2 py-1 bg-rose-800 hover:bg-rose-700 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  📄 Cancel PO
-                                </button>
-                              )}
+                                {activeTab === 'callReopen' && isClosed && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'reopen')}
+                                    className="px-2 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    🔓 Reopen Call
+                                  </button>
+                                )}
 
-                              {activeTab === 'callFeedback' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'feedback')}
-                                  className="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  ⭐ Feedback
-                                </button>
-                              )}
+                                {activeTab === 'callCancel' && !isClosed && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'cancel')}
+                                    className="px-2 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    ❌ Cancel Call
+                                  </button>
+                                )}
 
-                              {activeTab === 'updateSerialNo' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'updateSerialNo')}
-                                  className="px-2 py-1 bg-cyan-600 hover:bg-cyan-500 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  🔢 Update Serial
-                                </button>
-                              )}
+                                {activeTab === 'directCancel' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'directCancel')}
+                                    className="px-2 py-1 bg-rose-700 hover:bg-rose-600 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    🚫 Direct Cancel
+                                  </button>
+                                )}
 
-                              {activeTab === 'callEdit' && (
-                                <button
-                                  type="button"
-                                  onClick={() => openActionDialog(c, 'edit')}
-                                  className="px-2 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-[11px] font-bold shadow"
-                                >
-                                  ✏️ Edit
-                                </button>
-                              )}
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              )}
-            </div>
+                                {activeTab === 'directCancelPo' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'directCancelPo')}
+                                    className="px-2 py-1 bg-rose-800 hover:bg-rose-700 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    📄 Cancel PO
+                                  </button>
+                                )}
+
+                                {activeTab === 'callFeedback' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'feedback')}
+                                    className="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    ⭐ Feedback
+                                  </button>
+                                )}
+
+                                {activeTab === 'updateSerialNo' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'updateSerialNo')}
+                                    className="px-2 py-1 bg-cyan-600 hover:bg-cyan-500 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    🔢 Update Serial
+                                  </button>
+                                )}
+
+                                {activeTab === 'callEdit' && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openActionDialog(c, 'edit')}
+                                    className="px-2 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-[11px] font-bold shadow cursor-pointer"
+                                  >
+                                    ✏️ Edit
+                                  </button>
+                                )}
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -206,7 +206,7 @@ export default function Home() {
         </header>
 
         {/* Dynamic Section Content */}
-        <main className="flex-1 p-3 sm:p-5 md:p-8 space-y-4 sm:space-y-6 max-w-full overflow-x-hidden">
+        <main className="flex-1 p-3 sm:p-5 md:p-8 pb-24 md:pb-8 space-y-4 sm:space-y-6 max-w-full overflow-x-hidden">
           <Header user={user} onOpenMobileMenu={() => setMobileMenuOpen(true)} />
 
 
@@ -428,6 +428,70 @@ export default function Home() {
           </div>
         )}
         </main>
+
+        {/* Mobile Floating Bottom Navigation Dock */}
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#111c2e]/95 backdrop-blur-md border-t border-[#1e293b] py-1.5 px-2 flex justify-around items-center shadow-2xl safe-area-bottom">
+          <button
+            type="button"
+            onClick={() => setCurrentSection('dashboard')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-[10px] font-medium transition cursor-pointer min-w-[54px] min-h-[44px] ${
+              currentSection === 'dashboard'
+                ? 'text-emerald-400 font-bold bg-emerald-500/10'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <span className="text-base leading-none mb-1">📊</span>
+            <span>Dashboard</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentSection('callView')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-[10px] font-medium transition cursor-pointer min-w-[54px] min-h-[44px] ${
+              currentSection.startsWith('call') || currentSection === 'jobsheetPrint'
+                ? 'text-emerald-400 font-bold bg-emerald-500/10'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <span className="text-base leading-none mb-1">📞</span>
+            <span>Calls</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentSection('allEscalations')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-[10px] font-medium transition cursor-pointer min-w-[54px] min-h-[44px] ${
+              currentSection.toLowerCase().includes('escalat')
+                ? 'text-emerald-400 font-bold bg-emerald-500/10'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <span className="text-base leading-none mb-1">⚡</span>
+            <span>Escalation</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentSection('createUser')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-[10px] font-medium transition cursor-pointer min-w-[54px] min-h-[44px] ${
+              currentSection === 'createUser' || currentSection === 'updateUser'
+                ? 'text-emerald-400 font-bold bg-emerald-500/10'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <span className="text-base leading-none mb-1">👥</span>
+            <span>Users</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-[10px] font-medium text-slate-400 hover:text-slate-200 transition cursor-pointer min-w-[54px] min-h-[44px]"
+          >
+            <span className="text-base leading-none mb-1">☰</span>
+            <span>Menu</span>
+          </button>
+        </nav>
       </div>
     </div>
   );
